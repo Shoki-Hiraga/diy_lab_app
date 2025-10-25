@@ -1,52 +1,52 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+    @vite(['resources/css/login.css'])
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+    <div class="register-container">
+        <h1>新規アカウント作成</h1>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <!-- ユーザー名 -->
+            <div class="form-group">
+                <label for="username">ユーザー名</label>
+                <input id="username" type="text" name="username" value="{{ old('username') }}" required autofocus>
+                @error('username')
+                    <p style="color:red; font-size:0.9rem;">{{ $message }}</p>
+                @enderror
+            </div>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+            <!-- メールアドレス -->
+            <div class="form-group">
+                <label for="email">メールアドレス</label>
+                <input id="email" type="email" name="email" value="{{ old('email') }}" required>
+                @error('email')
+                    <p style="color:red; font-size:0.9rem;">{{ $message }}</p>
+                @enderror
+            </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            <!-- パスワード -->
+            <div class="form-group">
+                <label for="password">パスワード</label>
+                <input id="password" type="password" name="password" required autocomplete="new-password">
+                @error('password')
+                    <p style="color:red; font-size:0.9rem;">{{ $message }}</p>
+                @enderror
+            </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <!-- パスワード確認 -->
+            <div class="form-group">
+                <label for="password_confirmation">パスワード（確認用）</label>
+                <input id="password_confirmation" type="password" name="password_confirmation" required>
+            </div>
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+            <button type="submit">
+                アカウント作成
+            </button>
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
+            <div class="links">
+                <a href="{{ route('login') }}">すでにアカウントをお持ちの方はこちら</a>
+            </div>
+        </form>
+    </div>
 </x-guest-layout>
