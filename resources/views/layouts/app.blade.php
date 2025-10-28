@@ -8,7 +8,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- 独自CSS -->
-    @vite(['resources/css/post.css', 'resources/js/app.js'])
+    @vite(['resources/css/login.css', 'resources/css/posts.css', 'resources/js/app.js'])
+
 </head>
 <body>
     @include('layouts.navigation')
