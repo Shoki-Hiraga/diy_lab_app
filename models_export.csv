@@ -1,0 +1,5 @@
+model,table,primaryKey,fillable,guarded,casts,functions,relations
+Category,,id,name,,,posts,posts:belongsToMany
+Post,,id,"user_id, title, body, difficulty_id, status, view_count",,,"user, images, categories, tools, tags, difficulty, comments, reactions","user:belongsTo, images:hasMany, categories:belongsToMany, tools:belongsToMany, tags:belongsToMany, difficulty:belongsTo, comments:hasMany, reactions:hasMany"
+Tool,,id,name,,,posts,posts:belongsToMany
+User,,id,"username, email, password",,,,

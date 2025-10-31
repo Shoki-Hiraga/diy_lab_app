@@ -12,7 +12,6 @@
 
 </head>
 <body>
-    @include('layouts.navigation')
 
     <!-- ページヘッダー -->
     @isset($header)
