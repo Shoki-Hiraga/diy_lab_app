@@ -57,7 +57,7 @@
                 @endforeach
             </div>
             @if(count($categories) > 10)
-                <button type="button" class="toggle-btn" data-target="category-group">もっと見る ▼</button>
+                <button type="button" class="toggle-btn" data-target="category-group">他のカテゴリ ▼</button>
             @endif
         </div>
 
@@ -73,7 +73,7 @@
                 @endforeach
             </div>
             @if(count($tools) > 10)
-                <button type="button" class="toggle-btn" data-target="tool-group">もっと見る ▼</button>
+                <button type="button" class="toggle-btn" data-target="tool-group">他のツール ▼</button>
             @endif
         </div>
 
