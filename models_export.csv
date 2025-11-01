@@ -1,5 +1,7 @@
 model,table,primaryKey,fillable,guarded,casts,functions,relations
 Category,,id,name,,,posts,posts:belongsToMany
-Post,,id,"user_id, title, body, difficulty_id, status, view_count",,,"user, images, categories, tools, tags, difficulty, comments, reactions","user:belongsTo, images:hasMany, categories:belongsToMany, tools:belongsToMany, tags:belongsToMany, difficulty:belongsTo, comments:hasMany, reactions:hasMany"
+Difficulty,,id,name,,,posts,posts:hasMany
+Post,,id,"user_id, title, difficulty_id, status, view_count",,,"user, contents, categories, tools, tags, difficulty, comments, reactions","user:belongsTo, contents:hasMany, categories:belongsToMany, tools:belongsToMany, tags:belongsToMany, difficulty:belongsTo, comments:hasMany, reactions:hasMany"
+PostContent,,id,"post_id, image_path, comment, order",,,post,post:belongsTo
 Tool,,id,name,,,posts,posts:belongsToMany
-User,,id,"username, email, password",,,,
+User,,id,"username, email, password, is_active",,"email_verified_at => datetime, is_active => boolean","profile, socialLinks, posts, comments, reactions, following, followers, scopeActive","profile:hasOne, socialLinks:hasMany, posts:hasMany, comments:hasMany, reactions:hasMany, following:belongsToMany, followers:belongsToMany"

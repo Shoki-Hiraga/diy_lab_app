@@ -54,7 +54,7 @@ def parse_model(file_path):
         "primaryKey": pk.group(1) if pk else "id",
         "fillable": ", ".join(extract_array(fillable.group(1))) if fillable else "",
         "guarded": ", ".join(extract_array(guarded.group(1))) if guarded else "",
-        "casts": ", ".join(re.findall(r"['\"](\w+)['\"]\s*=>\s*['\"](\w+)['\"]", casts.group(1))) if casts else "",
+        "casts": ", ".join([f"{k} => {v}" for k, v in re.findall(r"['\"](\w+)['\"]\s*=>\s*['\"](\w+)['\"]", casts.group(1))]) if casts else "",
         "functions": ", ".join(functions),
         "relations": ", ".join(relations),
     }

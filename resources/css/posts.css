@@ -85,7 +85,7 @@ textarea {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1rem 1.5rem; /* 行間・列間の間隔 */
+    gap: 1rem 1.5rem;
     font-size: 0.95rem;
 }
 
@@ -93,7 +93,7 @@ textarea {
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    white-space: nowrap; /* 折り返し防止（カテゴリ名の途中で改行されない） */
+    white-space: nowrap;
 }
 
 input[type="file"] {
@@ -139,12 +139,14 @@ button:hover {
     opacity: 0.85;
 }
 
+/* ==========================
+   画像アップロードボタン
+   ========================== */
 .image-upload {
-    text-align: center; /* ボタンを中央に */
+    text-align: center;
     margin-top: 0.5rem;
 }
 
-/* 写真を追加ボタン */
 .image-upload input[type="file"] {
     display: none;
 }
@@ -168,7 +170,9 @@ button:hover {
     transform: scale(1.03);
 }
 
-/* スマホ最適化 */
+/* ==========================
+   スマホ対応
+   ========================== */
 @media (max-width: 480px) {
     .post-wrapper {
         margin: 0.5rem;
@@ -204,6 +208,9 @@ button:hover {
     transform: scale(1.2);
 }
 
+/* ==========================
+   コメントブロック
+   ========================== */
 .photo-comment-block {
     margin-bottom: 1.5rem;
     border: 1px solid #ddd;
@@ -211,6 +218,7 @@ button:hover {
     border-radius: 12px;
     background: #f9f9f9;
 }
+
 .photo-comment-block textarea {
     margin-top: 0.7rem;
     width: 100%;
@@ -219,67 +227,35 @@ button:hover {
     padding: 0.6rem;
 }
 
-.preview {
+/* ==========================
+   プロフィール画像プレビュー（users.show専用）
+   ========================== */
+.post-wrapper .preview {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100%;
     margin-top: 0.8rem;
     text-align: center;
 }
 
-.preview-image {
-    max-width: 100%;
-    max-height: 180px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    object-fit: cover;
-}
-
-.preview {
-    margin-top: 0.8rem;
-    text-align: center;
-    position: relative;
-}
-
-.preview-wrapper {
-    display: inline-block;
-    position: relative;
-}
-
-.preview-image {
-    max-width: 100%;
-    max-height: 180px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    object-fit: cover;
-}
-
-.btn-remove {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    border: none;
+.post-wrapper .preview img {
+    display: block;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.btn-remove:hover {
-    background: rgba(255,0,0,0.8);
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    margin: 0 auto;
 }
 
 /* ==========================
-   トグル開閉ボタン・隠し要素
+   トグル開閉ボタン
    ========================== */
-
-/* 11件目以降を隠す */
 .hidden {
     display: none !important;
 }
 
-/* トグルボタン */
 .toggle-btn {
     display: inline-block;
     margin-top: 0.8rem;
@@ -299,22 +275,19 @@ button:hover {
     transform: scale(1.03);
 }
 
-/* 折りたたみアニメーション（任意・おしゃれに見せたい場合） */
 .checkbox-group {
     transition: max-height 0.3s ease;
     overflow: hidden;
 }
 
-/* 折りたたみを開閉したときのアニメーションを自然に見せる */
 .checkbox-group.expanded {
-    max-height: 1000px; /* 十分な高さに設定して全体を表示 */
+    max-height: 1000px;
 }
 
 .checkbox-group.collapsed {
-    max-height: 300px; /* 10件分くらいの高さ */
+    max-height: 300px;
 }
 
-/* ボタンの矢印をアニメーションで回転 */
 .toggle-btn::after {
     content: "▼";
     display: inline-block;

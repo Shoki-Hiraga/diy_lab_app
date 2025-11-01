@@ -21,6 +21,10 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'introduction',
+        'x_id',
+        'youtube_url',
+        'icon',
     ];
 
     /**
@@ -45,4 +49,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
+
+    public function socialLinks()
+    {
+        return $this->hasMany(UserSocialLink::class);
+    }
+
 }

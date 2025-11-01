@@ -18,10 +18,13 @@ Route::middleware('auth')->group(function () {
 });
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/users/new', [PostController::class, 'create'])->name('posts.create');
     Route::post('/users/new', [PostController::class, 'store'])->name('posts.store');
+    Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 });
 
 require __DIR__.'/auth.php';

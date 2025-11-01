@@ -43,7 +43,7 @@ class Post extends Model
     // 難易度（単一）
     public function difficulty()
     {
-        return $this->belongsTo(Difficulty::class);
+        return $this->belongsTo(Difficulty::class, 'difficulty_id', 'level');
     }
 
     // コメント（ユーザーからのコメント）
