@@ -45,32 +45,36 @@
             <input type="hidden" name="difficulty_id" id="difficulty" value="{{ old('difficulty_id', 0) }}">
         </div>
 
-        {{-- カテゴリ --}}
         <div class="form-group">
             <label>カテゴリ一覧</label>
-            <div class="checkbox-group">
+            <div class="checkbox-group collapsed" id="category-group">
                 @foreach($categories as $category)
-                    <label>
+                    <label class="{{ $loop->index >= 10 ? 'hidden-category hidden' : '' }}">
                         <input type="checkbox" name="category_id[]" value="{{ $category->id }}"
                             {{ in_array($category->id, old('category_id', [])) ? 'checked' : '' }}>
                         {{ $category->name }}
                     </label>
                 @endforeach
             </div>
+            @if(count($categories) > 10)
+                <button type="button" class="toggle-btn" data-target="category-group">もっと見る ▼</button>
+            @endif
         </div>
 
-        {{-- 使用ツール --}}
         <div class="form-group">
             <label>使用ツール</label>
-            <div class="checkbox-group">
+            <div class="checkbox-group collapsed" id="tool-group">
                 @foreach($tools as $tool)
-                    <label>
+                    <label class="{{ $loop->index >= 10 ? 'hidden-tool hidden' : '' }}">
                         <input type="checkbox" name="tools[]" value="{{ $tool->id }}"
                             {{ in_array($tool->id, old('tools', [])) ? 'checked' : '' }}>
                         {{ $tool->name }}
                     </label>
                 @endforeach
             </div>
+            @if(count($tools) > 10)
+                <button type="button" class="toggle-btn" data-target="tool-group">もっと見る ▼</button>
+            @endif
         </div>
 
         {{-- 写真＋コメント --}}
@@ -109,6 +113,33 @@ stars.forEach(star => {
         stars.forEach(s => {
             s.textContent = s.getAttribute('data-value') <= value ? '★' : '☆';
         });
+    });
+});
+
+document.querySelectorAll('.toggle-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const targetGroup = document.getElementById(targetId);
+
+        const hiddenItems = targetGroup.querySelectorAll('.hidden');
+        if (hiddenItems.length > 0) {
+            // 開く
+            hiddenItems.forEach(item => item.classList.remove('hidden'));
+            targetGroup.classList.add('expanded');
+            targetGroup.classList.remove('collapsed');
+            button.classList.add('active');
+            button.textContent = '閉じる';
+        } else {
+            // 閉じる
+            const labels = targetGroup.querySelectorAll('label');
+            labels.forEach((label, index) => {
+                if (index >= 10) label.classList.add('hidden');
+            });
+            targetGroup.classList.add('collapsed');
+            targetGroup.classList.remove('expanded');
+            button.classList.remove('active');
+            button.textContent = 'もっと見る';
+        }
     });
 });
 

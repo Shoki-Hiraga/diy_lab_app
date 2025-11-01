@@ -269,3 +269,59 @@ button:hover {
 .btn-remove:hover {
     background: rgba(255,0,0,0.8);
 }
+
+/* ==========================
+   トグル開閉ボタン・隠し要素
+   ========================== */
+
+/* 11件目以降を隠す */
+.hidden {
+    display: none !important;
+}
+
+/* トグルボタン */
+.toggle-btn {
+    display: inline-block;
+    margin-top: 0.8rem;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #007bff;
+    background: #f2f8ff;
+    border: 1px solid #b3d4fc;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.toggle-btn:hover {
+    background: #e6f0ff;
+    transform: scale(1.03);
+}
+
+/* 折りたたみアニメーション（任意・おしゃれに見せたい場合） */
+.checkbox-group {
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+}
+
+/* 折りたたみを開閉したときのアニメーションを自然に見せる */
+.checkbox-group.expanded {
+    max-height: 1000px; /* 十分な高さに設定して全体を表示 */
+}
+
+.checkbox-group.collapsed {
+    max-height: 300px; /* 10件分くらいの高さ */
+}
+
+/* ボタンの矢印をアニメーションで回転 */
+.toggle-btn::after {
+    content: "▼";
+    display: inline-block;
+    margin-left: 0.3rem;
+    transition: transform 0.25s ease;
+}
+
+.toggle-btn.active::after {
+    transform: rotate(180deg);
+}
