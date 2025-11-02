@@ -1,0 +1,107 @@
+/* ==========================
+   投稿一覧ページ（users/posts/index.blade.php）
+   ========================== */
+.post-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+}
+
+@media (min-width: 600px) {
+    .post-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 900px) {
+    .post-list {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.post-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-3px);
+}
+
+.post-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background: #eee;
+}
+
+.post-image.no-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.post-body {
+    padding: 1rem;
+    flex: 1;
+}
+
+.post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.post-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0.3rem 0 0.5rem 0;
+}
+
+.post-text {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.post-actions {
+    text-align: right;
+}
+
+.btn-detail {
+    display: inline-block;
+    background: #9dc5e4;
+    color: #fff;
+    padding: 0.5rem 1.2rem;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.btn-detail:hover {
+    opacity: 0.85;
+}
+
+.no-posts {
+    text-align: center;
+    color: #666;
+    margin-top: 2rem;
+}
+
+.pagination-wrapper {
+    margin-top: 2rem;
+    text-align: center;
+}
