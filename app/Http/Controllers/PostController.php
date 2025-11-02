@@ -11,15 +11,22 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    // 投稿フォーム
+    // 投稿フォーム表示
     public function create()
     {
+        // ✅ カテゴリとツールを全部取得
         $categories = Category::all();
         $tools = Tool::all();
-        return view('posts.create', compact('categories', 'tools'));
+
+        // ✅ 現在ログイン中のユーザーを取得し、
+        //    さらに profile 情報もまとめて読み込む（これが "最適化"）
+        $user = Auth::user()->load('profile');
+
+        // ✅ ビューに渡す
+        return view('posts.create', compact('categories', 'tools', 'user'));
     }
 
-    // 投稿保存
+    // 投稿保存処理
     public function store(Request $request)
     {
         $request->validate([
@@ -32,7 +39,7 @@ class PostController extends Controller
             'comments.*'    => 'nullable|string|max:1000',
         ]);
 
-        // 投稿作成
+        // 投稿を作成
         $post = Post::create([
             'user_id'       => Auth::id(),
             'title'         => $request->title,
@@ -48,7 +55,7 @@ class PostController extends Controller
             $post->tools()->sync($request->tools);
         }
 
-        // 画像＋コメント保存
+        // 画像とコメントを保存
         $images = $request->file('images', []);
         $comments = $request->input('comments', []);
 

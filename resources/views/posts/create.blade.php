@@ -4,9 +4,16 @@
 <div class="post-wrapper">
     <h2>投稿の作成</h2>
 
+    {{-- 🔹 ユーザー情報（アイコン＋ユーザー名） --}}
+    @php
+        $iconPath = $user->profile && $user->profile->profile_image_url
+            ? asset('storage/icons/'.$user->profile->profile_image_url)
+            : asset('storage/images/default_icon.png');
+    @endphp
+
     <div class="user-info">
-        <img src="{{ Auth::user()->profile_image ?? '/images/default_user.png' }}" alt="ユーザー画像" class="user-icon">
-        <span class="username">{{ Auth::user()->name }} さんの投稿</span>
+        <img src="{{ $iconPath }}" alt="ユーザー画像" class="user-icon">
+        <span class="username">{{ $user->username }} さんの投稿</span>
     </div>
 
     @if(session('success'))
