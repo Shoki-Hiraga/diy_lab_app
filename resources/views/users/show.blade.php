@@ -40,8 +40,8 @@
 
             {{-- ✅ 画像選択ボタン --}}
             <div class="image-upload">
-                <label for="icon" class="btn-upload">画像を選択</label>
-                <input type="file" name="icon" id="icon" accept="image/*">
+                <label for="icon-file" class="btn-upload">画像を選択</label>
+                <input type="file" name="icon" id="icon-file" accept="image/*">
             </div>
 
             {{-- ✅ デフォルト画像 or 登録済み画像 --}}
@@ -87,18 +87,24 @@
 
 {{-- ✅ 画像プレビュー処理 --}}
 <script>
-document.getElementById('icon').addEventListener('change', function (event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = e => {
-            const img = document.getElementById('preview-image');
-            img.src = e.target.result;
-            img.style.display = 'block';
-            document.getElementById('preview-area').style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-    }
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('icon-file');
+    if (!fileInput) return;
+
+    fileInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                const img = document.getElementById('preview-image');
+                img.src = e.target.result;
+                img.style.display = 'block';
+                document.getElementById('preview-area').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 });
 </script>
+
 @endsection
