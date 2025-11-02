@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -23,7 +24,7 @@ class PostController extends Controller
         $user = Auth::user()->load('profile');
 
         // ✅ ビューに渡す
-        return view('posts.create', compact('categories', 'tools', 'user'));
+        return view('users.posts.create', compact('categories', 'tools', 'user'));
     }
 
     // 投稿保存処理
@@ -70,6 +71,6 @@ class PostController extends Controller
             ]);
         }
 
-        return redirect()->route('posts.create')->with('success', '投稿が完了しました！');
+        return redirect()->route('users.posts.create')->with('success', '投稿が完了しました！');
     }
 }

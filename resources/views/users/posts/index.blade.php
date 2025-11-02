@@ -45,7 +45,7 @@
                         </p>
 
                         <div class="post-actions">
-                            <a href="{{ route('users.show', $user->id) }}" class="btn-detail">詳細を見る</a>
+                            <a href="{{ route('users.profile.show', $user->id) }}" class="btn-detail">詳細を見る</a>
                         </div>
                     </div>
                 </div>

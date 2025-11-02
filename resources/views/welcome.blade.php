@@ -40,8 +40,8 @@
     @auth
         <div class="links">
             <a href="{{ route('profile.edit') }}">プロフィール編集</a>
-            <a href="{{ route('posts.create') }}">ユーザー作成（新規投稿）</a>
-            <a href="{{ route('users.show', ['id' => 1]) }}">ユーザー詳細（例: ID=1）</a>
+            <a href="{{ route('users.posts.create') }}">ユーザー作成（新規投稿）</a>
+            <a href="{{ route('users.profile.show', ['id' => 4]) }}">ユーザー詳細（例: ID=4）</a>
         </div>
         <div class="small">
             <p>ログイン中です。</p>
@@ -55,9 +55,9 @@
                 <a href="{{ route('register') }}">ユーザー登録</a>
             @endif
             {{-- 認証後アクセス可能なページ例（そのまま押すとログインへリダイレクト） --}}
-            <a href="{{ route('profile.edit') }}">プロフィール編集（要ログイン）</a>
-            <a href="{{ route('posts.create') }}">ユーザー作成（要ログイン）</a>
-            <a href="{{ route('users.show', ['id' => 1]) }}">ユーザー詳細（要ログイン）</a>
+            <a href="{{ route('users.profile.edit') }}">プロフィール編集（要ログイン）</a>
+            <a href="{{ route('users.posts.create') }}">ユーザー作成（要ログイン）</a>
+            <a href="{{ route('users.profile.show', ['id' => 1]) }}">ユーザー詳細（要ログイン）</a>
         </div>
         <div class="small">
             <p>※ 認証が必要なページは、未ログイン時はログイン画面にリダイレクトされます。</p>

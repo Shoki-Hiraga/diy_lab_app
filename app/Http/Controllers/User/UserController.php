@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\User;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserProfile;
 use App\Models\SocialPlatform;
@@ -20,7 +20,7 @@ class UserController extends Controller
         $user = User::with(['profile', 'socialLinks.platform'])->findOrFail($id);
         $platforms = SocialPlatform::all();
 
-        return view('users.show', compact('user', 'platforms'));
+        return view('users.profile.show', compact('user', 'platforms'));
     }
 
     public function update(Request $request, $id)
@@ -59,7 +59,7 @@ class UserController extends Controller
         // 更新
         $profile->update($validated);
 
-        return redirect()->route('users.show', $id)
+        return redirect()->route('users.profile.show', $id)
             ->with('success', 'プロフィールを更新しました！');
     }
 }

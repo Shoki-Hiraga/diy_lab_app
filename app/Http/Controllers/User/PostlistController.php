@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\User;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
@@ -16,6 +15,6 @@ class PostlistController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(6); // ページネーション
 
-        return view('posts.index', compact('posts', 'user'));
+        return view('users.posts.index', compact('posts', 'user'));
     }
 }

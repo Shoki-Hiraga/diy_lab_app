@@ -30,7 +30,7 @@
         </div>
     @endif
 
-    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data" class="post-form">
+    <form action="{{ route('users.posts.store') }}" method="POST" enctype="multipart/form-data" class="post-form">
         @csrf
 
         {{-- タイトル --}}
