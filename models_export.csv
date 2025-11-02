@@ -3,5 +3,8 @@ Category,,id,name,,,posts,posts:belongsToMany
 Difficulty,,id,name,,,posts,posts:hasMany
 Post,,id,"user_id, title, difficulty_id, status, view_count",,,"user, contents, categories, tools, tags, difficulty, comments, reactions","user:belongsTo, contents:hasMany, categories:belongsToMany, tools:belongsToMany, tags:belongsToMany, difficulty:belongsTo, comments:hasMany, reactions:hasMany"
 PostContent,,id,"post_id, image_path, comment, order",,,post,post:belongsTo
+SocialPlatform,,id,name,,,links,links:hasMany
 Tool,,id,name,,,posts,posts:belongsToMany
-User,,id,"username, email, password, is_active",,"email_verified_at => datetime, is_active => boolean","profile, socialLinks, posts, comments, reactions, following, followers, scopeActive","profile:hasOne, socialLinks:hasMany, posts:hasMany, comments:hasMany, reactions:hasMany, following:belongsToMany, followers:belongsToMany"
+User,,id,"username, email, password, introduction, x_id, youtube_url, icon",,,"profile, socialLinks","profile:hasOne, socialLinks:hasMany"
+UserProfile,,id,"user_id, profile, profile_image_url",,,user,user:belongsTo
+UserSocialLink,,id,"user_id, social_platforms_id, url",,,platform,platform:belongsTo
