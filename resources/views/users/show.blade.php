@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/posts.css') }}">
 
 <div class="post-wrapper">
     <h2>プロフィール</h2>
