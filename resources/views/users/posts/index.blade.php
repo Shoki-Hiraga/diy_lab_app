@@ -7,8 +7,8 @@
     {{-- ユーザー情報 --}}
     @php
         $iconPath = $user->profile && $user->profile->profile_image_url
-            ? asset('storage/icons/'.$user->profile->profile_image_url)
-            : asset('storage/images/default_icon.png');
+            ? asset('assets/icons/'.$user->profile->profile_image_url)
+            : asset('assets/images/default_icon.png');
     @endphp
 
     <div class="user-info">
@@ -21,8 +21,8 @@
             @foreach ($posts as $post)
                 <div class="post-card">
                     {{-- 画像 --}}
-                    @if($post->image_path)
-                        <img src="{{ asset('storage/'.$post->image_path) }}" alt="{{ $post->title }}" class="post-image">
+                    @if($post->main_image_path)
+                        <img src="{{ asset('assets/'.$post->main_image_path) }}" alt="{{ $post->title }}" class="post-image">
                     @else
                         <div class="post-image no-image">No Image</div>
                     @endif

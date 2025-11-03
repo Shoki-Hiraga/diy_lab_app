@@ -1,8 +1,9 @@
 APP_NAME=diy_lab_app
-APP_ENV=local
+APP_ENV=production
 APP_KEY=base64:neOWOryARx4BrhessINzF+ZzTkqZoj9k3sA1KAlSdhE=
 APP_DEBUG=true
 APP_URL=http://localhost
+FILESYSTEM_DISK=assets
 
 # 言語設定
 APP_LOCALE=ja

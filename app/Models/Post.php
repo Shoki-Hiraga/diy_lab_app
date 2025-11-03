@@ -57,4 +57,14 @@ class Post extends Model
     {
         return $this->hasMany(Reaction::class);
     }
+
+    // 代表画像（最初の画像）を取得するアクセサ
+    public function getMainImagePathAttribute()
+    {
+        // contents() は hasMany + orderBy('order') なので最初の1件が「1枚目」
+        $firstContent = $this->contents->first();
+
+        return $firstContent ? $firstContent->image_path : null;
+    }
+
 }

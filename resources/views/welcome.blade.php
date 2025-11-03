@@ -55,7 +55,6 @@
                 <a href="{{ route('register') }}">ユーザー登録</a>
             @endif
             {{-- 認証後アクセス可能なページ例（そのまま押すとログインへリダイレクト） --}}
-            <a href="{{ route('users.profile.edit') }}">プロフィール編集（要ログイン）</a>
             <a href="{{ route('users.posts.create') }}">ユーザー作成（要ログイン）</a>
             <a href="{{ route('users.profile.show', ['id' => 1]) }}">ユーザー詳細（要ログイン）</a>
         </div>

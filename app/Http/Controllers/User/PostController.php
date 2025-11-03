@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers\User;use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -61,7 +60,7 @@ class PostController extends Controller
         $comments = $request->input('comments', []);
 
         foreach ($images as $index => $image) {
-            $path = $image ? $image->store('posts', 'public') : null;
+            $path = $image ? $image->store('posts', 'assets') : null;
             $comment = $comments[$index] ?? null;
 
             $post->contents()->create([

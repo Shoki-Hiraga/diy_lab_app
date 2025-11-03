@@ -7,9 +7,9 @@ return [
     | Default Filesystem Disk
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the default filesystem disk that should be used
-    | by the framework. The "local" disk, as well as a variety of cloud
-    | based disks are available to your application for file storage.
+    | You may specify which of the filesystem disks below you wish
+    | to use as your default disk for general storage. You can set this
+    | in your .env file with FILESYSTEM_DISK=public or FILESYSTEM_DISK=assets etc.
     |
     */
 
@@ -20,33 +20,42 @@ return [
     | Filesystem Disks
     |--------------------------------------------------------------------------
     |
-    | Below you may configure as many filesystem disks as necessary, and you
-    | may even configure multiple disks for the same driver. Examples for
-    | most supported storage drivers are configured here for reference.
-    |
+    | Here you may configure multiple disks of different drivers.
     | Supported drivers: "local", "ftp", "sftp", "s3"
     |
     */
 
     'disks' => [
 
+        // 通常のローカルストレージ（非公開）
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app/private'),
-            'serve' => true,
+            'root' => storage_path('app'),
             'throw' => false,
             'report' => false,
         ],
 
+        // public/storage ディレクトリ（Laravel標準）
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => public_path('storage'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
         ],
 
+        // 🔹 追加：assets ディスク（ルート直下の assets フォルダ）
+        'assets' => [
+            'driver' => 'local',
+            'root' => base_path('assets'), // ← Laravelルート直下の /assets/
+            'url' => env('APP_URL').'/assets', // WebアクセスURL
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        // S3 などクラウドストレージ用（オプション）
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -67,14 +76,14 @@ return [
     | Symbolic Links
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the symbolic links that will be created when the
-    | `storage:link` Artisan command is executed. The array keys should be
-    | the locations of the links and the values should be their targets.
+    | The array keys are the locations of the links and the values
+    | are their targets. You can safely leave this empty since we
+    | don’t use symbolic links for assets or public storage anymore.
     |
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        // シンボリックリンク不要
     ],
 
 ];
