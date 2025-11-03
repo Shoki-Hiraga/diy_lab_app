@@ -20,12 +20,16 @@
         <div class="post-list">
             @foreach ($posts as $post)
                 <div class="post-card">
-                    {{-- 画像 --}}
-                    @if($post->main_image_path)
-                        <img src="{{ asset('assets/'.$post->main_image_path) }}" alt="{{ $post->title }}" class="post-image">
-                    @else
-                        <div class="post-image no-image">No Image</div>
-                    @endif
+                {{-- 画像 --}}
+                @php
+                    $mainImage = optional($post->contents->first())->image_path;
+                @endphp
+
+                @if($mainImage)
+                    <img src="{{ asset('assets/'.$mainImage) }}" alt="{{ $post->title }}" class="post-image">
+                @else
+                    <div class="post-image no-image">No Image</div>
+                @endif
 
                     {{-- 内容 --}}
                     <div class="post-body">
