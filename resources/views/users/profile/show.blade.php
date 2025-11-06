@@ -46,8 +46,8 @@
             {{-- ✅ デフォルト画像 or 登録済み画像 --}}
             @php
                 $iconPath = $user->profile && $user->profile->profile_image_url
-                    ? asset('storage/icons/'.$user->profile->profile_image_url)
-                    : asset('storage/images/default_icon.png');
+                    ? asset('assets/icons/'.$user->profile->profile_image_url)
+                    : asset('static/images/default_icon.png');
             @endphp
 
             {{-- ✅ プレビュー表示 --}}

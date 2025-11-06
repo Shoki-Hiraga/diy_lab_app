@@ -27,32 +27,23 @@ return [
 
     'disks' => [
 
-        // 通常のローカルストレージ（非公開）
+        'public_assets' => [
+            'driver' => 'local',
+            'root' => public_path('assets'),   // ← public/assets に保存する
+            'url' => env('APP_URL') . '/assets',
+            'visibility' => 'public',
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
-            'throw' => false,
-            'report' => false,
         ],
 
-        // public/storage ディレクトリ（Laravel標準）
         'public' => [
             'driver' => 'local',
-            'root' => public_path('storage'),
-            'url' => env('APP_URL').'/storage',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
-            'throw' => false,
-            'report' => false,
-        ],
-
-        // 🔹 追加：assets ディスク（ルート直下の assets フォルダ）
-        'assets' => [
-            'driver' => 'local',
-            'root' => base_path('assets'), // ← Laravelルート直下の /assets/
-            'url' => env('APP_URL').'/assets', // WebアクセスURL
-            'visibility' => 'public',
-            'throw' => false,
-            'report' => false,
         ],
 
         // S3 などクラウドストレージ用（オプション）

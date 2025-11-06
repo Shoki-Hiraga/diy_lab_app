@@ -1,9 +1,9 @@
 APP_NAME=diy_lab_app
-APP_ENV=production
+APP_ENV=dev
 APP_KEY=base64:neOWOryARx4BrhessINzF+ZzTkqZoj9k3sA1KAlSdhE=
 APP_DEBUG=true
 APP_URL=http://localhost
-FILESYSTEM_DISK=assets
+FILESYSTEM_DISK=public_assets
 
 # 言語設定
 APP_LOCALE=ja
@@ -43,7 +43,6 @@ SESSION_DOMAIN=null
 
 # 各種ドライバ（Laravel 12 流の命名へ変更）
 BROADCAST_CONNECTION=log
-FILESYSTEM_DISK=local
 QUEUE_CONNECTION=sync
 CACHE_STORE=file
 # CACHE_PREFIX=

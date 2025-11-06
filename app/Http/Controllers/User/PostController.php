@@ -60,7 +60,7 @@ class PostController extends Controller
         $comments = $request->input('comments', []);
 
         foreach ($images as $index => $image) {
-            $path = $image ? $image->store('posts', 'assets') : null;
+            $path = $image ? $image->store('posts', 'public_assets') : null;
             $comment = $comments[$index] ?? null;
 
             $post->contents()->create([
