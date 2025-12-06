@@ -85,6 +85,53 @@ class PostController extends Controller
     }
 
     /**
+    * 更新処理
+    */
+    public function update(Request $request, Post $post)
+    {
+        $this->authorizePost($post);
+
+        $request->validate([
+            'title'         => 'required|max:255',
+            'difficulty_id' => 'required|integer|min:1|max:5',
+            'category_id'   => 'required|array',
+            'category_id.*' => 'exists:categories,id',
+            'tools.*'       => 'nullable|exists:tools,id',
+            'images.*'      => 'nullable|image|max:4096',
+            'comments.*'    => 'nullable|string|max:1000',
+        ]);
+
+        // 投稿本体を更新
+        $post->update([
+            'title'         => $request->title,
+            'difficulty_id' => $request->difficulty_id,
+            'draft'         => $request->has('draft'),
+        ]);
+
+        // カテゴリ・ツール更新
+        $post->categories()->sync($request->category_id);
+        $post->tools()->sync($request->tools ?? []);
+
+        return redirect()
+            ->route('users.posts.index')
+            ->with('success', '投稿を更新しました！');
+    }
+
+    /**
+    * 投稿削除
+    */
+    public function destroy(Post $post)
+    {
+        $this->authorizePost($post);
+
+        $post->delete();
+
+        return redirect()
+            ->route('users.posts.index')
+            ->with('success', '投稿を削除しました');
+    }
+
+    /**
      * 投稿の所有者チェック
      */
     private function authorizePost(Post $post)

@@ -179,12 +179,14 @@
 
         {{-- ボタン --}}
         <div class="button-group">
+
             <button type="button"
                     class="btn-cancel"
                     onclick="history.back()">
                 キャンセル
             </button>
 
+            {{-- 下書き保存 --}}
             <button type="submit"
                     name="draft"
                     value="1"
@@ -192,11 +194,26 @@
                 下書き保存
             </button>
 
+            {{-- 公開（draftを送らない） --}}
             <button type="submit"
                     class="btn-submit">
-                更新する
+                公開する
             </button>
+
         </div>
+<form action="{{ route('users.posts.destroy', $post->id) }}"
+      method="POST"
+      onsubmit="return confirm('本当に削除しますか？');">
+
+    @csrf
+    @method('DELETE')
+
+    <button type="submit"
+            style="background:#dc2626;color:#fff;border-radius:8px;padding:0.8rem;">
+        削除する
+    </button>
+</form>
+
     </form>
 </div>
 
