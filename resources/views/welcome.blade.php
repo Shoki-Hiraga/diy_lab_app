@@ -39,9 +39,9 @@
     {{-- ログイン状態で表示を切り替え --}}
     @auth
         <div class="links">
-            <a href="{{ route('profile.edit') }}">プロフィール編集</a>
+            <a href="{{ route('users.posts.index') }}">MY DIY 投稿</a>
             <a href="{{ route('users.posts.create') }}">ユーザー作成（新規投稿）</a>
-            <a href="{{ route('users.profile.show', ['id' => 4]) }}">ユーザー詳細（例: ID=4）</a>
+            <a href="{{ route('users.profile.show', ['id' => 4]) }}">MYプロフィール（例: ID=4）</a>
         </div>
         <div class="small">
             <p>ログイン中です。</p>

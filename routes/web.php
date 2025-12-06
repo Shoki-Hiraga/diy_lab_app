@@ -17,26 +17,6 @@ Route::get('/', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Dashboard (認証済みユーザー向け)
-|--------------------------------------------------------------------------
-*/
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-/*
-|--------------------------------------------------------------------------
-| Profile Routes (認証必須)
-|--------------------------------------------------------------------------
-*/
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-/*
-|--------------------------------------------------------------------------
 | User Routes (/users/)
 |--------------------------------------------------------------------------
 | 会員向けのユーザー管理・投稿管理
