@@ -1,32 +1,47 @@
 <?php
 
-namespace App\Http\Controllers\User;use App\Http\Controllers\Controller;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\PostContent;
 use App\Models\Category;
 use App\Models\Tool;
-use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    // 投稿フォーム表示
+    /**
+     * 新規投稿画面
+     */
     public function create()
     {
-        // ✅ カテゴリとツールを全部取得
-        $categories = Category::all();
-        $tools = Tool::all();
-
-        // ✅ 現在ログイン中のユーザーを取得し、
-        //    さらに profile 情報もまとめて読み込む（これが "最適化"）
-        $user = Auth::user()->load('profile');
-
-        // ✅ ビューに渡す
-        return view('users.posts.create', compact('categories', 'tools', 'user'));
+        return view('users.posts.create', [
+            'categories' => Category::all(),
+            'tools' => Tool::all(),
+            'user' => Auth::user()->load('profile'),
+        ]);
     }
 
-    // 投稿保存処理
+    /**
+     * 編集画面
+     */
+    public function edit(Post $post)
+    {
+        $this->authorizePost($post);
+
+        return view('users.posts.edit', [
+            'post' => $post->load(['categories', 'tools', 'contents']),
+            'categories' => Category::all(),
+            'tools' => Tool::all(),
+            'user' => Auth::user()->load('profile'),
+        ]);
+    }
+
+    /**
+     * 投稿保存
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -39,37 +54,43 @@ class PostController extends Controller
             'comments.*'    => 'nullable|string|max:1000',
         ]);
 
-        // 投稿を作成
         $post = Post::create([
             'user_id'       => Auth::id(),
             'title'         => $request->title,
             'difficulty_id' => $request->difficulty_id,
-            'status'        => $request->has('draft') ? 'draft' : 'published',
+            'draft'         => $request->has('draft'),
         ]);
 
-        // カテゴリ登録
+        // カテゴリ
         $post->categories()->sync($request->category_id);
 
-        // 使用ツール登録
-        if ($request->filled('tools')) {
-            $post->tools()->sync($request->tools);
-        }
+        // ツール
+        $post->tools()->sync($request->tools ?? []);
 
-        // 画像とコメントを保存
-        $images = $request->file('images', []);
-        $comments = $request->input('comments', []);
-
-        foreach ($images as $index => $image) {
+        // 画像とコメント
+        foreach ($request->file('images', []) as $index => $image) {
             $path = $image ? $image->store('posts', 'public_assets') : null;
-            $comment = $comments[$index] ?? null;
 
-            $post->contents()->create([
-                'image_path' => $path,
-                'comment'    => $comment,
-                'order'      => $index,
+            PostContent::create([
+                'post_id'    => $post->id,
+                'image_path'=> $path,
+                'comment'   => $request->comments[$index] ?? null,
+                'order'     => $index,
             ]);
         }
 
-        return redirect()->route('users.posts.create')->with('success', '投稿が完了しました！');
+        return redirect()
+            ->route('users.posts.index')
+            ->with('success', '投稿が完了しました！');
+    }
+
+    /**
+     * 投稿の所有者チェック
+     */
+    private function authorizePost(Post $post)
+    {
+        if ($post->user_id !== Auth::id()) {
+            abort(403);
+        }
     }
 }

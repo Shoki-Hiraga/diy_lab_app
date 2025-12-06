@@ -24,16 +24,28 @@ Route::get('/', function () {
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->prefix('users')->group(function () {
-    // --- ログイン中ユーザーの投稿一覧 ---
-    Route::get('/', [UserPostlistController::class, 'index'])->name('users.posts.index');
 
-    // --- 投稿関連 ---
-    Route::get('/new', [UserPostController::class, 'create'])->name('users.posts.create');
-    Route::post('/new', [UserPostController::class, 'store'])->name('users.posts.store');
+    // 投稿一覧
+    Route::get('/', [UserPostlistController::class, 'index'])
+        ->name('users.posts.index');
 
-    // --- プロフィール関連 ---
-    Route::get('/{id}', [UserUserController::class, 'show'])->name('users.profile.show');
-    Route::put('/{id}', [UserUserController::class, 'update'])->name('users.profile.update');
+    // 新規投稿
+    Route::get('/new', [UserPostController::class, 'create'])
+        ->name('users.posts.create');
+    Route::post('/new', [UserPostController::class, 'store'])
+        ->name('users.posts.store');
+
+    // 投稿編集
+    Route::get('/posts/{post}/edit', [UserPostController::class, 'edit'])
+        ->name('users.posts.edit');
+    Route::put('/posts/{post}', [UserPostController::class, 'update'])
+        ->name('users.posts.update');
+
+    // プロフィール
+    Route::get('/{id}', [UserUserController::class, 'show'])
+        ->name('users.profile.show');
+    Route::put('/{id}', [UserUserController::class, 'update'])
+        ->name('users.profile.update');
 });
 
 require __DIR__.'/auth.php';

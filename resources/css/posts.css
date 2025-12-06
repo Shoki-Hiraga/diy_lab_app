@@ -298,3 +298,12 @@ button:hover {
 .toggle-btn.active::after {
     transform: rotate(180deg);
 }
+
+.badge-draft {
+    background: #f59e0b;
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-right: 8px;
+}

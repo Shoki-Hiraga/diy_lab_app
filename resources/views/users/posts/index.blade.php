@@ -17,42 +17,82 @@
     </div>
 
     @if ($posts->count() > 0)
+
         <div class="post-list">
             @foreach ($posts as $post)
+
                 <div class="post-card">
-                {{-- 画像 --}}
-                @php
-                    $mainImage = optional($post->contents->first())->image_path;
-                @endphp
 
-                @if($mainImage)
-                    <img src="{{ asset('assets/'.$mainImage) }}" alt="{{ $post->title }}" class="post-image">
-                @else
-                    <div class="post-image no-image">No Image</div>
-                @endif
+                    {{-- メイン画像 --}}
+                    @php
+                        $mainImage = optional($post->contents->first())->image_path;
+                    @endphp
 
-                    {{-- 内容 --}}
+                    @if ($mainImage)
+                        <img src="{{ asset('assets/'.$mainImage) }}"
+                             alt="{{ $post->title }}"
+                             class="post-image">
+                    @else
+                        <div class="post-image no-image">No Image</div>
+                    @endif
+
+                    {{-- 本文 --}}
                     <div class="post-body">
+
                         <div class="post-meta">
+
+                            {{-- 下書きバッジ --}}
+                            @if ($post->draft)
+                                <span class="badge badge-draft">下書き</span>
+                            @endif
+
+                            {{-- 難易度 --}}
                             <span class="difficulty">
                                 難易度：
                                 @for($i = 1; $i <= 5; $i++)
-                                    <span class="star">{{ $i <= ($post->difficulty_id ?? 0) ? '★' : '☆' }}</span>
+                                    <span class="star">
+                                        {{ $i <= ($post->difficulty_id ?? 0) ? '★' : '☆' }}
+                                    </span>
                                 @endfor
                             </span>
-                            <span class="date">{{ $post->created_at->format('Y/m/d') }}</span>
+
+                            {{-- 日付 --}}
+                            <span class="date">
+                                {{ $post->created_at->format('Y/m/d') }}
+                            </span>
+
                         </div>
 
+                        {{-- タイトル --}}
                         <h3 class="post-title">{{ $post->title }}</h3>
+
+                        {{-- 本文（本文フィールドがない場合は空OK） --}}
                         <p class="post-text">
-                            {{ Str::limit($post->content, 80, '…') }}
+                            {{ Str::limit($post->content ?? '', 80, '…') }}
                         </p>
 
+                        {{-- アクション --}}
                         <div class="post-actions">
-                            <a href="{{ route('users.profile.show', $user->id) }}" class="btn-detail">詳細を見る</a>
+
+                            @if ($post->draft)
+                                {{-- 下書き --}}
+                                <a href="{{ route('users.posts.edit', $post->id) }}"
+                                   class="btn-draft">
+                                    下書きを編集
+                                </a>
+                            @else
+                                {{-- 公開済み --}}
+                                <a href="{{ route('users.posts.edit', $post->id) }}"
+                                   class="btn-edit">
+                                    編集する
+                                </a>
+                            @endif
+
                         </div>
+
                     </div>
                 </div>
+
             @endforeach
         </div>
 
@@ -60,8 +100,11 @@
         <div class="pagination-wrapper">
             {{ $posts->links() }}
         </div>
+
     @else
+
         <p class="no-posts">まだ投稿がありません。</p>
+
     @endif
 </div>
 @endsection
