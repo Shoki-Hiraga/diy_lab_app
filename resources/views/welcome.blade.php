@@ -40,9 +40,14 @@
     @auth
         <div class="links">
             <a href="{{ route('users.posts.index') }}">MY DIY 投稿</a>
-            <a href="{{ route('users.posts.create') }}">ユーザー作成（新規投稿）</a>
-            <a href="{{ route('users.profile.show', ['id' => 4]) }}">MYプロフィール（例: ID=4）</a>
+            <a href="{{ route('users.posts.create') }}">新規投稿</a>
+
+            {{-- ✅ ログイン中の自分のプロフィール --}}
+            <a href="{{ route('users.profile.show', ['id' => Auth::id()]) }}">
+                MYプロフィール
+            </a>
         </div>
+
         <div class="small">
             <p>ログイン中です。</p>
         </div>
