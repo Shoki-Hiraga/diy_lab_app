@@ -117,6 +117,72 @@
             </div>
         </div>
 
+        {{-- 写真＋コメント --}}
+        <div class="form-group">
+            <label>写真とコメント</label>
+
+            <div id="photo-comment-area">
+
+                {{-- 既存画像 --}}
+                @foreach($post->contents->sortBy('order') as $index => $content)
+                    <div class="photo-comment-block" data-existing="1">
+
+                        <input type="hidden"
+                            name="existing_contents[{{ $content->id }}][delete]"
+                            value="0"
+                            class="delete-flag">
+
+                        <div class="image-upload">
+                            <div class="preview">
+                                <div class="preview-wrapper">
+                                    <img src="{{ asset('assets/'.$content->image_path) }}"
+                                        class="preview-image">
+
+                                    {{-- ✅ ChatGPT風 × --}}
+                                    <button type="button"
+                                            class="btn-remove">
+                                        ×
+                                    </button>
+                                </div>
+                            </div>
+
+                            <input type="file"
+                                name="existing_contents[{{ $content->id }}][image]"
+                                id="existing_image_{{ $content->id }}"
+                                accept="image/*"
+                                style="display:none;">
+
+                            <label for="existing_image_{{ $content->id }}"
+                                class="btn-upload">
+                                写真を変更
+                            </label>
+                        </div>
+
+                        <textarea name="existing_contents[{{ $content->id }}][comment]"
+                                placeholder="この写真の説明を入力...">{{ $content->comment }}</textarea>
+                    </div>
+                @endforeach
+
+                {{-- ✅ 新規追加用 --}}
+                <div class="photo-comment-block">
+                    <div class="image-upload">
+                        <input type="file"
+                            name="images[]"
+                            id="image_new_0"
+                            accept="image/*"
+                            style="display:none;">
+
+                        <label for="image_new_0" class="btn-upload">
+                            写真を追加
+                        </label>
+
+                        <div class="preview"></div>
+                    </div>
+                    <textarea name="comments[]" placeholder="この写真の説明を入力..."></textarea>
+                </div>
+            </div>
+        </div>
+
         {{-- ボタン --}}
         <div class="button-group">
             <button type="button"

@@ -1,7 +1,7 @@
 model,table,primaryKey,fillable,guarded,casts,functions,relations
 Category,,id,name,,,posts,posts:belongsToMany
 Difficulty,,id,name,,,posts,posts:hasMany
-Post,,id,"user_id, title, difficulty_id, status, view_count",,,"user, contents, categories, tools, tags, difficulty, comments, reactions, getMainImagePathAttribute","user:belongsTo, contents:hasMany, categories:belongsToMany, tools:belongsToMany, tags:belongsToMany, difficulty:belongsTo, comments:hasMany, reactions:hasMany"
+Post,,id,"user_id, title, difficulty_id, status, view_count",,,"user, contents, categories, tools, tags, difficulty, comments, reactions, scopePublished, getMainImagePathAttribute","user:belongsTo, contents:hasMany, categories:belongsToMany, tools:belongsToMany, tags:belongsToMany, difficulty:belongsTo, comments:hasMany, reactions:hasMany"
 PostContent,,id,"post_id, image_path, comment, order",,,post,post:belongsTo
 SocialPlatform,,id,name,,,links,links:hasMany
 Tool,,id,name,,,posts,posts:belongsToMany

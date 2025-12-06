@@ -1,101 +1,93 @@
-
-{{-- スクリプト --}}
 <script>
-/* ★ 難易度 星の選択 */
-const stars = document.querySelectorAll('.star');
-const difficultyInput = document.getElementById('difficulty');
-stars.forEach(star => {
+/* =========================
+ * 星評価
+ * ========================= */
+document.querySelectorAll('.star').forEach(star => {
     star.addEventListener('click', () => {
-        const value = star.getAttribute('data-value');
-        difficultyInput.value = value;
-        stars.forEach(s => {
-            s.textContent = s.getAttribute('data-value') <= value ? '★' : '☆';
+        const value = star.dataset.value;
+        document.getElementById('difficulty').value = value;
+
+        document.querySelectorAll('.star').forEach(s => {
+            s.textContent = s.dataset.value <= value ? '★' : '☆';
         });
     });
 });
 
-document.querySelectorAll('.toggle-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        const targetId = button.getAttribute('data-target');
-        const targetGroup = document.getElementById(targetId);
+/* =========================
+ * 画像プレビュー
+ * ========================= */
+function bindImageInput(input) {
+    input.addEventListener('change', () => {
+        const file = input.files[0];
+        if (!file) return;
 
-        const hiddenItems = targetGroup.querySelectorAll('.hidden');
-        if (hiddenItems.length > 0) {
-            // 開く
-            hiddenItems.forEach(item => item.classList.remove('hidden'));
-            targetGroup.classList.add('expanded');
-            targetGroup.classList.remove('collapsed');
-            button.classList.add('active');
-            button.textContent = '閉じる';
-        } else {
-            // 閉じる
-            const labels = targetGroup.querySelectorAll('label');
-            labels.forEach((label, index) => {
-                if (index >= 10) label.classList.add('hidden');
-            });
-            targetGroup.classList.add('collapsed');
-            targetGroup.classList.remove('expanded');
-            button.classList.remove('active');
-            button.textContent = 'もっと見る';
+        const preview = input.closest('.image-upload').querySelector('.preview');
+
+        const reader = new FileReader();
+        reader.onload = e => {
+            preview.innerHTML = `
+                <div class="preview-wrapper">
+                    <img src="${e.target.result}" class="preview-image">
+                    <button type="button" class="btn-remove">×</button>
+                </div>
+            `;
+        };
+        reader.readAsDataURL(file);
+
+        // ✅ 自分が「最後の input」なら追加
+        const allInputs = [...document.querySelectorAll('#photo-comment-area input[type=file]')];
+        if (allInputs[allInputs.length - 1] === input) {
+            addNewBlock();
         }
     });
-});
-
-/* ★ 画像プレビュー＋削除＋自動追加 */
-function handleImagePreview(event, previewElement) {
-    const file = event.target.files[0];
-    if (!file) {
-        previewElement.innerHTML = "";
-        return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        previewElement.innerHTML = `
-            <div class="preview-wrapper">
-                <img src="${e.target.result}" class="preview-image" alt="preview">
-                <button type="button" class="btn-remove">×</button>
-            </div>
-        `;
-        previewElement.querySelector('.btn-remove').addEventListener('click', function() {
-            const input = previewElement.closest('.image-upload').querySelector('input[type=file]');
-            input.value = "";
-            previewElement.innerHTML = "";
-        });
-
-        // ★ アップロード完了後に次のブロックを自動追加
-        addNewPhotoBlock();
-    };
-    reader.readAsDataURL(file);
 }
 
-/* ★ 新しい写真ブロックを追加 */
-function addNewPhotoBlock() {
-    const container = document.getElementById('photo-comment-area');
-    const count = container.children.length;
-    const newId = 'image_' + count;
+document.querySelectorAll('#photo-comment-area input[type=file]').forEach(bindImageInput);
 
-    const newBlock = document.createElement('div');
-    newBlock.classList.add('photo-comment-block');
-    newBlock.innerHTML = `
+/* =========================
+ * 新規ブロック
+ * ========================= */
+function addNewBlock() {
+    const area = document.getElementById('photo-comment-area');
+    const index = area.children.length;
+
+    const block = document.createElement('div');
+    block.className = 'photo-comment-block';
+
+    block.innerHTML = `
         <div class="image-upload">
-            <input type="file" name="images[]" id="${newId}" accept="image/*" style="display:none;">
-            <label for="${newId}" class="btn-upload">写真を追加</label>
+            <input type="file"
+                   name="images[]"
+                   id="image_${index}"
+                   accept="image/*"
+                   style="display:none;">
+            <label for="image_${index}" class="btn-upload">写真を追加</label>
             <div class="preview"></div>
         </div>
         <textarea name="comments[]" placeholder="この写真の説明を入力..."></textarea>
     `;
 
-    container.appendChild(newBlock);
-
-    const input = newBlock.querySelector('input[type=file]');
-    const preview = newBlock.querySelector('.preview');
-    input.addEventListener('change', e => handleImagePreview(e, preview));
+    area.appendChild(block);
+    bindImageInput(block.querySelector('input[type=file]'));
 }
 
-/* ★ 初期のfile inputにイベント付与 */
-document.querySelectorAll('input[type=file]').forEach(input => {
-    const preview = input.closest('.image-upload').querySelector('.preview');
-    input.addEventListener('change', e => handleImagePreview(e, preview));
+/* =========================
+ * × 削除
+ * ========================= */
+document.addEventListener('click', e => {
+    if (!e.target.classList.contains('btn-remove')) return;
+
+    const block = e.target.closest('.photo-comment-block');
+    if (!block) return;
+
+    const deleteFlag = block.querySelector('.delete-flag');
+    if (deleteFlag) {
+        deleteFlag.value = 1;
+    } else {
+        const input = block.querySelector('input[type=file]');
+        if (input) input.value = '';
+    }
+
+    block.remove();
 });
 </script>

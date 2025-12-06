@@ -4,7 +4,7 @@
 <div class="post-wrapper">
     <h2>投稿の作成</h2>
 
-    {{-- 🔹 ユーザー情報（アイコン＋ユーザー名） --}}
+    {{-- ユーザー情報（アイコン＋ユーザー名） --}}
     @php
         $iconPath = $user->profile && $user->profile->profile_image_url
             ? asset('assets/icons/'.$user->profile->profile_image_url)
@@ -52,6 +52,7 @@
             <input type="hidden" name="difficulty_id" id="difficulty" value="{{ old('difficulty_id', 0) }}">
         </div>
 
+        {{-- カテゴリ --}}
         <div class="form-group">
             <label>カテゴリ一覧</label>
             <div class="checkbox-group collapsed" id="category-group">
@@ -68,6 +69,7 @@
             @endif
         </div>
 
+        {{-- ツール --}}
         <div class="form-group">
             <label>使用ツール</label>
             <div class="checkbox-group collapsed" id="tool-group">
@@ -87,11 +89,20 @@
         {{-- 写真＋コメント --}}
         <div class="form-group">
             <label>写真とコメント</label>
+
             <div id="photo-comment-area">
                 <div class="photo-comment-block">
                     <div class="image-upload">
-                        <input type="file" name="images[]" id="image_0" accept="image/*" style="display:none;">
-                        <label for="image_0" class="btn-upload">写真を追加</label>
+                        <input type="file"
+                            name="images[]"
+                            id="image_0"
+                            accept="image/*"
+                            style="display:none;">
+
+                        <label for="image_0" class="btn-upload">
+                            写真を追加
+                        </label>
+
                         <div class="preview"></div>
                     </div>
                     <textarea name="comments[]" placeholder="この写真の説明を入力..."></textarea>
@@ -102,9 +113,10 @@
         {{-- ボタン --}}
         <div class="button-group">
             <button type="button" class="btn-cancel" onclick="history.back()">キャンセル</button>
+
+            {{-- status 初期値 --}}
             <input type="hidden" name="status" id="status"
                value="{{ \App\Models\Post::STATUS_DRAFT }}">
-
 
             <button type="submit"
                     class="btn-draft"
@@ -117,9 +129,10 @@
                     onclick="document.getElementById('status').value='published'">
                 投稿する
             </button>
-                    </div>
-                </form>
-            </div>
+        </div>
+    </form>
+</div>
+
 @include('users.posts.partials.form-scripts')
 
 @endsection

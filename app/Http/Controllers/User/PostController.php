@@ -66,8 +66,13 @@ class PostController extends Controller
         $post->categories()->sync($request->category_id);
         $post->tools()->sync($request->tools ?? []);
 
+        // 画像＋コメント保存
         foreach ($request->file('images', []) as $index => $image) {
-            $path = $image?->store('posts', 'public_assets');
+            if (!$image) {
+                continue;
+            }
+
+            $path = $image->store('posts', 'public_assets');
 
             PostContent::create([
                 'post_id'    => $post->id,
@@ -95,16 +100,95 @@ class PostController extends Controller
             'category_id'   => 'required|array',
             'category_id.*' => 'exists:categories,id',
             'tools.*'       => 'nullable|exists:tools,id',
+
+            // 新規追加用
+            'images.*'      => 'nullable|image|max:4096',
+            'comments.*'    => 'nullable|string|max:1000',
+
+            // 既存PostContent用
+            'existing_contents'                     => 'nullable|array',
+            'existing_contents.*.comment'           => 'nullable|string|max:1000',
+            'existing_contents.*.image'             => 'nullable|image|max:4096',
+            'existing_contents.*.delete'            => 'nullable|boolean',
+            'existing_contents.*.order'             => 'nullable|integer',
         ]);
 
+        // 投稿本体を更新
         $post->update([
             'title'         => $request->title,
             'difficulty_id' => $request->difficulty_id,
             'status'        => $request->status,
         ]);
 
+        // カテゴリ・ツール
         $post->categories()->sync($request->category_id);
         $post->tools()->sync($request->tools ?? []);
+
+        // === 既存のPostContentの更新／削除 ===
+        if ($request->filled('existing_contents')) {
+            foreach ($request->existing_contents as $contentId => $data) {
+                /** @var \App\Models\PostContent|null $content */
+                $content = $post->contents()->where('id', $contentId)->first();
+                if (!$content) {
+                    continue;
+                }
+
+                // 削除フラグ
+                $delete = isset($data['delete']) && $data['delete'];
+
+                if ($delete) {
+                    if ($content->image_path && Storage::disk('public_assets')->exists($content->image_path)) {
+                        Storage::disk('public_assets')->delete($content->image_path);
+                    }
+                    $content->delete();
+                    continue;
+                }
+
+                // コメント更新
+                if (array_key_exists('comment', $data)) {
+                    $content->comment = $data['comment'];
+                }
+
+                // 並び順
+                if (array_key_exists('order', $data)) {
+                    $content->order = (int) $data['order'];
+                }
+
+                // 画像差し替え
+                $imageKey = "existing_contents.$contentId.image";
+                if ($request->hasFile($imageKey)) {
+                    // 古いファイルを削除
+                    if ($content->image_path && Storage::disk('public_assets')->exists($content->image_path)) {
+                        Storage::disk('public_assets')->delete($content->image_path);
+                    }
+
+                    $path = $request->file($imageKey)->store('posts', 'public_assets');
+                    $content->image_path = $path;
+                }
+
+                $content->save();
+            }
+        }
+
+        // === 新規PostContentの追加 ===
+        if ($request->hasFile('images')) {
+            $currentMaxOrder = $post->contents()->max('order') ?? 0;
+
+            foreach ($request->file('images') as $index => $image) {
+                if (!$image) {
+                    continue;
+                }
+
+                $path = $image->store('posts', 'public_assets');
+
+                PostContent::create([
+                    'post_id'    => $post->id,
+                    'image_path' => $path,
+                    'comment'    => $request->comments[$index] ?? null,
+                    'order'      => $currentMaxOrder + $index + 1,
+                ]);
+            }
+        }
 
         return redirect()
             ->route('users.posts.index')

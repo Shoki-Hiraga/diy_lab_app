@@ -38,7 +38,7 @@
     @foreach($post->contents as $content)
         <div class="photo-comment-block">
             @if($content->image_path)
-                <img src="{{ asset('storage/'.$content->image_path) }}" class="post-image">
+                <img src="{{ asset('assets/'.$content->image_path) }}" class="post-image">
             @endif
             @if($content->comment)
                 <p>{{ $content->comment }}</p>
