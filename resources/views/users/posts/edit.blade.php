@@ -12,15 +12,11 @@
     @endphp
 
     <div class="user-info">
-        <img src="{{ $iconPath }}" alt="ユーザー画像" class="user-icon">
+        <img src="{{ $iconPath }}" class="user-icon">
         <span class="username">{{ $user->username }} さんの投稿</span>
     </div>
 
-    {{-- メッセージ --}}
-    @if(session('success'))
-        <div class="alert-success">{{ session('success') }}</div>
-    @endif
-
+    {{-- エラーメッセージ --}}
     @if ($errors->any())
         <div class="alert-error">
             <ul>
@@ -31,12 +27,19 @@
         </div>
     @endif
 
+    {{-- 更新フォーム --}}
     <form action="{{ route('users.posts.update', $post->id) }}"
           method="POST"
           enctype="multipart/form-data"
           class="post-form">
         @csrf
         @method('PUT')
+
+        {{-- ✅ status（初期値は現在の投稿状態 or old） --}}
+        <input type="hidden"
+               name="status"
+               id="status"
+               value="{{ old('status', $post->status) }}">
 
         {{-- タイトル --}}
         <div class="form-group">
@@ -65,7 +68,7 @@
             <input type="hidden"
                    name="difficulty_id"
                    id="difficulty"
-                   value="{{ $difficulty ?? 0 }}">
+                   value="{{ $difficulty }}">
         </div>
 
         {{-- カテゴリ --}}
@@ -77,10 +80,10 @@
         @endphp
 
         <div class="form-group">
-            <label>カテゴリ一覧</label>
-            <div class="checkbox-group collapsed" id="category-group">
+            <label>カテゴリ</label>
+            <div class="checkbox-group">
                 @foreach($categories as $category)
-                    <label class="{{ $loop->index >= 10 ? 'hidden-category hidden' : '' }}">
+                    <label>
                         <input type="checkbox"
                                name="category_id[]"
                                value="{{ $category->id }}"
@@ -89,14 +92,6 @@
                     </label>
                 @endforeach
             </div>
-
-            @if(count($categories) > 10)
-                <button type="button"
-                        class="toggle-btn"
-                        data-target="category-group">
-                    他のカテゴリ
-                </button>
-            @endif
         </div>
 
         {{-- ツール --}}
@@ -109,9 +104,9 @@
 
         <div class="form-group">
             <label>使用ツール</label>
-            <div class="checkbox-group collapsed" id="tool-group">
+            <div class="checkbox-group">
                 @foreach($tools as $tool)
-                    <label class="{{ $loop->index >= 10 ? 'hidden-tool hidden' : '' }}">
+                    <label>
                         <input type="checkbox"
                                name="tools[]"
                                value="{{ $tool->id }}"
@@ -120,100 +115,44 @@
                     </label>
                 @endforeach
             </div>
-
-            @if(count($tools) > 10)
-                <button type="button"
-                        class="toggle-btn"
-                        data-target="tool-group">
-                    他のツール
-                </button>
-            @endif
-        </div>
-
-        {{-- 写真＋コメント --}}
-        <div class="form-group">
-            <label>写真とコメント</label>
-            <div id="photo-comment-area">
-
-                {{-- 既存画像 --}}
-                @foreach($post->contents as $index => $content)
-                    <div class="photo-comment-block">
-                        <div class="image-upload">
-                            <input type="file"
-                                   name="images[]"
-                                   id="image_{{ $index }}"
-                                   accept="image/*"
-                                   style="display:none;">
-                            <label for="image_{{ $index }}" class="btn-upload">
-                                写真を変更
-                            </label>
-                            <div class="preview">
-                                @if($content->image_path)
-                                    <img src="{{ asset('storage/'.$content->image_path) }}">
-                                @endif
-                            </div>
-                        </div>
-
-                        <textarea name="comments[]"
-                                  placeholder="この写真の説明を入力...">
-{{ old('comments.'.$index, $content->comment) }}</textarea>
-                    </div>
-                @endforeach
-
-                {{-- 新規追加用 --}}
-                <div class="photo-comment-block">
-                    <div class="image-upload">
-                        <input type="file"
-                               name="images[]"
-                               id="image_new"
-                               accept="image/*"
-                               style="display:none;">
-                        <label for="image_new" class="btn-upload">写真を追加</label>
-                        <div class="preview"></div>
-                    </div>
-                    <textarea name="comments[]" placeholder="この写真の説明を入力..."></textarea>
-                </div>
-
-            </div>
         </div>
 
         {{-- ボタン --}}
         <div class="button-group">
-
             <button type="button"
                     class="btn-cancel"
                     onclick="history.back()">
                 キャンセル
             </button>
 
-            {{-- 下書き保存 --}}
+            {{-- 下書き --}}
             <button type="submit"
-                    name="draft"
-                    value="1"
-                    class="btn-draft">
+                    class="btn-draft"
+                    onclick="document.getElementById('status').value='{{ \App\Models\Post::STATUS_DRAFT }}'">
                 下書き保存
             </button>
 
-            {{-- 公開（draftを送らない） --}}
+            {{-- 公開 --}}
             <button type="submit"
-                    class="btn-submit">
+                    class="btn-submit"
+                    onclick="document.getElementById('status').value='{{ \App\Models\Post::STATUS_PUBLISHED }}'">
                 公開する
             </button>
-
         </div>
-<form action="{{ route('users.posts.destroy', $post->id) }}"
-      method="POST"
-      onsubmit="return confirm('本当に削除しますか？');">
+    </form>
 
-    @csrf
-    @method('DELETE')
+    {{-- 削除フォーム --}}
+    <form action="{{ route('users.posts.destroy', $post->id) }}"
+          method="POST"
+          onsubmit="return confirm('本当に削除しますか？');"
+          style="margin-top:1.2rem;">
+        @csrf
+        @method('DELETE')
 
-    <button type="submit"
-            style="background:#dc2626;color:#fff;border-radius:8px;padding:0.8rem;">
-        削除する
-    </button>
-</form>
-
+        <button type="submit"
+                style="width:100%;background:#dc2626;color:#fff;border:none;border-radius:8px;padding:0.8rem;">
+            削除する
+        </button>
     </form>
 </div>
 

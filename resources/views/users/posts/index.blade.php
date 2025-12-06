@@ -17,10 +17,9 @@
     </div>
 
     @if ($posts->count() > 0)
-
         <div class="post-list">
-            @foreach ($posts as $post)
 
+            @foreach ($posts as $post)
                 <div class="post-card">
 
                     {{-- メイン画像 --}}
@@ -38,12 +37,13 @@
 
                     {{-- 本文 --}}
                     <div class="post-body">
-
                         <div class="post-meta">
 
-                            {{-- 下書きバッジ --}}
-                            @if ($post->draft)
+                            {{-- ステータス --}}
+                            @if ($post->status === \App\Models\Post::STATUS_DRAFT)
                                 <span class="badge badge-draft">下書き</span>
+                            @elseif ($post->status === \App\Models\Post::STATUS_PUBLISHED)
+                                <span class="badge badge-published">公開中</span>
                             @endif
 
                             {{-- 難易度 --}}
@@ -60,51 +60,46 @@
                             <span class="date">
                                 {{ $post->created_at->format('Y/m/d') }}
                             </span>
-
                         </div>
 
                         {{-- タイトル --}}
                         <h3 class="post-title">{{ $post->title }}</h3>
 
-                        {{-- 本文（本文フィールドがない場合は空OK） --}}
+                        {{-- 本文（無くてもOK） --}}
                         <p class="post-text">
                             {{ Str::limit($post->content ?? '', 80, '…') }}
                         </p>
 
-                        {{-- アクション --}}
+                        {{-- 操作ボタン --}}
                         <div class="post-actions">
-
-                            @if ($post->draft)
-                                {{-- 下書き --}}
-                                <a href="{{ route('users.posts.edit', $post->id) }}"
-                                   class="btn-draft">
+                            @if ($post->status === \App\Models\Post::STATUS_DRAFT)
+                                <a href="{{ route('users.posts.edit', $post) }}"
+                                   class="btn-edit">
                                     下書きを編集
                                 </a>
                             @else
-                                {{-- 公開済み --}}
-                                <a href="{{ route('users.posts.edit', $post->id) }}"
+                                <a href="{{ route('posts.show', $post) }}"
+                                   class="btn-detail">
+                                    詳細を見る
+                                </a>
+                                <a href="{{ route('users.posts.edit', $post) }}"
                                    class="btn-edit">
-                                    編集する
+                                    編集
                                 </a>
                             @endif
-
                         </div>
-
                     </div>
                 </div>
-
             @endforeach
+
         </div>
 
         {{-- ページネーション --}}
         <div class="pagination-wrapper">
             {{ $posts->links() }}
         </div>
-
     @else
-
         <p class="no-posts">まだ投稿がありません。</p>
-
     @endif
 </div>
 @endsection

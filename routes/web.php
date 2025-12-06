@@ -4,6 +4,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\PostController as UserPostController;
 use App\Http\Controllers\User\UserController as UserUserController;
 use App\Http\Controllers\User\PostlistController as UserPostlistController;
+use App\Http\Controllers\PostPublicController;
+
+/*
+|--------------------------------------------------------------------------
+| Public Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/posts/{post}', [PostPublicController::class, 'show'])
+    ->name('posts.show');
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +50,7 @@ Route::middleware('auth')->prefix('users')->group(function () {
         ->name('users.profile.show');
     Route::put('/{id}', [UserUserController::class, 'update'])
         ->name('users.profile.update');
+
 });
 
 require __DIR__.'/auth.php';

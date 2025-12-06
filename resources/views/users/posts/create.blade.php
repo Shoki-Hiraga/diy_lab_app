@@ -102,11 +102,24 @@
         {{-- ボタン --}}
         <div class="button-group">
             <button type="button" class="btn-cancel" onclick="history.back()">キャンセル</button>
-            <button type="submit" name="draft" value="1" class="btn-draft">下書き保存</button>
-            <button type="submit" class="btn-submit">投稿する</button>
-        </div>
-    </form>
-</div>
+            <input type="hidden" name="status" id="status"
+               value="{{ \App\Models\Post::STATUS_DRAFT }}">
+
+
+            <button type="submit"
+                    class="btn-draft"
+                    onclick="document.getElementById('status').value='draft'">
+                下書き保存
+            </button>
+
+            <button type="submit"
+                    class="btn-submit"
+                    onclick="document.getElementById('status').value='published'">
+                投稿する
+            </button>
+                    </div>
+                </form>
+            </div>
 @include('users.posts.partials.form-scripts')
 
 @endsection
