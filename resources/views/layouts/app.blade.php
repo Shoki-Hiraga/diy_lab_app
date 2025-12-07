@@ -8,7 +8,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- 独自CSS -->
-    @vite(['resources/css/login.css', 'resources/css/posts.css', 'resources/css/users.css', 'resources/js/app.js'])
+    @vite([
+    'resources/css/users/login.css',
+    'resources/css/users/posts.css',
+    'resources/css/users/users.css',
+    'resources/js/app.js'
+    ])
 
 </head>
 <body>
