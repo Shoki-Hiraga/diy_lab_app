@@ -62,7 +62,7 @@
 
                     {{-- 操作ボタン（公開ページなので詳細のみ） --}}
                     <div class="post-actions">
-                        <a href="{{ route('posts.show', $post) }}"
+                        <a href="{{ route('users.posts.show', $post) }}"
                            class="btn-detail">
                             詳細を見る
                         </a>

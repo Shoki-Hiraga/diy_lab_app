@@ -6,6 +6,12 @@ body {
     font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 .hidden {
     display: none !important;
 }
