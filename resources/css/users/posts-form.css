@@ -10,21 +10,6 @@ body {
     display: none !important;
 }
 
-.post-wrapper {
-    max-width: 520px;
-    margin: 1.5rem auto;
-    background: #fff;
-    padding: 1.5rem;
-    border-radius: 16px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
-
-.post-wrapper h2 {
-    text-align: center;
-    margin-bottom: 1.2rem;
-    color: #333;
-}
-
 /* ==========================
    ユーザー情報
    ========================== */
@@ -94,14 +79,29 @@ textarea {
 .checkbox-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem 1.2rem;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    font-size: 0.95rem;
 }
 
 .checkbox-group label {
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.checkbox-group {
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+}
+
+.checkbox-group.expanded {
+    max-height: 1000px;
+}
+
+.checkbox-group.collapsed {
+    max-height: 300px;
 }
 
 /* ==========================

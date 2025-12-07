@@ -11,9 +11,12 @@ use App\Http\Controllers\PostPublicController;
 | Public Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/', function () {
+Route::get('/userstop', function () {
     return view('users.welcome');
-});
+})->name('users.top');
+
+Route::get('/', [PostPublicController::class, 'index'])
+    ->name('public.posts.index');
 
 Route::get('/posts/{post}', [PostPublicController::class, 'show'])
     ->name('posts.show');

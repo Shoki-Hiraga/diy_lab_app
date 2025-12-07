@@ -9,6 +9,22 @@
     gap: 1.4rem;
 }
 
+.post-wrapper {
+    max-width: 520px;
+    margin: 1.5rem auto;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.post-wrapper h2 {
+    text-align: center;
+    margin-bottom: 1.2rem;
+    color: #333;
+}
+
+
 /* ==========================
    投稿カード
    ========================== */

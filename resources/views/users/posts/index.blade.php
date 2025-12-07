@@ -78,7 +78,7 @@
                                     下書きを編集
                                 </a>
                             @else
-                                <a href="{{ route('posts.show', $post) }}"
+                                <a href="{{ route('users.posts.show', $post) }}"
                                    class="btn-detail">
                                     詳細を見る
                                 </a>
