@@ -1,7 +1,10 @@
 /* ==========================
    投稿一覧ページ
    ========================== */
-
+body {
+    background-color: #fff5eb;
+    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+}
 /* 全体グリッド */
 .post-list {
     display: grid;
