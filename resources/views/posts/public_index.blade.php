@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="post-wrapper">
+    <a href="{{ route('users.top') }}">ユーザーのウェルカムページへ</a>
     <h2>投稿一覧</h2>
 
     {{-- 公開用なのでユーザー固定の表示はしない --}}
