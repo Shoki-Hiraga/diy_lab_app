@@ -1,0 +1,19 @@
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-actions .btn-category {
+    padding: 8px 14px;
+    background: #4caf50;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.header-actions .btn-category:hover {
+    opacity: 0.9;
+}

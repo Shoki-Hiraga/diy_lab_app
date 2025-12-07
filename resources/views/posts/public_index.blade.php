@@ -3,7 +3,10 @@
 @section('title', 'DIY 投稿一覧')
 
 @section('content')
+
 <div class="post-wrapper">
+    @include('components.header')
+
     <a href="{{ route('users.top') }}">ユーザーのウェルカムページへ</a>
     <h2>投稿一覧</h2>
 
@@ -29,6 +32,17 @@
                 {{-- 本文 --}}
                 <div class="post-body">
                     <div class="post-meta">
+
+                        {{-- カテゴリ --}}
+                        <div class="categories">
+                            @foreach ($post->categories as $category)
+                                <a href="{{ route('categories.show', $category) }}"
+                                class="category-badge">
+                                    {{ $category->name }}
+                                </a>
+                            @endforeach
+                        </div>
+
 
                         {{-- 公開画面なのでステータスは表示しない --}}
                         

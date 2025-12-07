@@ -5,6 +5,7 @@ use App\Http\Controllers\User\PostController as UserPostController;
 use App\Http\Controllers\User\UserController as UserUserController;
 use App\Http\Controllers\User\PostlistController as UserPostlistController;
 use App\Http\Controllers\PostPublicController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,12 @@ Route::get('/', [PostPublicController::class, 'index'])
 
 Route::get('/posts/{post}', [PostPublicController::class, 'show'])
     ->name('users.posts.show');
+
+Route::get('/category', [CategoryController::class, 'index'])
+    ->name('categories.index');
+
+Route::get('/category/{category}', [CategoryController::class, 'show'])
+    ->name('categories.show');
 
 /*
 |--------------------------------------------------------------------------

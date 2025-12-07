@@ -9,6 +9,7 @@
     {{-- 共通CSS --}}
     @vite([
     'resources/css/common/posts-index.css',
+    'resources/css/common/header.css',
     'resources/js/app.js'
     ])
 
