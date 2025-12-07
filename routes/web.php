@@ -12,7 +12,7 @@ use App\Http\Controllers\PostPublicController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', function () {
-    return view('welcome');
+    return view('users.welcome');
 });
 
 Route::get('/posts/{post}', [PostPublicController::class, 'show'])
