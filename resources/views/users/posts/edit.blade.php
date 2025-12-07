@@ -79,19 +79,45 @@
             );
         @endphp
 
+        {{-- カテゴリ --}}
+        @php
+            $checkedCategories = old(
+                'category_id',
+                $post->categories->pluck('id')->toArray()
+            );
+        @endphp
+
         <div class="form-group">
-            <label>カテゴリ</label>
-            <div class="checkbox-group">
+            <label>カテゴリ一覧</label>
+
+            <div class="checkbox-group collapsed" id="category-group">
                 @foreach($categories as $category)
-                    <label>
+                    @php
+                        $checked = in_array($category->id, $checkedCategories);
+
+                        // ✅ 10個目以降 & 未選択 → hidden
+                        $hiddenClass = ($loop->index >= 10 && !$checked)
+                            ? 'hidden-category hidden'
+                            : '';
+                    @endphp
+
+                    <label class="{{ $hiddenClass }}">
                         <input type="checkbox"
-                               name="category_id[]"
-                               value="{{ $category->id }}"
-                               {{ in_array($category->id, $checkedCategories) ? 'checked' : '' }}>
+                            name="category_id[]"
+                            value="{{ $category->id }}"
+                            {{ $checked ? 'checked' : '' }}>
                         {{ $category->name }}
                     </label>
                 @endforeach
             </div>
+
+            @if(count($categories) > 10)
+                <button type="button"
+                        class="toggle-btn"
+                        data-target="category-group">
+                    他のカテゴリ ▼
+                </button>
+            @endif
         </div>
 
         {{-- ツール --}}
@@ -104,17 +130,35 @@
 
         <div class="form-group">
             <label>使用ツール</label>
-            <div class="checkbox-group">
+
+            <div class="checkbox-group collapsed" id="tool-group">
                 @foreach($tools as $tool)
-                    <label>
+                    @php
+                        $checked = in_array($tool->id, $checkedTools);
+
+                        // ✅ 10個目以降 & 未選択 → hidden
+                        $hiddenClass = ($loop->index >= 10 && !$checked)
+                            ? 'hidden-tool hidden'
+                            : '';
+                    @endphp
+
+                    <label class="{{ $hiddenClass }}">
                         <input type="checkbox"
-                               name="tools[]"
-                               value="{{ $tool->id }}"
-                               {{ in_array($tool->id, $checkedTools) ? 'checked' : '' }}>
+                            name="tools[]"
+                            value="{{ $tool->id }}"
+                            {{ $checked ? 'checked' : '' }}>
                         {{ $tool->name }}
                     </label>
                 @endforeach
             </div>
+
+            @if(count($tools) > 10)
+                <button type="button"
+                        class="toggle-btn"
+                        data-target="tool-group">
+                    他のツール ▼
+                </button>
+            @endif
         </div>
 
         {{-- 写真＋コメント --}}

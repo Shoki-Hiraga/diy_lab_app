@@ -1,0 +1,175 @@
+/* ==========================
+   全体
+   ========================== */
+body {
+    background-color: #E6F4FA;
+    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.post-wrapper {
+    max-width: 520px;
+    margin: 1.5rem auto;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.post-wrapper h2 {
+    text-align: center;
+    margin-bottom: 1.2rem;
+    color: #333;
+}
+
+/* ==========================
+   ユーザー情報
+   ========================== */
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.4rem;
+}
+
+.user-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.username {
+    font-weight: bold;
+    color: #333;
+}
+
+/* ==========================
+   フォーム
+   ========================== */
+.form-group {
+    margin-bottom: 1.3rem;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.4rem;
+    color: #555;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================
+   星評価
+   ========================== */
+.stars {
+    font-size: 1.8rem;
+    color: #fbbf24;
+    cursor: pointer;
+    user-select: none;
+}
+
+.star {
+    margin-right: 4px;
+}
+
+/* ==========================
+   チェックボックス
+   ========================== */
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.2rem;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.95rem;
+}
+
+/* ==========================
+   写真＋コメント
+   ========================== */
+.photo-comment-block {
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.2rem;
+}
+
+.image-upload {
+    text-align: center;
+}
+
+.btn-upload {
+    display: inline-block;
+    margin-bottom: 0.6rem;
+    background: #007bff;
+    color: #fff;
+    padding: 0.7rem 1.6rem;
+    border-radius: 9999px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.preview img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 0.6rem;
+}
+
+/* ==========================
+   ボタン
+   ========================== */
+.button-group {
+    display: flex;
+    gap: 8px;
+    margin-top: 1.5rem;
+}
+
+button {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-cancel { background: #ccc; }
+.btn-draft  { background: #9dc5e4; color: #fff; }
+.btn-submit { background: #2ba84a; color: #fff; }
+
+/* ==========================
+   削除ボタン（editのみ）
+   ========================== */
+.btn-remove {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}

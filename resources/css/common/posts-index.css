@@ -1,0 +1,195 @@
+/* ==========================
+   投稿一覧ページ
+   ========================== */
+
+/* 全体グリッド */
+.post-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+}
+
+/* ==========================
+   投稿カード
+   ========================== */
+.post-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* ==========================
+   画像
+   ========================== */
+.post-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background: #e5e7eb;
+}
+
+.post-image.no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+/* ==========================
+   本文エリア
+   ========================== */
+.post-body {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* メタ情報 */
+.post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.6rem;
+}
+
+/* ==========================
+   ステータスバッジ
+   ========================== */
+.badge {
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.badge-draft {
+    background: #f59e0b;
+    color: #ffffff;
+}
+
+.badge-published {
+    background: #22c55e;
+    color: #ffffff;
+}
+
+/* ==========================
+   難易度（★）
+   ========================== */
+.difficulty {
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.star {
+    color: #fbbf24;
+}
+
+/* ==========================
+   タイトル / 本文
+   ========================== */
+.post-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0.2rem 0 0.5rem;
+    line-height: 1.4;
+}
+
+.post-text {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+/* ==========================
+   操作ボタン
+   ========================== */
+.post-actions {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.post-actions a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 8px;
+    color: #ffffff;
+    transition: opacity 0.2s ease;
+}
+
+.post-actions a:hover {
+    opacity: 0.85;
+}
+
+.btn-detail {
+    background: #9dc5e4;
+}
+
+.btn-edit {
+    background: #6366f1;
+}
+
+/* ==========================
+   ページネーション
+   ========================== */
+.pagination-wrapper {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.pagination-wrapper nav {
+    display: inline-block;
+}
+
+.pagination-wrapper svg {
+    width: 16px;
+    height: 16px;
+}
+
+.pagination-wrapper .flex {
+    justify-content: center;
+}
+
+/* ==========================
+   投稿なし
+   ========================== */
+.no-posts {
+    text-align: center;
+    color: #666;
+    margin-top: 2rem;
+}
+
+/* ==========================
+   レスポンシブ
+   ========================== */
+@media (min-width: 600px) {
+    .post-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 900px) {
+    .post-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

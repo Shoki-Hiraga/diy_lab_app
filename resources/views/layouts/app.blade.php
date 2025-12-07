@@ -10,7 +10,9 @@
     <!-- 独自CSS -->
     @vite([
     'resources/css/users/login.css',
-    'resources/css/users/posts.css',
+    'resources/css/common/posts-index.css',
+    'resources/css/users/posts-form.css',
+
     'resources/css/users/users.css',
     'resources/js/app.js'
     ])
