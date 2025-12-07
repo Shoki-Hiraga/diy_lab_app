@@ -11,7 +11,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::withCount('posts')->get();
+        $categories = Category::withCount('posts')
+            ->has('posts')   // ✅ 投稿が1件以上のカテゴリのみ
+            ->get();
 
         return view('categories.index', compact('categories'));
     }

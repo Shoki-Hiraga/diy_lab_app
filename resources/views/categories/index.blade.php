@@ -12,7 +12,7 @@
                 <a href="{{ route('categories.show', $category) }}">
                     {{ $category->name }}
                     <span class="count">
-                        （{{ $category->posts_count }}）
+                        {{ $category->published_posts_count }}
                     </span>
                 </a>
             </li>

@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', $category->name . 'の投稿一覧')
+@section('title', $category->name . ' の投稿一覧')
 
 @section('content')
 <div class="post-wrapper">
@@ -11,25 +11,19 @@
     <div class="post-list">
         @forelse ($posts as $post)
             <div class="post-card">
-
                 {{-- メイン画像 --}}
                 @if ($post->main_image_path)
-                    <img src="{{ asset('assets/'.$post->main_image_path) }}"
-                         class="post-image">
+                    <img src="{{ asset('assets/'.$post->main_image_path) }}" class="post-image">
                 @else
                     <div class="post-image no-image">No Image</div>
                 @endif
 
                 <div class="post-body">
-
-                    {{-- メタ情報 --}}
                     <div class="post-meta">
-
-                        {{-- カテゴリ（複数対応） --}}
+                        {{-- カテゴリ複数 --}}
                         <div class="categories">
                             @foreach ($post->categories as $cat)
-                                <a href="{{ route('categories.show', $cat) }}"
-                                   class="category-badge">
+                                <a href="{{ route('categories.show', $cat) }}" class="category-badge">
                                     {{ $cat->name }}
                                 </a>
                             @endforeach
@@ -39,7 +33,9 @@
                         <span class="difficulty">
                             難易度：
                             @for ($i = 1; $i <= 5; $i++)
-                                {{ $i <= ($post->difficulty_id ?? 0) ? '★' : '☆' }}
+                                <span class="star">
+                                    {{ $i <= ($post->difficulty_id ?? 0) ? '★' : '☆' }}
+                                </span>
                             @endfor
                         </span>
 
@@ -49,24 +45,29 @@
                     </div>
 
                     {{-- タイトル --}}
-                    <h3>{{ $post->title }}</h3>
+                    <h3 class="post-title">{{ $post->title }}</h3>
 
                     {{-- 本文 --}}
-                    <p>{{ Str::limit($post->content ?? '', 80) }}</p>
+                    <p class="post-text">
+                        {{ Str::limit($post->content ?? '', 80, '…') }}
+                    </p>
 
                     {{-- 投稿者 --}}
                     <div class="post-author">
                         投稿者：{{ $post->user->username }}
                     </div>
 
-                    <a href="{{ route('users.posts.show', $post) }}"
-                       class="btn-detail">
-                        詳細を見る
-                    </a>
+                    {{-- 詳細ボタン --}}
+                    <div class="post-actions">
+                        <a href="{{ route('users.posts.show', $post) }}"
+                           class="btn-detail">
+                            詳細を見る
+                        </a>
+                    </div>
                 </div>
             </div>
         @empty
-            <p>このカテゴリの投稿はありません。</p>
+            <p class="no-posts">このカテゴリの投稿はありません。</p>
         @endforelse
     </div>
 

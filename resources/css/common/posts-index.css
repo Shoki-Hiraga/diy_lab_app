@@ -241,3 +241,61 @@ body {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+/* ==========================
+   カテゴリ一覧ページ
+   ========================== */
+.category-wrapper {
+    max-width: 520px;
+    margin: 1.5rem auto;
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.category-wrapper h2 {
+    text-align: center;
+    margin-bottom: 1.2rem;
+    color: #333;
+}
+
+/* リスト */
+.category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* 各カテゴリ */
+.category-item a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    background: #f9fafb;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.95rem;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.category-item a:hover {
+    background: #4caf50;
+    color: #ffffff;
+    transform: translateX(3px);
+}
+
+/* 投稿数 */
+.category-item .count {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.category-item a:hover .count {
+    color: #ffffff;
+}
