@@ -94,7 +94,6 @@
         </div>
     @endif
 
-{{-- タグ機能実装忘れ
     {{-- タグ --}}
     @if ($post->tags->count() > 0)
         <div class="post-tags">
@@ -105,7 +104,6 @@
             @endforeach
         </div>
     @endif
- --}}
  
     {{-- 戻る --}}
     <div class="post-actions">

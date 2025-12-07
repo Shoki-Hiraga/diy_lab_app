@@ -161,6 +161,27 @@
             @endif
         </div>
 
+          {{-- タグ --}}
+        @php
+            $tagString = old(
+                'tags',
+                $post->tags
+                    ->pluck('name')
+                    ->map(fn ($name) => "#{$name}")
+                    ->implode(' ')
+            );
+        @endphp
+
+        <div class="form-group">
+            <label for="tags">タグ</label>
+
+            <input type="text"
+                name="tags"
+                id="tags"
+                value="{{ $tagString }}"
+                placeholder="#DIY #木工 #初心者">
+        </div>
+
         {{-- 写真＋コメント --}}
         <div class="form-group">
             <label>写真とコメント</label>

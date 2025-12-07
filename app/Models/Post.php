@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+use App\Models\Tag;
+use App\Models\PostTag;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -59,6 +61,7 @@ class Post extends Model
     /**
      * タグ（多対多）
      */
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'post_tags');

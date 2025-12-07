@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Models\PostContent;
 use App\Models\Category;
 use App\Models\Tool;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
@@ -20,8 +21,8 @@ class PostController extends Controller
     {
         return view('users.posts.create', [
             'categories' => Category::all(),
-            'tools' => Tool::all(),
-            'user' => Auth::user()->load('profile'),
+            'tools'      => Tool::all(),
+            'user'       => Auth::user()->load('profile'),
         ]);
     }
 
@@ -33,10 +34,10 @@ class PostController extends Controller
         $this->authorizePost($post);
 
         return view('users.posts.edit', [
-            'post' => $post->load(['categories', 'tools', 'contents']),
+            'post'       => $post->load(['categories', 'tools', 'contents', 'tags']),
             'categories' => Category::all(),
-            'tools' => Tool::all(),
-            'user' => Auth::user()->load('profile'),
+            'tools'      => Tool::all(),
+            'user'       => Auth::user()->load('profile'),
         ]);
     }
 
@@ -54,8 +55,10 @@ class PostController extends Controller
             'images.*'      => 'nullable|image|max:4096',
             'comments.*'    => 'nullable|string|max:1000',
             'status'        => 'required|in:draft,published',
+            'tags'          => 'nullable|string|max:255',
         ]);
 
+        // 投稿作成
         $post = Post::create([
             'user_id'       => Auth::id(),
             'title'         => $request->title,
@@ -66,11 +69,13 @@ class PostController extends Controller
         $post->categories()->sync($request->category_id);
         $post->tools()->sync($request->tools ?? []);
 
+        // ✅ タグ保存（マスタ方式）
+        $tagIds = $this->syncTags($request->tags);
+        $post->tags()->sync($tagIds);
+
         // 画像＋コメント保存
         foreach ($request->file('images', []) as $index => $image) {
-            if (!$image) {
-                continue;
-            }
+            if (!$image) continue;
 
             $path = $image->store('posts', 'public_assets');
 
@@ -100,92 +105,65 @@ class PostController extends Controller
             'category_id'   => 'required|array',
             'category_id.*' => 'exists:categories,id',
             'tools.*'       => 'nullable|exists:tools,id',
-
-            // 新規追加用
             'images.*'      => 'nullable|image|max:4096',
             'comments.*'    => 'nullable|string|max:1000',
-
-            // 既存PostContent用
-            'existing_contents'                     => 'nullable|array',
-            'existing_contents.*.comment'           => 'nullable|string|max:1000',
-            'existing_contents.*.image'             => 'nullable|image|max:4096',
-            'existing_contents.*.delete'            => 'nullable|boolean',
-            'existing_contents.*.order'             => 'nullable|integer',
+            'existing_contents'           => 'nullable|array',
+            'existing_contents.*.comment' => 'nullable|string|max:1000',
+            'existing_contents.*.image'   => 'nullable|image|max:4096',
+            'existing_contents.*.delete'  => 'nullable|boolean',
+            'tags'                        => 'nullable|string|max:255',
         ]);
 
-        // 投稿本体を更新
         $post->update([
             'title'         => $request->title,
             'difficulty_id' => $request->difficulty_id,
             'status'        => $request->status,
         ]);
 
-        // カテゴリ・ツール
         $post->categories()->sync($request->category_id);
         $post->tools()->sync($request->tools ?? []);
 
-        // === 既存のPostContentの更新／削除 ===
+        // ✅ タグ更新
+        $tagIds = $this->syncTags($request->tags);
+        $post->tags()->sync($tagIds);
+
+        // === 既存画像処理 ===
         if ($request->filled('existing_contents')) {
-            foreach ($request->existing_contents as $contentId => $data) {
-                /** @var \App\Models\PostContent|null $content */
-                $content = $post->contents()->where('id', $contentId)->first();
-                if (!$content) {
-                    continue;
-                }
+            foreach ($request->existing_contents as $id => $data) {
+                $content = $post->contents()->find($id);
+                if (!$content) continue;
 
-                // 削除フラグ
-                $delete = isset($data['delete']) && $data['delete'];
-
-                if ($delete) {
-                    if ($content->image_path && Storage::disk('public_assets')->exists($content->image_path)) {
-                        Storage::disk('public_assets')->delete($content->image_path);
-                    }
+                if (!empty($data['delete'])) {
+                    Storage::disk('public_assets')->delete($content->image_path);
                     $content->delete();
                     continue;
                 }
 
-                // コメント更新
-                if (array_key_exists('comment', $data)) {
+                if (isset($data['comment'])) {
                     $content->comment = $data['comment'];
                 }
 
-                // 並び順
-                if (array_key_exists('order', $data)) {
-                    $content->order = (int) $data['order'];
-                }
-
-                // 画像差し替え
-                $imageKey = "existing_contents.$contentId.image";
-                if ($request->hasFile($imageKey)) {
-                    // 古いファイルを削除
-                    if ($content->image_path && Storage::disk('public_assets')->exists($content->image_path)) {
-                        Storage::disk('public_assets')->delete($content->image_path);
-                    }
-
-                    $path = $request->file($imageKey)->store('posts', 'public_assets');
-                    $content->image_path = $path;
+                if ($request->hasFile("existing_contents.$id.image")) {
+                    Storage::disk('public_assets')->delete($content->image_path);
+                    $content->image_path = $request
+                        ->file("existing_contents.$id.image")
+                        ->store('posts', 'public_assets');
                 }
 
                 $content->save();
             }
         }
 
-        // === 新規PostContentの追加 ===
+        // === 新規画像 ===
         if ($request->hasFile('images')) {
-            $currentMaxOrder = $post->contents()->max('order') ?? 0;
+            $maxOrder = $post->contents()->max('order') ?? 0;
 
-            foreach ($request->file('images') as $index => $image) {
-                if (!$image) {
-                    continue;
-                }
-
-                $path = $image->store('posts', 'public_assets');
-
+            foreach ($request->file('images') as $i => $image) {
                 PostContent::create([
                     'post_id'    => $post->id,
-                    'image_path' => $path,
-                    'comment'    => $request->comments[$index] ?? null,
-                    'order'      => $currentMaxOrder + $index + 1,
+                    'image_path' => $image->store('posts', 'public_assets'),
+                    'comment'    => $request->comments[$i] ?? null,
+                    'order'      => $maxOrder + $i + 1,
                 ]);
             }
         }
@@ -203,19 +181,38 @@ class PostController extends Controller
         $this->authorizePost($post);
 
         foreach ($post->contents as $content) {
-            if ($content->image_path && Storage::disk('public_assets')->exists($content->image_path)) {
-                Storage::disk('public_assets')->delete($content->image_path);
-            }
+            Storage::disk('public_assets')->delete($content->image_path);
         }
 
         $post->contents()->delete();
         $post->categories()->detach();
         $post->tools()->detach();
+        $post->tags()->detach();
         $post->delete();
 
         return redirect()
             ->route('users.posts.index')
             ->with('success', '投稿を削除しました');
+    }
+
+    /**
+     * タグ同期（マスタ方式）
+     */
+    private function syncTags(?string $tagString): array
+    {
+        if (!$tagString) {
+            return [];
+        }
+
+        return collect(preg_split('/[\s,]+/', $tagString))
+            ->map(fn ($tag) => mb_strtolower(ltrim($tag, '#')))
+            ->filter()
+            ->unique()
+            ->map(function ($name) {
+                return Tag::firstOrCreate(['name' => $name])->id;
+            })
+            ->values()
+            ->toArray();
     }
 
     /**

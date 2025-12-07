@@ -86,6 +86,17 @@
             @endif
         </div>
 
+        {{-- タグ --}}
+        <div class="form-group">
+            <label for="tags">タグ</label>
+
+            <input type="text"
+                name="tags"
+                id="tags"
+                value="{{ old('tags') }}"
+                placeholder="#DIY #木工 #初心者">
+        </div>
+
         {{-- 写真＋コメント --}}
         <div class="form-group">
             <label>写真とコメント</label>

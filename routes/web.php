@@ -19,7 +19,7 @@ Route::get('/', [PostPublicController::class, 'index'])
     ->name('public.posts.index');
 
 Route::get('/posts/{post}', [PostPublicController::class, 'show'])
-    ->name('posts.show');
+    ->name('users.posts.show');
 
 /*
 |--------------------------------------------------------------------------
