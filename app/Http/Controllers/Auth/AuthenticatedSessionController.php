@@ -28,7 +28,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended('/users');
+        return redirect()->route(
+            'users.profile.show',
+            Auth::id()
+        );
+
 
     }
 
