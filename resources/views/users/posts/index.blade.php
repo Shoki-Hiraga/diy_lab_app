@@ -96,7 +96,8 @@
 
         {{-- ページネーション --}}
         <div class="pagination-wrapper">
-            {{ $posts->links() }}
+            {{ $posts->links('pagination::bootstrap-5') }}
+
         </div>
     @else
         <p class="no-posts">まだ投稿がありません。</p>

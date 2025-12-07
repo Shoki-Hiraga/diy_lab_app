@@ -150,24 +150,53 @@
 }
 
 /* ==========================
-   ページネーション
+   ページネーション（Bootstrap 5）
    ========================== */
 .pagination-wrapper {
     margin-top: 2rem;
-    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .pagination-wrapper nav {
-    display: inline-block;
+    display: block;
 }
 
-.pagination-wrapper svg {
-    width: 16px;
-    height: 16px;
+.pagination-wrapper ul.pagination {
+    display: flex;
+    gap: 0.3rem;
+    padding-left: 0;
+    margin: 0;
 }
 
-.pagination-wrapper .flex {
+.pagination-wrapper .page-item {
+    list-style: none;
+}
+
+.pagination-wrapper .page-link {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 0.6rem;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    color: #333;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.pagination-wrapper .page-item.active .page-link {
+    background-color: #6366f1;
+    color: #ffffff;
+    border-color: #6366f1;
+}
+
+.pagination-wrapper .page-item.disabled .page-link {
+    color: #aaa;
+    pointer-events: none;
+    background: #f3f4f6;
 }
 
 /* ==========================

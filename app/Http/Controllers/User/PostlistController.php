@@ -14,7 +14,7 @@ class PostlistController extends Controller
         $posts = Post::with('contents')
         ->where('user_id', $user->id)
         ->orderBy('created_at', 'desc')
-        ->paginate(6); // ページネーション
+        ->paginate(30); // ページネーション
 
         return view('users.posts.index', compact('posts', 'user'));
     }
