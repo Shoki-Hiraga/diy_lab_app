@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <meta name="robots" content="noindex">
     <meta charset="utf-8">
     <title>@yield('title', 'DIY投稿サイト')</title>
 
