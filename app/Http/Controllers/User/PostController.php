@@ -77,7 +77,7 @@ class PostController extends Controller
         foreach ($request->file('images', []) as $index => $image) {
             if (!$image) continue;
 
-            $path = $image->store('posts', 'public_assets');
+            $path = $image->store('posts', 'public_fileassets');
 
             PostContent::create([
                 'post_id'    => $post->id,
@@ -134,7 +134,7 @@ class PostController extends Controller
                 if (!$content) continue;
 
                 if (!empty($data['delete'])) {
-                    Storage::disk('public_assets')->delete($content->image_path);
+                    Storage::disk('public_fileassets')->delete($content->image_path);
                     $content->delete();
                     continue;
                 }
@@ -144,10 +144,10 @@ class PostController extends Controller
                 }
 
                 if ($request->hasFile("existing_contents.$id.image")) {
-                    Storage::disk('public_assets')->delete($content->image_path);
+                    Storage::disk('public_fileassets')->delete($content->image_path);
                     $content->image_path = $request
                         ->file("existing_contents.$id.image")
-                        ->store('posts', 'public_assets');
+                        ->store('posts', 'public_fileassets');
                 }
 
                 $content->save();
@@ -161,7 +161,7 @@ class PostController extends Controller
             foreach ($request->file('images') as $i => $image) {
                 PostContent::create([
                     'post_id'    => $post->id,
-                    'image_path' => $image->store('posts', 'public_assets'),
+                    'image_path' => $image->store('posts', 'public_fileassets'),
                     'comment'    => $request->comments[$i] ?? null,
                     'order'      => $maxOrder + $i + 1,
                 ]);
@@ -181,7 +181,7 @@ class PostController extends Controller
         $this->authorizePost($post);
 
         foreach ($post->contents as $content) {
-            Storage::disk('public_assets')->delete($content->image_path);
+            Storage::disk('public_fileassets')->delete($content->image_path);
         }
 
         $post->contents()->delete();

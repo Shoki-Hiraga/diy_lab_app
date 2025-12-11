@@ -22,7 +22,7 @@
                 @endphp
 
                 @if ($mainImage)
-                    <img src="{{ asset('assets/'.$mainImage) }}"
+                    <img src="{{ asset('fileassets/'.$mainImage) }}"
                          alt="{{ $post->title }}"
                          class="post-image">
                 @else

@@ -7,8 +7,8 @@
     {{-- ユーザー情報 --}}
     @php
         $iconPath = $user->profile && $user->profile->profile_image_url
-            ? asset('assets/icons/'.$user->profile->profile_image_url)
-            : asset('assets/images/default_icon.png');
+            ? asset('fileassets/icons/'.$user->profile->profile_image_url)
+            : asset('fileassets/images/default_icon.png');
     @endphp
 
     <div class="user-info">
@@ -28,7 +28,7 @@
                     @endphp
 
                     @if ($mainImage)
-                        <img src="{{ asset('assets/'.$mainImage) }}"
+                        <img src="{{ asset('fileassets/'.$mainImage) }}"
                              alt="{{ $post->title }}"
                              class="post-image">
                     @else

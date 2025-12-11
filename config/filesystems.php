@@ -9,7 +9,7 @@ return [
     |
     | You may specify which of the filesystem disks below you wish
     | to use as your default disk for general storage. You can set this
-    | in your .env file with FILESYSTEM_DISK=public or FILESYSTEM_DISK=assets etc.
+    | in your .env file with FILESYSTEM_DISK=public or FILESYSTEM_DISK=fileassets etc.
     |
     */
 
@@ -27,10 +27,10 @@ return [
 
     'disks' => [
 
-        'public_assets' => [
+        'public_fileassets' => [
             'driver' => 'local',
-            'root' => public_path('assets'),   // ← public/assets に保存する
-            'url' => env('APP_URL') . '/assets',
+            'root' => public_path('fileassets'),
+            'url' => env('APP_URL') . '/fileassets',
             'visibility' => 'public',
         ],
 
@@ -69,7 +69,7 @@ return [
     |
     | The array keys are the locations of the links and the values
     | are their targets. You can safely leave this empty since we
-    | don’t use symbolic links for assets or public storage anymore.
+    | don’t use symbolic links for fileassets or public storage anymore.
     |
     */
 

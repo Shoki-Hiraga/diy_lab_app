@@ -47,12 +47,12 @@ class UserController extends Controller
             $filename = uniqid().'_'.$file->getClientOriginalName();
 
             // 🔹 以前の画像を削除（存在すれば）
-            if ($profile->profile_image_url && Storage::disk('public_assets')->exists('icons/'.$profile->profile_image_url)) {
-                Storage::disk('public_assets')->delete('icons/'.$profile->profile_image_url);
+            if ($profile->profile_image_url && Storage::disk('public_fileassets')->exists('icons/'.$profile->profile_image_url)) {
+                Storage::disk('public_fileassets')->delete('icons/'.$profile->profile_image_url);
             }
 
             // 🔹 新しい画像を保存
-            $file->storeAs('icons', $filename, 'public_assets');
+            $file->storeAs('icons', $filename, 'public_fileassets');
             $validated['profile_image_url'] = $filename;
         }
 

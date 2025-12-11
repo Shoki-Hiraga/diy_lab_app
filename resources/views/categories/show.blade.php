@@ -13,7 +13,7 @@
             <div class="post-card">
                 {{-- メイン画像 --}}
                 @if ($post->main_image_path)
-                    <img src="{{ asset('assets/'.$post->main_image_path) }}" class="post-image">
+                    <img src="{{ asset('fileassets/'.$post->main_image_path) }}" class="post-image">
                 @else
                     <div class="post-image no-image">No Image</div>
                 @endif

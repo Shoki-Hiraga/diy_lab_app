@@ -7,8 +7,8 @@
     {{-- ユーザー情報 --}}
     @php
         $iconPath = $user->profile && $user->profile->profile_image_url
-            ? asset('assets/icons/'.$user->profile->profile_image_url)
-            : asset('assets/images/default_icon.png');
+            ? asset('fileassets/icons/'.$user->profile->profile_image_url)
+            : asset('fileassets/images/default_icon.png');
     @endphp
 
     <div class="user-info">
@@ -200,7 +200,7 @@
                         <div class="image-upload">
                             <div class="preview">
                                 <div class="preview-wrapper">
-                                    <img src="{{ asset('assets/'.$content->image_path) }}"
+                                    <img src="{{ asset('fileassets/'.$content->image_path) }}"
                                         class="preview-image">
 
                                     {{-- ✅ ChatGPT風 × --}}

@@ -3,7 +3,7 @@ APP_ENV=dev
 APP_KEY=base64:neOWOryARx4BrhessINzF+ZzTkqZoj9k3sA1KAlSdhE=
 APP_DEBUG=true
 APP_URL=http://localhost
-FILESYSTEM_DISK=public_assets
+FILESYSTEM_DISK=public_fileassets
 
 # 言語設定
 APP_LOCALE=ja

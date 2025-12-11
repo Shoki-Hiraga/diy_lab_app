@@ -16,8 +16,8 @@
     {{-- 投稿者情報 --}}
     @php
         $iconPath = $post->user->profile && $post->user->profile->profile_image_url
-            ? asset('assets/icons/'.$post->user->profile->profile_image_url)
-            : asset('assets/images/default_icon.png');
+            ? asset('fileassets/icons/'.$post->user->profile->profile_image_url)
+            : asset('fileassets/images/default_icon.png');
     @endphp
 
     <div class="user-info">
@@ -63,7 +63,7 @@
 
                 {{-- 画像 --}}
                 @if (!empty($content->image_path))
-                    <img src="{{ asset('assets/'.$content->image_path) }}"
+                    <img src="{{ asset('fileassets/'.$content->image_path) }}"
                          alt="{{ $post->title }}"
                          class="post-image">
                 @endif
