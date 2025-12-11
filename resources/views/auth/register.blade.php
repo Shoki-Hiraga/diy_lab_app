@@ -1,5 +1,4 @@
 <x-guest-layout>
-    @vite(['resources/css/login.css'])
 
     <div class="register-container">
         <h1>新規アカウント作成</h1>

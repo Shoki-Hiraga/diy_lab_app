@@ -1,5 +1,4 @@
 <x-guest-layout>
-    @vite(['resources/css/login.css'])
 
     <div class="login-container">
         <h1>DIY LAB ログイン</h1>
