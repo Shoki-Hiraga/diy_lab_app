@@ -24,20 +24,19 @@ $app->handleRequest(Request::capture());
 /*  Xサーバー用のindex.php
 <?php
 
-// Xserver のドキュメントルート public_html から
-// Laravel の public ディレクトリへ流す
+$root = dirname(__DIR__) . '/diy_lab_app';
 
-require __DIR__ . '/diy_lab_app/vendor/autoload.php';
-$app = require_once __DIR__ . '/diy_lab_app/bootstrap/app.php';
+require $root . '/vendor/autoload.php';
 
-use Illuminate\Contracts\Http\Kernel;
-use Illuminate\Http\Request;
+$app = require_once $root . '/bootstrap/app.php';
 
-$kernel = $app->make(Kernel::class);
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
-    $request = Request::capture()
-)->send();
+    $request = Illuminate\Http\Request::capture()
+);
+
+$response->send();
 
 $kernel->terminate($request, $response);
 */
