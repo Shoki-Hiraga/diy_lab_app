@@ -5,6 +5,8 @@
 /* 共通 */
 @import "./common/header.css";
 @import "./common/posts-index.css";
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import 'bootstrap';
 
 /* ユーザー関連 */
 @import "./users/users.css";
