@@ -28,25 +28,25 @@
     opacity: 0.85;
 }
 
-/* ===== カテゴリナビ ===== */
-.category-nav {
+/* ===== TYPEナビ ===== */
+.type-nav {
     display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 5px;
+    margin-bottom: 10px;
     flex-wrap: wrap;
 }
 
 /* モバイルは横スクロール */
 @media (max-width: 768px) {
-    .category-nav {
+    .type-nav {
         overflow-x: auto;
         white-space: nowrap;
         padding-bottom: 6px;
     }
 }
 
-/* カテゴリチップ */
-.category-chip {
+/* TYPEチップ */
+.type-chip {
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-radius: 999px;
@@ -57,7 +57,7 @@
     transition: background 0.2s ease, color 0.2s ease;
 }
 
-.category-chip:hover {
+.type-chip:hover {
     background: #4caf50;
     color: #fff;
 }

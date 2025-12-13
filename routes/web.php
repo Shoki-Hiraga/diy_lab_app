@@ -7,6 +7,7 @@ use App\Http\Controllers\User\PostlistController as UserPostlistController;
 use App\Http\Controllers\PostPublicController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DifficultyController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,12 @@ Route::get('/difficulty', [DifficultyController::class, 'index'])
 
 Route::get('/difficulty/{difficulty}', [DifficultyController::class, 'show'])
     ->name('difficulties.show');
+
+Route::get('/tags', [TagController::class, 'index'])
+    ->name('tags.index');
+
+Route::get('/tags/{tag}', [TagController::class, 'show'])
+    ->name('tags.show');
 
 /*
 |--------------------------------------------------------------------------

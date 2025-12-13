@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
 use App\Models\Difficulty;
+use App\Models\Tag;
 use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
@@ -45,5 +46,12 @@ class AppServiceProvider extends ServiceProvider
             ->has('publishedPosts')
             ->get()
         );
+
+        // タグ（公開済み投稿があるものだけ）
+        View::share(
+        'tags',
+        Tag::has('publishedPosts')->get()
+        );
+
     }
 }

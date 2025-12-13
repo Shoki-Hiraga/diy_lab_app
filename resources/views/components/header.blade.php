@@ -9,16 +9,31 @@
         <a href="{{ route('difficulties.index') }}" class="btn-type-list">
             ⭐ 難易度一覧
         </a>
-    </div>
+
+        <a href="{{ route('tags.index') }}" class="btn-type-list">
+            🏷️ タグ一覧
+        </a>    </div>
 </div>
 
 {{-- カテゴリナビ --}}
 @if ($categories->count())
-    <div class="category-nav">
+    <div class="type-nav">
         @foreach ($categories as $category)
             <a href="{{ route('categories.show', $category) }}"
-               class="category-chip">
+               class="type-chip">
                 {{ $category->name }}
+            </a>
+        @endforeach
+    </div>
+@endif
+
+{{-- タグナビ --}}
+@if ($tags->count())
+    <div class="type-nav">
+        @foreach ($tags as $tag)
+            <a href="{{ route('tags.show', $tag) }}"
+               class="type-chip">
+                #{{ $tag->name }}
             </a>
         @endforeach
     </div>
@@ -26,10 +41,10 @@
 
 {{-- 難易度ナビ --}}
 @if ($difficulties->count())
-    <div class="difficulty-nav">
+    <div class="type-nav">
         @foreach ($difficulties as $difficulty)
             <a href="{{ route('difficulties.show', $difficulty) }}"
-               class="difficulty-chip">
+               class="type-chip">
                 {{ str_repeat('★', $difficulty->id) }}
             </a>
         @endforeach

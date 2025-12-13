@@ -72,7 +72,7 @@ class Post extends Model
      */
     public function difficulty()
     {
-        return $this->belongsTo(Difficulty::class, 'difficulty_id', 'level');
+        return $this->belongsTo(Difficulty::class);
     }
 
     /**
