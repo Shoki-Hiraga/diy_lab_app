@@ -8,6 +8,7 @@ use App\Http\Controllers\PostPublicController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DifficultyController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\CreatorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,23 +25,33 @@ Route::get('/', [PostPublicController::class, 'index'])
 Route::get('/posts/{post}', [PostPublicController::class, 'show'])
     ->name('users.posts.show');
 
+/* カテゴリ */
 Route::get('/category', [CategoryController::class, 'index'])
     ->name('categories.index');
 
 Route::get('/category/{category}', [CategoryController::class, 'show'])
     ->name('categories.show');
 
+/* 難易度 */
 Route::get('/difficulty', [DifficultyController::class, 'index'])
     ->name('difficulties.index');
 
 Route::get('/difficulty/{difficulty}', [DifficultyController::class, 'show'])
     ->name('difficulties.show');
 
+/* タグ */
 Route::get('/tags', [TagController::class, 'index'])
     ->name('tags.index');
 
 Route::get('/tags/{tag}', [TagController::class, 'show'])
     ->name('tags.show');
+
+/* 投稿者（Creators） */
+Route::get('/creators', [CreatorController::class, 'index'])
+    ->name('creators.index');
+
+Route::get('/creators/{user}', [CreatorController::class, 'show'])
+    ->name('creators.show');
 
 /*
 |--------------------------------------------------------------------------

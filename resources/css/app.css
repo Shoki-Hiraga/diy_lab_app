@@ -8,6 +8,5 @@
 
 /* ユーザー関連 */
 @import "./users/users.css";
-@import "./users/posts.css";
 @import "./users/posts-form.css";
 @import "./users/login.css";

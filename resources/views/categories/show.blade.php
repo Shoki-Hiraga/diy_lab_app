@@ -52,9 +52,12 @@
                         {{ Str::limit($post->content ?? '', 80, '…') }}
                     </p>
 
-                    {{-- 投稿者 --}}
                     <div class="post-author">
-                        投稿者：{{ $post->user->username }}
+                        投稿者：
+                        <a href="{{ route('creators.show', $post->user) }}"
+                        class="author-link">
+                            {{ $post->user->username }}
+                        </a>
                     </div>
 
                     {{-- 詳細ボタン --}}

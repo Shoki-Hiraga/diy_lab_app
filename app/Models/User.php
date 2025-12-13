@@ -60,4 +60,21 @@ class User extends Authenticatable
         return $this->hasMany(UserSocialLink::class);
     }
 
+    /**
+     * 投稿
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
+     * 公開済み投稿のみ
+     */
+    public function publishedPosts()
+    {
+        return $this->hasMany(Post::class)
+            ->where('status', Post::STATUS_PUBLISHED);
+    }
+    
 }

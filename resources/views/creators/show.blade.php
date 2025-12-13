@@ -1,12 +1,12 @@
 @extends('layouts.public')
 
-@section('title', '#'.$tag->name.' の投稿一覧')
+@section('title', $user->username . ' の投稿一覧')
 
 @section('content')
 <div class="post-wrapper">
-    <a href="{{ route('tags.index') }}">← タグ一覧へ戻る</a>
+    <a href="{{ route('creators.index') }}">← 投稿者一覧へ戻る</a>
 
-    <h2>#{{ $tag->name }} の投稿一覧</h2>
+    <h2>{{ $user->username }} の投稿一覧</h2>
 
     <div class="post-list">
         @forelse ($posts as $post)
@@ -40,25 +40,16 @@
                         </span>
                     </div>
 
-                    {{-- タイトル --}}
-                    <h3 class="post-title">
-                        {{ $post->title }}
-                    </h3>
+                    <h3 class="post-title">{{ $post->title }}</h3>
 
-                    {{-- 本文 --}}
                     <p class="post-text">
                         {{ Str::limit($post->content ?? '', 80, '…') }}
                     </p>
 
                     <div class="post-author">
-                        投稿者：
-                        <a href="{{ route('creators.show', $post->user) }}"
-                        class="author-link">
-                            {{ $post->user->username }}
-                        </a>
+                        投稿者：{{ $user->username }}
                     </div>
 
-                    {{-- 詳細 --}}
                     <div class="post-actions">
                         <a href="{{ route('users.posts.show', $post) }}"
                            class="btn-detail">
@@ -68,7 +59,7 @@
                 </div>
             </div>
         @empty
-            <p class="no-posts">このタグの投稿はありません。</p>
+            <p class="no-posts">この投稿者の投稿はありません。</p>
         @endforelse
     </div>
 

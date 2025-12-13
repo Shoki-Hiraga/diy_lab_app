@@ -233,3 +233,12 @@ a {
     color: #666;
     margin-top: 2rem;
 }
+.author-link {
+    color: #4caf50;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.author-link:hover {
+    text-decoration: underline;
+}
