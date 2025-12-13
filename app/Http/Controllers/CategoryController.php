@@ -11,8 +11,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::withCount('posts')
-            ->has('posts')   // ✅ 投稿が1件以上のカテゴリのみ
+        $categories = Category::withCount('publishedPosts')
+            ->has('publishedPosts') // ✅ 公開投稿があるカテゴリのみ
             ->get();
 
         return view('categories.index', compact('categories'));
@@ -23,8 +23,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $posts = $category->posts()
-            ->published()
+        $posts = $category->publishedPosts()
             ->with(['user', 'contents', 'categories'])
             ->latest()
             ->paginate(10);

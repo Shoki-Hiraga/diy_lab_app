@@ -7,8 +7,14 @@
     gap: 12px;
 }
 
-/* カテゴリ一覧ボタン */
-.header-actions .btn-category {
+/* ヘッダーTypeボタン */
+.header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.header-actions .btn-type-list {
     padding: 8px 14px;
     background: #4caf50;
     color: #fff;
@@ -18,7 +24,7 @@
     transition: opacity 0.2s ease;
 }
 
-.header-actions .btn-category:hover {
+.header-actions .btn-type-list:hover {
     opacity: 0.85;
 }
 

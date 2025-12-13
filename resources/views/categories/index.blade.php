@@ -3,15 +3,15 @@
 @section('title', 'カテゴリ一覧')
 
 @section('content')
-<div class="category-wrapper">
+<div class="type-wrapper">
     <h2>カテゴリ一覧</h2>
 
-    <ul class="category-list">
+    <ul class="type-list">
         @foreach ($categories as $category)
-            <li class="category-item">
+            <li class="type-item">
                 <a href="{{ route('categories.show', $category) }}">
                     {{ $category->name }}
-                    <span class="count">
+                    <span class="type-count">
                         {{ $category->published_posts_count }}
                     </span>
                 </a>

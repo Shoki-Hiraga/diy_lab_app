@@ -6,6 +6,7 @@ use App\Http\Controllers\User\UserController as UserUserController;
 use App\Http\Controllers\User\PostlistController as UserPostlistController;
 use App\Http\Controllers\PostPublicController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DifficultyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,12 @@ Route::get('/category', [CategoryController::class, 'index'])
 
 Route::get('/category/{category}', [CategoryController::class, 'show'])
     ->name('categories.show');
+
+Route::get('/difficulty', [DifficultyController::class, 'index'])
+    ->name('difficulties.index');
+
+Route::get('/difficulty/{difficulty}', [DifficultyController::class, 'show'])
+    ->name('difficulties.show');
 
 /*
 |--------------------------------------------------------------------------
