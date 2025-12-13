@@ -3,12 +3,18 @@
 @tailwind utilities; */
 
 /* 共通 */
+@import "./common/posts-index.sp.css";
+@import "./common/posts-index.tablet.css";
+@import "./common/posts-index.pc.css";
+
 @import "./common/header.css";
-@import "./common/posts-index.css";
+
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import 'bootstrap';
 
 /* ユーザー関連 */
 @import "./users/users.css";
-@import "./users/posts-form.css";
+@import "./users/posts-form.sp.css";
+@import "./users/posts-form.tablet.css";
+@import "./users/posts-form.pc.css";
 @import "./users/login.css";

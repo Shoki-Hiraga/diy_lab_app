@@ -18,19 +18,6 @@
 </head>
 <body class="layout-public">
 
-    <header class="public-header">
-        <div class="header-inner">
-            <a href="{{ route('public.posts.index') }}" class="logo">
-                DIY SNS
-            </a>
-
-            <nav class="public-nav">
-                <a href="{{ route('login') }}">ログイン</a>
-                <a href="{{ route('register') }}">会員登録</a>
-            </nav>
-        </div>
-    </header>
-
     <main class="main-content">
         @yield('content')
     </main>
