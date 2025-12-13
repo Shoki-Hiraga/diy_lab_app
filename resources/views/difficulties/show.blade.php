@@ -1,18 +1,21 @@
 @extends('layouts.public')
 
-@section('title', $difficulty->name . ' の投稿一覧')
+@section(
+    'title',
+    '難易度 ' . str_repeat('★', $difficulty->id) . ' の投稿一覧'
+)
 
 @section('content')
 <div class="post-wrapper">
     <a href="{{ route('difficulties.index') }}">← 難易度一覧へ戻る</a>
 
-    <h2>{{ $difficulty->name }} の投稿一覧</h2>
-<span class="difficulty">
-    難易度：
-    <span class="stars">
-        {{ str_repeat('★', $post->difficulty_id ?? 0) }}
-    </span>
-</span>
+    <h2>
+        難易度
+        <span class="stars">
+            {{ str_repeat('★', $difficulty->id) }}
+        </span>
+        の投稿一覧
+    </h2>
 
     <div class="post-list">
         @forelse ($posts as $post)
