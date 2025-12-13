@@ -3,12 +3,8 @@
 define('LARAVEL_START', microtime(true));
 
 require __DIR__.'/../vendor/autoload.php';
-$app = require_once __DIR__.'/../bootstrap/app.php';
 
-/* 本番公開用
-require __DIR__.'/../diy_lab_app/vendor/autoload.php';
-$app = require_once __DIR__ . '/../diy_lab_app/bootstrap/app.php';
-*/
+$app = require_once __DIR__.'/../bootstrap/app.php';
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
