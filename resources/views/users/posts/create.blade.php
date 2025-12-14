@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+{{-- ▼ post-header --}}
+@section('post-header')
+    @include('components.post-header')
+@endsection
+
 @section('content')
 <div class="post-wrapper">
     <h2>投稿の作成</h2>

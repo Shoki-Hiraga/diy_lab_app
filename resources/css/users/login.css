@@ -1,95 +1,135 @@
-/* 背景全体 */
+/* =====================================================
+   Base
+===================================================== */
+* {
+  box-sizing: border-box;
+}
+
 body {
-    background-color: #FAEDE2;
-    font-family: sans-serif;
+  margin: 0;
+  background-color: #fff5eb; /* posts-index と統一 */
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  color: #333;
 }
 
-/* ログインフォームのコンテナ */
-.login-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 2rem;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+/* =====================================================
+   共通フォームコンテナ
+===================================================== */
+.login-container,
+.register-container {
+  max-width: 520px;
+  margin: 1.5rem auto;
+  padding: 1.75rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
-/* 見出し */
-.login-container h1 {
-    text-align: center;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: #333;
+/* =====================================================
+   見出し
+===================================================== */
+.login-container h1,
+.register-container h1 {
+  text-align: center;
+  font-size: 1.35rem;
+  margin-bottom: 1.4rem;
+  color: #333;
 }
 
-/* フォームグループ */
+/* =====================================================
+   フォーム
+===================================================== */
 .form-group {
-    margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
 }
 
-/* ラベル */
 label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: #555;
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
 }
 
 /* 入力欄 */
 input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* ボタン */
+input:focus {
+  outline: none;
+  border-color: #9dc5e4; /* posts-index の btn 色に寄せる */
+  box-shadow: 0 0 0 3px rgba(157,197,228,0.3);
+}
+
+/* =====================================================
+   ボタン
+===================================================== */
 button {
-    width: 100%;
-    padding: 0.75rem;
-    background: #f59e0b; /* オレンジ系 */
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #fff;
-    cursor: pointer;
-    transition: background 0.3s;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.7rem;
+  background: #9dc5e4; /* posts-index と統一 */
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 button:hover {
-    background: #d97706;
+  opacity: 0.85;
+  transform: translateY(-1px);
 }
 
-/* 下部リンク */
+/* =====================================================
+   下部リンク
+===================================================== */
 .links {
-    text-align: center;
-    margin-top: 1rem;
+  text-align: center;
+  margin-top: 1.2rem;
+  font-size: 0.85rem;
 }
 
 .links a {
-    color: #2563eb;
-    text-decoration: none;
+  color: #4caf50; /* author-link とトーン統一 */
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .links a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-/* 新規登録フォームのコンテナ */
-.register-container {
-    max-width: 450px;
-    margin: 50px auto;
+/* =====================================================
+   Tablet / PC
+===================================================== */
+@media (min-width: 600px) {
+  .login-container,
+  .register-container {
+    margin: 2.5rem auto;
     padding: 2rem;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
+  }
 
-.register-container h1 {
-    text-align: center;
+  .login-container h1,
+  .register-container h1 {
     font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: #333;
+  }
+
+  input {
+    font-size: 1rem;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
 }

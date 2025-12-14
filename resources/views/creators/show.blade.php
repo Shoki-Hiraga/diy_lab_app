@@ -2,6 +2,11 @@
 
 @section('title', $user->username . ' の投稿一覧')
 
+{{-- ▼ post-header --}}
+@section('post-header')
+    @include('components.post-header')
+@endsection
+
 @section('content')
 <div class="post-wrapper">
     <a href="{{ route('creators.index') }}">← 投稿者一覧へ戻る</a>

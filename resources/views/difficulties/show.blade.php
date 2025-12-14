@@ -5,6 +5,11 @@
     '難易度 ' . str_repeat('★', $difficulty->id) . ' の投稿一覧'
 )
 
+{{-- ▼ post-header --}}
+@section('post-header')
+    @include('components.post-header')
+@endsection
+
 @section('content')
 <div class="post-wrapper">
     <a href="{{ route('difficulties.index') }}">← 難易度一覧へ戻る</a>

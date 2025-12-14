@@ -16,6 +16,14 @@
 
 </head>
 <body>
+
+    {{-- ▼ ページ専用ヘッダー --}}
+    @hasSection('post-header')
+        <div class="post-header-wrapper">
+            @yield('post-header')
+        </div>
+    @endif
+
     <div class="login-wrapper">
         {{ $slot }}
     </div>

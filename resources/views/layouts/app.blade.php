@@ -17,14 +17,12 @@
 </head>
 <body>
 
-    <!-- ページヘッダー -->
-    @isset($header)
-        <header>
-            <div>
-                {{ $header }}
-            </div>
-        </header>
-    @endisset
+    {{-- ▼ ページ専用ヘッダー --}}
+    @hasSection('post-header')
+        <div class="post-header-wrapper">
+            @yield('post-header')
+        </div>
+    @endif
 
     <!-- ページコンテンツ -->
     <main>

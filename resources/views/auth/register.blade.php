@@ -1,3 +1,8 @@
+{{-- ▼ post-header --}}
+@section('post-header')
+    @include('components.post-header')
+@endsection
+
 <x-guest-layout>
 
     <div class="register-container">

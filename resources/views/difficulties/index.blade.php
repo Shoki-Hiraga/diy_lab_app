@@ -2,6 +2,11 @@
 
 @section('title', '難易度一覧')
 
+{{-- ▼ post-header --}}
+@section('post-header')
+    @include('components.post-header')
+@endsection
+
 @section('content')
 <div class="type-wrapper">
     <h2>難易度一覧</h2>

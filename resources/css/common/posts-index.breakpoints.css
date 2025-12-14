@@ -13,7 +13,7 @@
 @media (min-width: 900px) {
   .post-list {
     grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   .post-wrapper,

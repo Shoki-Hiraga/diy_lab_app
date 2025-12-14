@@ -13,7 +13,6 @@
 
 /* ユーザー関連 */
 @import "./users/users.css";
-@import "./users/posts-form.sp.css";
-@import "./users/posts-form.tablet.css";
-@import "./users/posts-form.pc.css";
+@import "./users/posts-form.base.css";
+@import "./users/posts-form.breakpoints.css";
 @import "./users/login.css";

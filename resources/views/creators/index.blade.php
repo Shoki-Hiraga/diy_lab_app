@@ -2,6 +2,11 @@
 
 @section('title', '投稿者一覧')
 
+{{-- ▼ post-header --}}
+@section('post-header')
+    @include('components.post-header')
+@endsection
+
 @section('content')
 <div class="type-wrapper">
     <h2>投稿者一覧</h2>

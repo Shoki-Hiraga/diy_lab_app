@@ -2,6 +2,11 @@
 
 @section('title', $category->name . ' の投稿一覧')
 
+{{-- ▼ post-header --}}
+@section('post-header')
+    @include('components.post-header')
+@endsection
+
 @section('content')
 <div class="post-wrapper">
     <a href="{{ route('categories.index') }}">← カテゴリ一覧へ戻る</a>

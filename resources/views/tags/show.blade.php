@@ -2,6 +2,11 @@
 
 @section('title', '#'.$tag->name.' の投稿一覧')
 
+{{-- ▼ post-header --}}
+@section('post-header')
+    @include('components.post-header')
+@endsection
+
 @section('content')
 <div class="post-wrapper">
     <a href="{{ route('tags.index') }}">← タグ一覧へ戻る</a>

@@ -1,5 +1,10 @@
 @extends('layouts.public')
 
+{{-- ▼ post-header --}}
+@section('post-header')
+    @include('components.post-header')
+@endsection
+
 @section('title', 'カテゴリ一覧')
 
 @section('content')
