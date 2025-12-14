@@ -138,6 +138,33 @@ a {
   text-decoration: underline;
 }
 
+
+.user-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.user-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.user-text {
+  min-width: 120px;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.user-text span {
+  display: block;           /* ← 確実に改行 */
+}
+
 /* ボタン */
 .post-actions {
   margin-top: auto;

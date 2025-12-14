@@ -27,12 +27,15 @@
 
     <div class="user-info">
         <img src="{{ $iconPath }}" alt="ユーザー画像" class="user-icon">
-        <span class="username">
-            {{ $post->user->username }}
-        </span>
-        <span class="date">
-            {{ $post->created_at->format('Y/m/d') }}
-        </span>
+
+        <div class="user-text">
+            <span class="username">
+                投稿者：{{ $post->user->username }}
+            </span>
+            <span class="date">
+                投稿日：{{ $post->created_at->format('Y/m/d') }}
+            </span>
+        </div>
     </div>
 
     {{-- メタ情報 --}}
