@@ -2,6 +2,42 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* =========================
+     * 表示件数（デバイス別）
+     * ========================= */
+    function getInitialVisibleCount() {
+        const width = window.innerWidth;
+        if (width >= 900) return 25;   // PC
+        if (width >= 600) return 15;   // Tablet
+        return 10;                     // SP
+    }
+
+    /* =========================
+    * トグルボタン 初期表示制御（★重要）
+    * ========================= */
+
+    function updateToggleButtonVisibility(button) {
+    const targetId = button.dataset.target;
+    const group = document.getElementById(targetId);
+    if (!group) return;
+
+    const visibleCount = getInitialVisibleCount();
+    const total = group.querySelectorAll('label').length;
+
+    // 「全部表示できる件数」ならボタン不要
+    if (total <= visibleCount) {
+        button.classList.add('hidden');
+    } else {
+        button.classList.remove('hidden');
+        // 初期表示時の文言も統一しておくと安心
+        button.textContent = 'もっと見る ▼';
+    }
+    }
+
+    document.querySelectorAll('.toggle-btn').forEach(button => {
+        updateToggleButtonVisibility(button);
+    });
+
+    /* =========================
      * 星評価
      * ========================= */
     document.querySelectorAll('.stars .star').forEach(star => {
@@ -17,24 +53,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* =========================
-     * カテゴリ / ツール トグル
+     * カテゴリ / ツール 初期表示制御
      * ========================= */
+    document.querySelectorAll('.checkbox-group').forEach(group => {
+        const visibleCount = getInitialVisibleCount();
+
+        group.querySelectorAll('label').forEach((el, i) => {
+            if (i >= visibleCount) {
+                el.classList.add('hidden');
+            } else {
+                el.classList.remove('hidden');
+            }
+        });
+    });
+
+    /* =========================
+    * カテゴリ / ツール トグル
+    * ========================= */
     document.querySelectorAll('.toggle-btn').forEach(button => {
         button.addEventListener('click', () => {
             const targetId = button.dataset.target;
             const group = document.getElementById(targetId);
             if (!group) return;
 
-            const hidden = group.querySelectorAll('.hidden');
+            const visibleCount = getInitialVisibleCount();
+            const labels = group.querySelectorAll('label');
+            const hiddenItems = group.querySelectorAll('.hidden');
 
-            if (hidden.length) {
-                hidden.forEach(el => el.classList.remove('hidden'));
+            if (hiddenItems.length > 0) {
+                // ▼ 展開（全部表示）
+                hiddenItems.forEach(el => el.classList.remove('hidden'));
                 button.textContent = '閉じる';
+                button.classList.remove('hidden');
+
             } else {
-                group.querySelectorAll('label').forEach((el, i) => {
-                    if (i >= 10) el.classList.add('hidden');
+                // ▲ 折りたたみ（デバイス別表示数）
+                labels.forEach((el, i) => {
+                    if (i >= visibleCount) el.classList.add('hidden');
+                    else el.classList.remove('hidden');
                 });
-                button.textContent = 'もっと見る';
+
+                // 折りたたみ後、隠れ要素が無ければボタン非表示
+                const remainHidden = group.querySelectorAll('.hidden').length;
+                if (remainHidden === 0) {
+                    button.classList.add('hidden');
+                } else {
+                    button.textContent = 'もっと見る ▼';
+                    button.classList.remove('hidden');
+                }
             }
         });
     });
