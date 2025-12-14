@@ -53,6 +53,11 @@ Route::get('/creators', [CreatorController::class, 'index'])
 Route::get('/creators/{user}', [CreatorController::class, 'show'])
     ->name('creators.show');
 
+    use App\Http\Controllers\SearchController;
+
+Route::get('/search', [SearchController::class, 'index'])
+    ->name('search.index');
+
 /*
 |--------------------------------------------------------------------------
 | User Routes (/users/)
