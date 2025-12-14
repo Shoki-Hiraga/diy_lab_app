@@ -3,9 +3,8 @@
 @tailwind utilities; */
 
 /* 共通 */
-@import "./common/posts-index.sp.css";
-@import "./common/posts-index.tablet.css";
-@import "./common/posts-index.pc.css";
+@import "./common/posts-index.base.css";
+@import "./common/posts-index.breakpoints.css";
 
 @import "./common/header.css";
 
