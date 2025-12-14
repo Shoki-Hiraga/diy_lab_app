@@ -60,6 +60,11 @@ class User extends Authenticatable
         return $this->hasMany(UserSocialLink::class);
     }
 
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+    
     /**
      * 投稿
      */

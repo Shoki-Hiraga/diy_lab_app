@@ -30,7 +30,10 @@
 
         <div class="user-text">
             <span class="username">
-                投稿者：{{ $post->user->username }}
+                投稿者：
+                <a href="{{ route('creators.show', $post->user) }}">
+                    {{ $post->user->username }}
+                </a>
             </span>
             <span class="date">
                 投稿日：{{ $post->created_at->format('Y/m/d') }}
