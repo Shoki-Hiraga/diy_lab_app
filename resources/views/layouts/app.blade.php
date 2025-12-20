@@ -10,10 +10,14 @@
 
     <!-- 独自CSS -->
     @vite([
-    'resources/css/app.css',
-    'resources/js/app.js'
+        'resources/css/common/header.css',
+        'resources/css/common/posts-index.base.css',
+        'resources/css/common/posts-index.breakpoints.css',
+        'resources/css/common/search.css',
+        'resources/css/users/posts-form.base.css',
+        'resources/css/users/posts-index.breakpoints.css',
+        'resources/js/app.js'
     ])
-
 </head>
 <body>
 
