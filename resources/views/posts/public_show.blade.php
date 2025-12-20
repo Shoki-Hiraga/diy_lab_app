@@ -26,12 +26,19 @@
     @endphp
 
     <div class="user-info">
-        <img src="{{ $iconPath }}" alt="ユーザー画像" class="user-icon">
+        <a href="{{ route('creators.show', $post->user) }}"
+        class="user-icon-link">
+            <img src="{{ $iconPath }}"
+                alt="{{ $post->user->username }}のプロフィール画像"
+                class="user-icon"
+                onerror="this.src='{{ asset('static/images/default_icon.png') }}'">
+        </a>
 
         <div class="user-text">
             <span class="username">
                 投稿者：
-                <a href="{{ route('creators.show', $post->user) }}">
+                <a href="{{ route('creators.show', $post->user) }}"
+                class="author-link">
                     {{ $post->user->username }}
                 </a>
             </span>
@@ -58,9 +65,9 @@
         @if ($post->categories->count() > 0)
             <div class="categories">
                 @foreach ($post->categories as $category)
-                    <span class="category">
+                    <a href="{{ route('categories.show', $category) }}" class="category">
                         {{ $category->name }}
-                    </span>
+                    </a>
                 @endforeach
             </div>
         @endif

@@ -129,29 +129,71 @@ a {
   margin-bottom: 0.6rem;
 }
 
+/* =====================================================
+   投稿者リンク（アクセシビリティ最優先）
+===================================================== */
 .author-link {
-  color: #4caf50;
+  color: #1f6f43;                /* 十分なコントラスト */
   font-weight: 600;
+  text-decoration: underline;    /* 色に依存しない */
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
 }
 
+/* hover（マウス） */
 .author-link:hover {
-  text-decoration: underline;
+  color: #145232;
 }
 
+/* focus（キーボード操作） */
+.author-link:focus-visible {
+  outline: 3px solid #9dc5e4;    /* 視認性の高いフォーカスリング */
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* active（クリック中） */
+.author-link:active {
+  color: #0f3d26;
+}
+
+/* =====================================================
+   ユーザーアイコンリンク（形崩れ防止・最終版）
+===================================================== */
+.user-icon-link {
+  display: inline-flex;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;            /* ← はみ出し防止 */
+  flex-shrink: 0;
+}
+
+/* 画像はリンクサイズに完全フィット */
+.user-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* hover */
+.user-icon-link:hover .user-icon {
+  opacity: 0.85;
+}
+
+/* focus（はみ出さない） */
+.user-icon-link:focus-visible {
+  outline: 3px solid #9dc5e4;
+  outline-offset: 2px;         /* ← 4px は広すぎた */
+  border-radius: 50%;
+}
 
 .user-info {
   display: flex;
   align-items: flex-start;
   gap: 12px;
   margin-bottom: 1rem;
-}
-
-.user-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
 }
 
 .user-text {
@@ -255,3 +297,44 @@ a {
   color: #666;
   margin-top: 2rem;
 }
+
+.post-wrapper .post-content {
+  margin-bottom: 1.2rem;
+}
+
+/* =====================================================
+   カテゴリタグ（クリック可能）
+===================================================== */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.category {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  background: #eef6f1;
+  color: #2f7a4f;
+  border-radius: 999px;
+  border: 1px solid #cde6d8;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+/* hover で「押せる」感じ */
+.category:hover {
+  background: #2f7a4f;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.category {
+  cursor: pointer;
+}
+
+.category:focus-visible {
+  outline: 2px solid #2f7a4f;
+  outline-offset: 2px;
+}
+

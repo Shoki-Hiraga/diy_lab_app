@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 
 class PostPublicController extends Controller
 {
@@ -26,7 +27,7 @@ class PostPublicController extends Controller
     {
         $post = Post::published()
             ->whereKey($post->id)
-            ->with(['categories', 'tools', 'contents', 'user.profile'])
+            ->with(['categories', 'tools', 'tags', 'contents', 'user.profile'])
             ->firstOrFail();
 
         return view('posts.public_show', compact('post'));
