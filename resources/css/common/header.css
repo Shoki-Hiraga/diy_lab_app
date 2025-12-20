@@ -31,6 +31,14 @@
     font-size: 1.4rem;
 }
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.post-header-wrapper {
+    overflow-x: hidden;
+}
+
 /* =====================================================
    アクションエリア
 ===================================================== */
@@ -125,23 +133,27 @@
 
 @media (max-width: 599px) {
 
-    .header-search input,
-    .search-submit {
-        display: none;
+    /* ヘッダー全体を縦並びに */
+    .post-header {
+        flex-direction: column;
+        align-items: stretch;
     }
 
-    .search-toggle {
-        display: inline-block;
-        font-size: 18px;
-        background: none;
+    /* アクションも縦積み */
+    .header-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
     }
 
-    .header-search.is-open input,
-    .header-search.is-open .search-submit {
-        display: inline-block;
+    /* ボタン群を2列 or 折り返し */
+    .header-action {
+        flex-wrap: wrap;
     }
 
-    .header-search.is-open .search-toggle {
-        display: none;
+    .btn-type-list {
+        flex: 1 1 48%;
+        text-align: center;
+        white-space: normal; /* ← 重要 */
     }
 }
