@@ -41,38 +41,5 @@
         </div>
     </header>
 
-    {{-- カテゴリ --}}
-    @if ($categories->count())
-        <nav class="type-nav">
-            @foreach ($categories as $category)
-                <a href="{{ route('categories.show', $category) }}" class="type-chip">
-                    {{ $category->name }}
-                </a>
-            @endforeach
-        </nav>
-    @endif
-
-    {{-- タグ --}}
-    @if ($tags->count())
-        <nav class="type-nav">
-            @foreach ($tags as $tag)
-                <a href="{{ route('tags.show', $tag) }}" class="type-chip">
-                    #{{ $tag->name }}
-                </a>
-            @endforeach
-        </nav>
-    @endif
-
-    {{-- 難易度 --}}
-    @if ($difficulties->count())
-        <nav class="type-nav">
-            @foreach ($difficulties as $difficulty)
-                <a href="{{ route('difficulties.show', $difficulty) }}" class="type-chip">
-                    {{ str_repeat('★', $difficulty->id) }}
-                </a>
-            @endforeach
-        </nav>
-    @endif
-
     @include('components.search-js')
 </section>
