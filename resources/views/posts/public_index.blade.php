@@ -103,6 +103,17 @@
                             >
                                 詳細を見る
                             </a>
+
+                            @auth
+                                @if (auth()->id() === $post->user_id)
+                                    <a
+                                        href="{{ route('users.posts.edit', $post) }}"
+                                        class="btn-edit"
+                                    >
+                                        編集
+                                    </a>
+                                @endif
+                            @endauth
                         </div>
 
                     </div>

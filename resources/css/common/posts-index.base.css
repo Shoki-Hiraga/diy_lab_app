@@ -338,3 +338,26 @@ a {
   outline-offset: 2px;
 }
 
+.btn-edit {
+    margin-left: 8px;
+    padding: 6px 12px;
+    background: #e5e7eb;
+    color: #000000;
+    border-radius: 4px;
+    text-decoration: none;
+}
+.btn-edit:hover {
+    background: #ec971f;
+}
+
+.btn-back {
+    margin-left: 8px;
+    padding: 6px 12px;
+    background: #f0ad4e;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+}
+.btn-back:hover {
+    background: #ec971f;
+}

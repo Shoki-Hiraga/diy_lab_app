@@ -123,12 +123,23 @@
         </div>
     @endif
  
-    {{-- 戻る --}}
+    {{-- 戻る・編集 --}}
     <div class="post-actions">
+
         <a href="{{ redirect()->back()->getTargetUrl() }}"
         class="btn-back">
             戻る
         </a>
+
+        @auth
+            @if (auth()->id() === $post->user_id)
+                <a href="{{ route('users.posts.edit', $post) }}"
+                class="btn-edit">
+                    編集する
+                </a>
+            @endif
+        @endauth
+
     </div>
 
 </div>
