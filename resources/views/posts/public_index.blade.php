@@ -1,129 +1,141 @@
 @extends('layouts.public')
 
-{{-- ページタイトル --}}
 @section('title', 'DIY ラボ')
-
-{{-- ページ説明（SEO用） --}}
 @section('description', 'DIYの投稿一覧ページです。人気のDIYや最新の投稿をチェックできます。')
 
-{{-- ▼ post-header --}}
 @section('post-header')
     @include('components.post-header')
 @endsection
 
-{{-- ▼ メインコンテンツ --}}
 @section('content')
 
-    <section class="page-section">
+<section class="page-section">
 
-        <div class="post-list">
+    <div class="post-list">
 
-            @forelse ($posts as $post)
+        @forelse ($posts as $post)
 
-                <article class="post-card">
+        <article class="post-item">
 
-                    <a
-                        href="{{ route('users.posts.show', $post) }}"
-                        class="post-card-link"
-                    >
+            {{-- =========================
+                 ▼ クリック可能なカード
+                 ========================= --}}
+            <div class="post-card">
 
-                        {{-- メイン画像 --}}
-                        @php
-                            $mainImage = optional($post->contents->first())->image_path;
-                        @endphp
+                <a
+                    href="{{ route('users.posts.show', $post) }}"
+                    class="post-card-link"
+                >
 
-                        @if ($mainImage)
-                            <img
-                                src="{{ asset('fileassets/' . $mainImage) }}"
-                                alt="{{ $post->title }}"
-                                class="post-image"
-                            >
-                        @else
-                            <div class="post-image no-image">
-                                No Image
-                            </div>
-                        @endif
+                    {{-- メイン画像 --}}
+                    @php
+                        $mainImage = optional($post->contents->first())->image_path;
+                    @endphp
 
-                        {{-- 本文 --}}
-                        <div class="post-body">
+                    @if ($mainImage)
+                        <img
+                            src="{{ asset('fileassets/' . $mainImage) }}"
+                            alt="{{ $post->title }}"
+                            class="post-image"
+                        >
+                    @else
+                        <div class="post-image no-image">
+                            No Image
+                        </div>
+                    @endif
 
-                            {{-- メタ情報 --}}
-                            <div class="post-meta">
+                    {{-- 本文 --}}
+                    <div class="post-body">
 
-                                {{-- カテゴリ --}}
-                                <div class="categories">
-                                    @foreach ($post->categories as $category)
-                                        <span class="category-badge">
-                                            {{ $category->name }}
-                                        </span>
-                                    @endforeach
-                                </div>
+                        {{-- 難易度・投稿日 --}}
+                        <div class="post-meta">
 
-                                {{-- 難易度 --}}
-                                <span class="difficulty">
-                                    難易度：
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        <span class="star">
-                                            {{ $i <= ($post->difficulty_id ?? 0) ? '★' : '☆' }}
-                                        </span>
-                                    @endfor
-                                </span>
+                            <span class="difficulty">
+                                難易度：
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <span class="star">
+                                        {{ $i <= ($post->difficulty_id ?? 0) ? '★' : '☆' }}
+                                    </span>
+                                @endfor
+                            </span>
 
-                                {{-- 投稿日 --}}
-                                <span class="date">
-                                    {{ $post->created_at->format('Y/m/d') }}
-                                </span>
-
-                            </div>
-
-                            {{-- タイトル --}}
-                            <h3 class="post-title">
-                                {{ $post->title }}
-                            </h3>
-
-                            {{-- 本文（抜粋） --}}
-                            <p class="post-text">
-                                {{ Str::limit($post->content ?? '', 80, '…') }}
-                            </p>
-
-                            {{-- 投稿者 --}}
-                            <div class="post-author">
-                                投稿者：
-                                {{ $post->user->username }}
-                            </div>
+                            <span class="date">
+                                {{ $post->created_at->format('Y/m/d') }}
+                            </span>
 
                         </div>
+
+                        <h3 class="post-title">
+                            {{ $post->title }}
+                        </h3>
+
+                        <p class="post-text">
+                            {{ Str::limit($post->content ?? '', 80, '…') }}
+                        </p>
+
+                    </div>
+                </a>
+            </div>
+
+            {{-- =========================
+                 ▼ カード外メタ情報
+                 ========================= --}}
+            <div class="post-meta-outside">
+
+                {{-- カテゴリ --}}
+                <div class="categories">
+                    @foreach ($post->categories->take(1) as $category)
+                        <a
+                            href="{{ route('categories.show', $category) }}"
+                            class="category-badge"
+                        >
+                            {{ $category->name }}
+                        </a>
+                    @endforeach
+
+                    @if ($post->categories->count() > 3)
+                        <span class="category-more">
+                            +{{ $post->categories->count() - 3 }}
+                        </span>
+                    @endif
+                </div>
+
+                {{-- 投稿者 --}}
+                <div class="post-author">
+                    投稿者：
+                    <a href="{{ route('creators.show', $post->user) }}">
+                        {{ $post->user->username }}
                     </a>
+                </div>
 
-                    {{-- 編集ボタン（カードリンクの外に出す） --}}
-                    @auth
-                        @if (auth()->id() === $post->user_id)
-                            <div class="post-actions">
-                                <a
-                                    href="{{ route('users.posts.edit', $post) }}"
-                                    class="btn-edit"
-                                >
-                                    編集
-                                </a>
-                            </div>
-                        @endif
-                    @endauth
+                {{-- 編集ボタン --}}
+                @auth
+                    @if (auth()->id() === $post->user_id)
+                        <div class="post-actions">
+                            <a
+                                href="{{ route('users.posts.edit', $post) }}"
+                                class="btn-edit"
+                            >
+                                編集
+                            </a>
+                        </div>
+                    @endif
+                @endauth
 
-                </article>
+            </div>
 
-            @empty
-                <p class="no-posts">
-                    まだ投稿がありません。
-                </p>
-            @endforelse
+        </article>
 
-        </div>
+        @empty
+            <p class="no-posts">まだ投稿がありません。</p>
+        @endforelse
 
-        {{-- ページネーション --}}
-        <div class="pagination-wrapper">
-            {{ $posts->links('pagination::bootstrap-5') }}
-        </div>
+    </div>
 
-    </section>
+    <div class="pagination-wrapper">
+        {{ $posts->links('pagination::bootstrap-5') }}
+    </div>
+
+</section>
 
 @endsection
