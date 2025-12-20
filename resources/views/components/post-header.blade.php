@@ -2,7 +2,9 @@
 <section class="page-section">
 
     <header class="post-header">
-        <h2 class="post-header__title">DIY 投稿一覧</h2>
+        <h2 class="post-header__title">
+            <a href="{{ route('public.posts.index') }}">DIY 投稿一覧</a>
+        </h2>
 
         <div class="header-actions">
 

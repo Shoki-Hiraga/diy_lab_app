@@ -7,6 +7,6 @@ PostTag,,id,"post_id, tag",,,post,post:belongsTo
 SocialPlatform,,id,name,,,links,links:hasMany
 Tag,,id,name,,,"posts, publishedPosts","posts:belongsToMany, publishedPosts:belongsToMany"
 Tool,,id,name,,,posts,posts:belongsToMany
-User,,id,"username, email, password, introduction, x_id, youtube_url, icon",,,"profile, socialLinks, posts, publishedPosts","profile:hasOne, socialLinks:hasMany, posts:hasMany, publishedPosts:hasMany"
+User,,id,"username, email, password, introduction, x_id, youtube_url, icon",,,"profile, socialLinks, getRouteKeyName, posts, publishedPosts","profile:hasOne, socialLinks:hasMany, posts:hasMany, publishedPosts:hasMany"
 UserProfile,,id,"user_id, profile, profile_image_url",,,user,user:belongsTo
 UserSocialLink,,id,"user_id, social_platforms_id, url",,,platform,platform:belongsTo
