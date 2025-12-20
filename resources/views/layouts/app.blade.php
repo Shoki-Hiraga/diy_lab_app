@@ -16,7 +16,8 @@
         'resources/css/common/posts-index.breakpoints.css',
         'resources/css/common/search.css',
         'resources/css/users/posts-form.base.css',
-        'resources/css/users/posts-index.breakpoints.css',
+        'resources/css/users/posts-form.breakpoints.css',
+        'resources/css/users/users.css',
         'resources/js/app.js'
     ])
 </head>
