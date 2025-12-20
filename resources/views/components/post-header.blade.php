@@ -3,7 +3,7 @@
 
     <header class="post-header">
         <h2 class="post-header__title">
-            <a href="{{ route('public.posts.index') }}">DIY 投稿一覧</a>
+            <a href="{{ route('public.posts.index') }}">DIY ラボ</a>
         </h2>
 
         <div class="header-actions">

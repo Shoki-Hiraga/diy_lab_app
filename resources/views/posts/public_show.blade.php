@@ -125,9 +125,9 @@
  
     {{-- 戻る --}}
     <div class="post-actions">
-        <a href="{{ route('public.posts.index') }}"
-           class="btn-back">
-            一覧に戻る
+        <a href="{{ redirect()->back()->getTargetUrl() }}"
+        class="btn-back">
+            戻る
         </a>
     </div>
 

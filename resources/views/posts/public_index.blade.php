@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 {{-- ページタイトル --}}
-@section('title', 'DIY 投稿一覧')
+@section('title', 'DIY ラボ')
 
 {{-- ページ説明（SEO用） --}}
 @section('description', 'DIYの投稿一覧ページです。人気のDIYや最新の投稿をチェックできます。')
