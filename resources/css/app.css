@@ -3,14 +3,19 @@
 @tailwind utilities; */
 
 /* 共通 */
+/*
 @import "./common/posts-index.base.css";
 @import "./common/posts-index.breakpoints.css";
 @import "./common/header.css";
+*/
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import 'bootstrap';
 
+
 /* ユーザー関連 */
+/*
 @import "./users/users.css";
 @import "./users/posts-form.base.css";
 @import "./users/posts-form.breakpoints.css";
 @import "./users/login.css";
+*/

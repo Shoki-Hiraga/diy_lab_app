@@ -10,6 +10,7 @@
 
     {{-- 共通CSS / JS --}}
     @vite([
+        'resources/css/app.css',
         'resources/css/common/header.css',
         'resources/css/common/posts-index.base.css',
         'resources/css/common/posts-index.breakpoints.css',
