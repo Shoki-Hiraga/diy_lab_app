@@ -6,7 +6,6 @@
 @import "./common/posts-index.base.css";
 @import "./common/posts-index.breakpoints.css";
 @import "./common/header.css";
-@import "./common/search.css";
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import 'bootstrap';
 
