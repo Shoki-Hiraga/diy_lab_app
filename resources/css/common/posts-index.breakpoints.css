@@ -1,4 +1,18 @@
 /* =====================================================
+   SP only（〜599px）
+===================================================== */
+@media (max-width: 599px) {
+  .author-name {
+    display: none;
+  }
+
+  .author-link {
+    text-decoration: none; /* 下線不要 */
+  }
+}
+
+
+/* =====================================================
    Tablet
 ===================================================== */
 @media (min-width: 600px) {
@@ -15,6 +29,9 @@
     grid-template-columns: repeat(5, 1fr);
     gap: 1.5rem;
   }
+    .post-author i {
+      font-size: 1rem;
+    }
 
   .post-wrapper,
   .type-wrapper {

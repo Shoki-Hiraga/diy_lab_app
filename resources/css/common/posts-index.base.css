@@ -132,38 +132,44 @@ a {
 
 /* 投稿者 */
 .post-author {
-  font-size: 0.8rem;
-  color: #777;
+  display: flex;
+  align-items: center;
   margin-bottom: 0.6rem;
 }
-
-/* =====================================================
-   投稿者リンク（アクセシビリティ最優先）
-===================================================== */
 .author-link {
-  color: #1f6f43;                /* 十分なコントラスト */
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  color: #1f6f43;
   font-weight: 600;
-  text-decoration: underline;    /* 色に依存しない */
-  text-underline-offset: 2px;
-  transition: color 0.2s ease;
+  text-decoration: underline;
 }
 
-/* hover（マウス） */
-.author-link:hover {
+
+/* 投稿者アイコンリンク（一覧用） */
+.author-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: #777;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.author-icon-link:hover {
   color: #145232;
+  background: #eef6f1;
 }
 
-/* focus（キーボード操作） */
-.author-link:focus-visible {
-  outline: 3px solid #9dc5e4;    /* 視認性の高いフォーカスリング */
-  outline-offset: 3px;
-  border-radius: 4px;
+.author-icon-link:focus-visible {
+  outline: 2px solid #9dc5e4;
+  outline-offset: 2px;
+  border-radius: 50%;
 }
 
-/* active（クリック中） */
-.author-link:active {
-  color: #0f3d26;
-}
 
 /* =====================================================
    ユーザーアイコンリンク（形崩れ防止・最終版）
@@ -368,4 +374,7 @@ a {
 }
 .btn-back:hover {
     background: #ec971f;
+}
+.category-label {
+  width: 100%;   /* ← これが改行の正体 */
 }
