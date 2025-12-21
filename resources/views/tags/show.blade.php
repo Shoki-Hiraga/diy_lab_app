@@ -90,10 +90,12 @@
 
                 {{-- カテゴリ --}}
                 <div class="categories">
+                    <span class="category-label">カテゴリ</span>
+
                     @foreach ($post->categories->take(1) as $category)
                         <a
                             href="{{ route('categories.show', $category) }}"
-                            class="category-badge"
+                            class="category"
                         >
                             {{ $category->name }}
                         </a>
@@ -106,11 +108,16 @@
                     @endif
                 </div>
 
+
                 {{-- 投稿者 --}}
                 <div class="post-author">
-                    投稿者：
-                    <a href="{{ route('creators.show', $post->user) }}">
-                        {{ $post->user->username }}
+                    <a
+                        href="{{ route('creators.show', $post->user) }}"
+                        class="author-link"
+                        title="投稿者：{{ $post->user->username }}"
+                    >
+                        <i class="fa-solid fa-user"></i>
+                        <span class="author-name">{{ $post->user->username }}</span>
                     </a>
                 </div>
 
@@ -133,9 +140,7 @@
         </article>
 
         @empty
-            <p class="no-posts">
-                このタグの投稿はありません。
-            </p>
+            <p class="no-posts">まだ投稿がありません。</p>
         @endforelse
 
     </div>

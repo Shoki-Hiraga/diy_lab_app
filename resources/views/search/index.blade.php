@@ -140,15 +140,19 @@
                 </a>
             </div>
 
-            {{-- ▼ カード外メタ情報 --}}
+            {{-- =========================
+                 ▼ カード外メタ情報
+                 ========================= --}}
             <div class="post-meta-outside">
 
                 {{-- カテゴリ --}}
                 <div class="categories">
+                    <span class="category-label">カテゴリ</span>
+
                     @foreach ($post->categories->take(1) as $category)
                         <a
                             href="{{ route('categories.show', $category) }}"
-                            class="category-badge"
+                            class="category"
                         >
                             {{ $category->name }}
                         </a>
@@ -161,31 +165,45 @@
                     @endif
                 </div>
 
+
                 {{-- 投稿者 --}}
                 <div class="post-author">
-                    投稿者：
-                    <a href="{{ route('creators.show', $post->user) }}">
-                        {{ $post->user->username }}
+                    <a
+                        href="{{ route('creators.show', $post->user) }}"
+                        class="author-link"
+                        title="投稿者：{{ $post->user->username }}"
+                    >
+                        <i class="fa-solid fa-user"></i>
+                        <span class="author-name">{{ $post->user->username }}</span>
                     </a>
                 </div>
+
+                {{-- 編集ボタン --}}
+                @auth
+                    @if (auth()->id() === $post->user_id)
+                        <div class="post-actions">
+                            <a
+                                href="{{ route('users.posts.edit', $post) }}"
+                                class="btn-edit"
+                            >
+                                編集
+                            </a>
+                        </div>
+                    @endif
+                @endauth
 
             </div>
 
         </article>
 
         @empty
-            <p class="no-posts">
-                該当する投稿が見つかりませんでした。
-            </p>
+            <p class="no-posts">まだ投稿がありません。</p>
         @endforelse
 
     </div>
 
-    {{-- =========================
-         ▼ ページネーション
-         ========================= --}}
     <div class="pagination-wrapper">
-        {{ $posts->withQueryString()->links('pagination::bootstrap-5') }}
+        {{ $posts->links('pagination::bootstrap-5') }}
     </div>
 
 </section>

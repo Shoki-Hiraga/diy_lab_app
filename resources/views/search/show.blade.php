@@ -37,6 +37,7 @@
                  ▼ クリック可能なカード
                  ========================= --}}
             <div class="post-card">
+
                 <a
                     href="{{ route('users.posts.show', $post) }}"
                     class="post-card-link"
