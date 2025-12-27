@@ -2,10 +2,6 @@
    SP only（〜599px）
 ===================================================== */
 @media (max-width: 599px) {
-  .author-name {
-    display: none;
-  }
-
   .author-link {
     text-decoration: none; /* 下線不要 */
   }

@@ -97,10 +97,11 @@
                         title="投稿者：{{ $post->user->username }}"
                     >
                         <i class="fa-solid fa-user"></i>
-                        <span class="author-name">{{ $post->user->username }}</span>
+                        <span class="author-name">
+                            {{ \Illuminate\Support\Str::limit($post->user->username, 10, '…') }}
+                        </span>
                     </a>
                 </div>
-
 
                 {{-- 編集ボタン --}}
                 @auth

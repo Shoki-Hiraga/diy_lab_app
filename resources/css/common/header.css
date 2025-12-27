@@ -99,11 +99,11 @@
 /* =====================================================
    ナビボタン
 ===================================================== */
-.btn-type-list {
+.btn-type-nav {
     height: var(--header-item-height);
     padding: 0 14px;
-    background: #4caf50;
-    color: #fff;
+    background: #cde6d8;
+    color: #000000;
     border-radius: 6px;
     font-size: 14px;
     text-decoration: none;
@@ -129,7 +129,7 @@
         flex-wrap: wrap;
     }
 
-    .btn-type-list {
+    .btn-type-nav {
         flex: 1 1 40%;
     }
 }

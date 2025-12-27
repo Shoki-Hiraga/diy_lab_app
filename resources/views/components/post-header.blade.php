@@ -30,10 +30,10 @@
 
             {{-- ナビ --}}
             <div class="header-action header-action--nav">
-                <a href="{{ route('categories.index') }}" class="btn-type-list">📂 カテゴリ</a>
-                <a href="{{ route('difficulties.index') }}" class="btn-type-list">⭐ 難易度</a>
-                <a href="{{ route('tags.index') }}" class="btn-type-list">🏷️ タグ</a>
-                <a href="{{ route('users.top') }}" class="btn-type-list">🏠 HOME</a>
+                <a href="{{ route('categories.index') }}" class="btn-type-nav">📂 カテゴリ</a>
+                <a href="{{ route('difficulties.index') }}" class="btn-type-nav">⭐ 難易度</a>
+                <a href="{{ route('tags.index') }}" class="btn-type-nav">🏷️ タグ</a>
+                <a href="{{ route('users.top') }}" class="btn-type-nav">🏠 HOME</a>
             </div>
 
         </div>

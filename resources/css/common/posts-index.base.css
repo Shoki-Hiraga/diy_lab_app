@@ -376,5 +376,5 @@ a {
     background: #ec971f;
 }
 .category-label {
-  width: 100%;   /* ← これが改行の正体 */
+  width: 100%;
 }
