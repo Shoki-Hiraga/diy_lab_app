@@ -1,9 +1,13 @@
+@extends('layouts.guest')
+
 {{-- ▼ post-header --}}
 @section('post-header')
     @include('components.post-header')
 @endsection
 
-<x-guest-layout>
+@section('content')
+
+<div class="guest-form">
     <div class="register-container">
         <h1>パスワード再発行</h1>
 
@@ -12,9 +16,9 @@
             ご登録のメールアドレスを入力すると、パスワード再設定用リンクをお送りします。
         </p>
 
-        <!-- Session Status -->
+        {{-- Session Status --}}
         @if (session('status'))
-            <p style="color:green; font-size:0.9rem; margin-bottom:1rem;">
+            <p class="status-message">
                 {{ session('status') }}
             </p>
         @endif
@@ -22,12 +26,19 @@
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
-            <!-- メールアドレス -->
+            {{-- メールアドレス --}}
             <div class="form-group">
                 <label for="email">メールアドレス</label>
-                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus>
+                <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    value="{{ old('email') }}"
+                    required
+                    autofocus
+                >
                 @error('email')
-                    <p style="color:red; font-size:0.9rem;">{{ $message }}</p>
+                    <p class="form-error">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -40,4 +51,6 @@
             </div>
         </form>
     </div>
-</x-guest-layout>
+</div>
+
+@endsection

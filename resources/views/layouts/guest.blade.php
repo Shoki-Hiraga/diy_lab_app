@@ -8,7 +8,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- 独自CSS -->
     @vite([
         'resources/css/app.css',
         'resources/css/common/header.css',
@@ -17,17 +16,22 @@
         'resources/js/app.js'
     ])
 </head>
-<body>
 
-    {{-- ▼ ページ専用ヘッダー --}}
+<body class="layout-guest">
+
+    {{-- ▼ ヘッダー（public と同じ責務） --}}
     @hasSection('post-header')
         <div class="post-header-wrapper">
-            @yield('post-header')
+            <div class="page-section">
+                @yield('post-header')
+            </div>
         </div>
     @endif
 
-    <div class="login-wrapper">
-        {{ $slot }}
-    </div>
+    {{-- ▼ ログイン専用メイン --}}
+    <main class="guest-main">
+        @yield('content')
+    </main>
+
 </body>
 </html>
