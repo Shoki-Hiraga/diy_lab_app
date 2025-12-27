@@ -23,6 +23,7 @@
                             src="{{ asset('fileassets/' . $mainImage) }}"
                             alt="{{ $post->title }}"
                             class="post-image"
+                            onerror="this.onerror=null; this.outerHTML='<div class=&quot;post-image no-image&quot;>No Image</div>';"
                         >
                     @else
                         <div class="post-image no-image">
