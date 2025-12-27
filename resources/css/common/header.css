@@ -1,12 +1,5 @@
 /* =====================================================
-   コンテンツ余白
-===================================================== */
-.main-content {
-    padding: 32px 0 40px;
-}
-
-/* =====================================================
-   共通幅
+   ヘッダー全体
 ===================================================== */
 .page-section {
     max-width: 1100px;
@@ -14,45 +7,56 @@
     padding: 0 20px;
 }
 
-/* =====================================================
-   ヘッダー全体
-===================================================== */
 .post-header {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 12px;
-    align-items: flex-start; /* ← center をやめる */
     margin-bottom: 16px;
 }
 
 .post-header__title {
-    flex: 0 0 100%;
     margin: 0;
     font-size: 1.4rem;
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
 .post-header-wrapper {
-    overflow-x: hidden;
+    top: 0;
+    z-index: 100;
+    background: #fff5eb;
 }
 
 /* =====================================================
-   アクションエリア
+   アクション全体
 ===================================================== */
 .header-actions {
     display: flex;
-    flex-wrap: wrap;
+    align-items: stretch; /* ★ 下端が揃う */
     gap: 8px;
-    align-items: center;
 }
 
+/* 共通：各アクションブロック */
 .header-action {
     display: flex;
+    align-items: stretch;
+}
+
+/* 検索は残り幅を全部使う */
+.header-action--search {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* ナビは必要幅のみ */
+.header-action--nav {
+    flex: 0 0 auto;
     gap: 8px;
-    align-items: center;
+}
+
+/* =====================================================
+   共通高さ定義（超重要）
+===================================================== */
+:root {
+    --header-item-height: 40px;
 }
 
 /* =====================================================
@@ -60,100 +64,72 @@
 ===================================================== */
 .header-search {
     display: flex;
-    align-items: center;
-    gap: 4px;
+    align-items: stretch;
+    gap: 6px;
+    width: 100%;
 }
 
 .header-search input {
-    width: 160px;
-    padding: 7px 10px;
+    flex: 1 1 auto;
+    min-width: 0;
+    height: var(--header-item-height);
+    padding: 0 12px;
     border-radius: 6px;
     border: 1px solid #ccc;
     font-size: 14px;
+    line-height: 1;
 }
 
-.header-search button {
-    padding: 7px 10px;
+/* 検索ボタン */
+.search-submit {
+    height: var(--header-item-height);
+    padding: 0 14px;
     border-radius: 6px;
     border: none;
     background: #9dc5e4;
     color: #fff;
     cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* =====================================================
    ナビボタン
 ===================================================== */
 .btn-type-list {
-    padding: 8px 14px;
+    height: var(--header-item-height);
+    padding: 0 14px;
     background: #4caf50;
     color: #fff;
     border-radius: 6px;
     font-size: 14px;
+    text-decoration: none;
     white-space: nowrap;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* =====================================================
-   TYPEチップ
+   SP（既存挙動維持）
 ===================================================== */
-.type-nav {
-    display: flex;
-    gap: 8px;
-    margin: 8px 0;
-    flex-wrap: wrap;
-}
-
-.type-chip {
-    padding: 6px 12px;
-    border-radius: 999px;
-    border: 1px solid #ccc;
-    background: #f9f9f9;
-    font-size: 13px;
-}
-
-/* =====================================================
-   sticky header
-===================================================== */
-.post-header-wrapper {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: #fff5eb;
-    padding-top: 16px;
-    padding-bottom: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-}
-
-/* =====================================================
-   SP検索トグル
-===================================================== */
-.search-toggle {
-    display: none;
-}
-
 @media (max-width: 599px) {
 
-    /* ヘッダー全体を縦並びに */
-    .post-header {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    /* アクションも縦積み */
     .header-actions {
         flex-direction: column;
         align-items: stretch;
         gap: 12px;
     }
 
-    /* ボタン群を2列 or 折り返し */
-    .header-action {
+    .header-action--nav {
         flex-wrap: wrap;
     }
 
     .btn-type-list {
-        flex: 1 1 48%;
-        text-align: center;
-        white-space: normal; /* ← 重要 */
+        flex: 1 1 40%;
     }
 }

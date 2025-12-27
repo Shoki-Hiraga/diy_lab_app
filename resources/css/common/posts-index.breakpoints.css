@@ -9,7 +9,20 @@
   .author-link {
     text-decoration: none; /* 下線不要 */
   }
-}
+  .post-meta {
+      flex-direction: column; /* 難易度と日付を縦に並べる */
+      gap: 0.2rem;
+    }
+
+    .difficulty {
+      white-space: normal; /* 改行を許可する */
+      font-size: 0.7rem;    /* 文字を小さくする */
+    }
+
+    .post-title {
+      font-size: 0.9rem;    /* タイトルを小さくする */
+    }
+  }
 
 
 /* =====================================================
