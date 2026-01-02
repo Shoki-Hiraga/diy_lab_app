@@ -17,6 +17,7 @@ export default defineConfig({
                 'resources/css/users/posts-form.base.css',
                 'resources/css/users/posts-form.breakpoints.css',
                 'resources/css/users/users.css',
+                'resources/js/comments.js',
                 'resources/js/app.js'
             ],
             refresh: true,

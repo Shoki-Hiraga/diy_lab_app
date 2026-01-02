@@ -12,6 +12,42 @@
   color: #333;
 }
 
+/* コメント専用 textarea */
+.comment-textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 90px;
+  padding: 0.7rem 0.8rem;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  line-height: 1.6;
+}
+
+.comment-textarea:focus {
+  outline: none;
+  border-color: #9dc5e4;
+  box-shadow: 0 0 0 2px rgba(157, 197, 228, 0.3);
+}
+
+/* コメント投稿ボタン */
+.comment-submit {
+  align-self: flex-end;
+  background: #2f7a4f;
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.comment-submit:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
 /* =====================================================
    コメント一覧
 ===================================================== */

@@ -166,85 +166,103 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /**
  * ============================
- * 返信コメント（AJAX）
+ * 返信コメント（AJAX・安定版）
  * ============================
  */
-commentList.addEventListener('click', async (e) => {
+document.addEventListener('DOMContentLoaded', () => {
 
-    if (!e.target.classList.contains('comment-reply-btn')) return;
+    const commentsWrapper = document.querySelector('.comments');
+    if (!commentsWrapper) return;
 
-    const commentItem = e.target.closest('.comment-item');
-    const parentId = commentItem.dataset.id;
+    const postId = commentsWrapper.dataset.postId;
+    const csrfToken = document
+        .querySelector('meta[name="csrf-token"]')
+        ?.getAttribute('content');
 
-    // すでにフォームがあれば出さない
-    if (commentItem.querySelector('.reply-form')) return;
+    commentsWrapper.addEventListener('click', async (e) => {
 
-    const formHtml = `
-        <form class="reply-form">
-            <textarea required
-                placeholder="返信を入力してください"></textarea>
-            <div class="reply-actions">
-                <button type="submit">返信する</button>
-                <button type="button" class="reply-cancel-btn">キャンセル</button>
-            </div>
-        </form>
-    `;
+        /**
+         * 返信ボタン押下 → フォーム表示
+         */
+        if (e.target.classList.contains('comment-reply-btn')) {
+            const commentItem = e.target.closest('.comment-item');
+            if (!commentItem) return;
 
-    commentItem.insertAdjacentHTML('beforeend', formHtml);
-});
+            // すでに表示されていたら何もしない
+            if (commentItem.querySelector('.reply-form')) return;
 
-/**
- * 返信送信・キャンセル
- */
-commentList.addEventListener('click', async (e) => {
+            const formHtml = `
+                <form class="reply-form">
+                    <textarea required
+                        placeholder="返信を入力してください"></textarea>
+                    <div class="reply-actions">
+                        <button type="submit" class="reply-submit-btn">
+                            返信する
+                        </button>
+                        <button type="button" class="reply-cancel-btn">
+                            キャンセル
+                        </button>
+                    </div>
+                </form>
+            `;
 
-    const replyForm = e.target.closest('.reply-form');
-    if (!replyForm) return;
-
-    const commentItem = e.target.closest('.comment-item');
-    const parentId = commentItem.dataset.id;
-
-    // キャンセル
-    if (e.target.classList.contains('reply-cancel-btn')) {
-        replyForm.remove();
-        return;
-    }
-
-    // 送信
-    if (e.target.type === 'submit') {
-        e.preventDefault();
-
-        const textarea = replyForm.querySelector('textarea');
-        const body = textarea.value.trim();
-        if (!body) return;
-
-        try {
-            const response = await fetch(`/posts/${postId}/comments`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken,
-                    'Content-Type': 'application/json',
-                    'Accept': 'text/html',
-                },
-                body: JSON.stringify({
-                    body,
-                    parent_comment_id: parentId,
-                }),
-            });
-
-            if (!response.ok) throw new Error();
-
-            const html = await response.text();
-
-            const replies = commentItem.querySelector('.comment-replies');
-            replies.insertAdjacentHTML('beforeend', html);
-
-            replyForm.remove();
-
-        } catch {
-            alert('返信に失敗しました');
+            commentItem.insertAdjacentHTML('beforeend', formHtml);
         }
-    }
+
+        /**
+         * 返信キャンセル
+         */
+        if (e.target.classList.contains('reply-cancel-btn')) {
+            const form = e.target.closest('.reply-form');
+            if (form) form.remove();
+        }
+
+        /**
+         * 返信送信
+         */
+        if (e.target.classList.contains('reply-submit-btn')) {
+            e.preventDefault();
+
+            const form = e.target.closest('.reply-form');
+            const commentItem = e.target.closest('.comment-item');
+            if (!form || !commentItem) return;
+
+            const textarea = form.querySelector('textarea');
+            const body = textarea.value.trim();
+            if (!body) return;
+
+            const parentId = commentItem.dataset.id;
+            const repliesContainer =
+                commentItem.querySelector('.comment-replies');
+
+            try {
+                const response = await fetch(`/posts/${postId}/comments`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken,
+                        'Content-Type': 'application/json',
+                        'Accept': 'text/html',
+                    },
+                    body: JSON.stringify({
+                        body,
+                        parent_comment_id: parentId,
+                    }),
+                });
+
+                if (!response.ok) throw new Error();
+
+                const html = await response.text();
+
+                repliesContainer.insertAdjacentHTML('beforeend', html);
+                form.remove();
+
+            } catch (err) {
+                alert('返信の投稿に失敗しました');
+                console.error(err);
+            }
+        }
+
+    });
 });
 
 /**
