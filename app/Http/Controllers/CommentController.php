@@ -15,16 +15,18 @@ class CommentController extends Controller
     {
         $request->validate([
             'body' => 'required|string|max:1000',
+            'parent_comment_id' => 'nullable|exists:comments,id',
         ]);
 
         $comment = $post->comments()->create([
             'user_id' => auth()->id(),
-            'body'    => $request->body,
+            'body' => $request->body,
+            'parent_comment_id' => $request->parent_comment_id,
         ]);
 
-        // AJAX用：コメント1件のHTMLを返す
         return view('components.comments.item', [
             'comment' => $comment->load('user'),
+            'isReply' => (bool) $request->parent_comment_id,
         ]);
     }
 

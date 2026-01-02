@@ -1,0 +1,68 @@
+
+/* =====================================================
+   コメント欄：SP調整
+===================================================== */
+@media (max-width: 599px) {
+  .comments h3 {
+    font-size: 0.95rem;
+  }
+
+  .comments button {
+    width: 100%;
+    align-self: stretch;
+  }
+
+  .comment-login-actions a {
+      flex: 1 1 45%;
+      text-align: center;
+  }
+
+  .comment-item.is-reply {
+    margin-left: 0.8rem;
+  }
+
+  .comment-actions {
+    justify-content: space-between;
+  }
+
+  /* タップ環境（SP）では常時表示 */
+  .comment-actions {
+    opacity: 1;
+  }
+
+}
+
+  .comment-item {
+    padding: 0.8rem 0.9rem;
+  }
+
+  .comment-body {
+    font-size: 0.85rem;
+  }
+
+
+/* =====================================================
+   コメント欄：PC調整
+===================================================== */
+@media (min-width: 900px) {
+  .comments {
+    margin-top: 3rem;
+  }
+
+  .comments textarea {
+    font-size: 0.9rem;
+  }
+
+  .comments button {
+    width: 100%;
+    align-self: stretch;
+  }
+
+  .comment-item {
+    padding: 1.1rem 1.2rem;
+  }
+
+  .comment-body {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,219 @@
+/* =====================================================
+   コメント欄：ベース
+===================================================== */
+.comments {
+  margin-top: 2.5rem;
+}
+
+.comment-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* =====================================================
+   コメント一覧
+===================================================== */
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+/* =====================================================
+   コメントカード
+===================================================== */
+.comment-item {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* 返信コメント */
+.comment-item.is-reply {
+  margin-left: 1.5rem;
+  background: #fdf7f2; /* post-wrapper背景寄り */
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+/* =====================================================
+   コメントヘッダー
+===================================================== */
+.comment-header {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #666;
+  margin-bottom: 0.4rem;
+}
+
+.comment-user {
+  font-weight: 600;
+  color: #2f7a4f;
+}
+
+.comment-date {
+  color: #999;
+}
+
+/* =====================================================
+   コメント本文
+===================================================== */
+.comment-body {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #444;
+  white-space: pre-wrap;
+}
+
+/* =====================================================
+   コメント操作
+===================================================== */
+.comment-actions {
+  margin-top: 0.4rem;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.comment-actions button {
+  background: none;
+  border: none;
+  font-size: 0.7rem;
+  color: #888;
+  cursor: pointer;
+  padding: 0;
+}
+
+.comment-actions button:hover {
+  color: #2f7a4f;
+  text-decoration: underline;
+}
+
+/* =====================================================
+   返信フォーム
+===================================================== */
+.reply-form {
+  margin-top: 0.6rem;
+}
+
+.reply-form textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+.reply-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+}
+
+.reply-actions button {
+  font-size: 0.7rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.reply-actions button:first-child {
+  background: #2f7a4f;
+  color: #fff;
+}
+
+.reply-actions button:last-child {
+  background: #e5e7eb;
+  color: #333;
+}
+
+/* =====================================================
+   コメント投稿フォーム
+===================================================== */
+.comment-form {
+  margin-top: 1.4rem;
+}
+
+/* =====================================================
+   コメント欄：SNS風強化
+===================================================== */
+
+/* コメントカードを少し「浮かせる」 */
+.comment-item {
+  position: relative;
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.comment-item:hover {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+
+/* コメントヘッダーをコンパクトに */
+.comment-header {
+  margin-bottom: 0.25rem;
+}
+
+/* 時間はさらに控えめに */
+.comment-date {
+  font-size: 0.7rem;
+  color: #aaa;
+}
+
+/* 本文を主役に */
+.comment-body {
+  font-size: 0.9rem;
+  margin-top: 0.1rem;
+}
+
+/* =====================================================
+   吹き出しっぽさ（疑似）
+===================================================== */
+.comment-item::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: -6px;
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  transform: rotate(45deg);
+  box-shadow: -2px 2px 4px rgba(0,0,0,0.05);
+}
+
+/* 返信は吹き出し無し */
+.comment-item.is-reply::before {
+  display: none;
+}
+
+/* =====================================================
+   アクション：SNSっぽく hover で表示
+===================================================== */
+.comment-actions {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.comment-item:hover .comment-actions {
+  opacity: 1;
+}
+
+/* =====================================================
+   返信コメントを「スレッド感」出す
+===================================================== */
+.comment-item.is-reply {
+  border-left: 3px solid #e7d5c5;
+  padding-left: 0.9rem;
+}
+
+.comment-relative-time {
+  margin-left: 0.2rem;
+  font-size: 0.7rem;
+  color: #aaa;
+  white-space: nowrap;
+}

@@ -130,4 +130,6 @@
 @endsection
 
 {{-- コメント用JS --}}
-@vite(['resources/js/comments.js'])
+@push('scripts')
+    @vite(['resources/js/comments.js'])
+@endpush

@@ -19,9 +19,12 @@
         'resources/css/common/header.css',
         'resources/css/common/posts-index.base.css',
         'resources/css/common/posts-index.breakpoints.css',
+        'resources/css/common/posts-comment.base.css',
+        'resources/css/common/posts-comment.breakpoints.css',
         'resources/css/common/search.css',
         'resources/js/app.js'
     ])
+    @stack('scripts')
 
     {{-- 公開用SEO --}}
     <meta name="description" content="@yield('description', 'DIYのアイデア投稿一覧')">
