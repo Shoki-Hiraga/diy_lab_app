@@ -1,9 +1,9 @@
 @extends('layouts.public')
 
-@section('title', $category->name . ' の投稿一覧')
-
 @section('post-header')
     @include('components.post-header')
+
+@section('title', $category->name . ' の投稿一覧')
 @endsection
 
 @section('content')

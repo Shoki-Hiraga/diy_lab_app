@@ -1,14 +1,14 @@
 @extends('layouts.public')
 
+@section('post-header')
+    @include('components.post-header')
+
 @section(
     'title',
     $keyword
         ? '「' . $keyword . '」の検索結果'
         : '検索結果'
 )
-
-@section('post-header')
-    @include('components.post-header')
 @endsection
 
 @section('content')

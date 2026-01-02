@@ -1,18 +1,22 @@
 @extends('layouts.public')
 
-@section('title', '検索結果')
-<meta name="robots" content="noindex">
 
 {{-- ▼ post-header --}}
 @section('post-header')
     @include('components.post-header')
+
+@section('title', request('q') ? request('q').'の検索結果' : '検索結果')
 @endsection
+
+<meta name="robots" content="noindex">
 
 @section('content')
 
 <section class="page-section">
 
-    <h2 class="page-title">検索</h2>
+    <h2 class="page-title">
+        {{ request('q') ? request('q').'の検索結果' : '検索結果' }}
+    </h2>
 
     {{-- =========================
          ▼ 検索条件チップ
@@ -25,7 +29,7 @@
                     href="{{ route('search.index', request()->except('q')) }}"
                     class="search-chip"
                 >
-                    「{{ request('q') }}」
+                    {{ request('q') }}
                     <span class="chip-close">×</span>
                 </a>
             @endif

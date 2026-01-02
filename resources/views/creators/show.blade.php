@@ -1,12 +1,12 @@
 @extends('layouts.public')
 
-@section('title', $user->username . ' の投稿一覧')
-
 @section('post-header')
     @include('components.post-header')
-@endsection
+
+@section('title', $user->username . ' の投稿一覧')
 
 @section('content')
+@endsection
 
 <section class="page-section">
 

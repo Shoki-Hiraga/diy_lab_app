@@ -1,13 +1,12 @@
 @extends('layouts.public')
 
+@section('post-header')
+    @include('components.post-header')
+
 @section(
     'title',
     '難易度 ' . str_repeat('★', $difficulty->id) . ' の投稿一覧'
 )
-
-@section('post-header')
-    @include('components.post-header')
-@endsection
 
 @section('content')
 
