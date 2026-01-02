@@ -143,21 +143,48 @@
         @endauth
 
     </div>
-    <h3>コメント</h3>
+    {{-- コメント欄 --}}
+    <div class="comments">
 
-    @auth
-        <form action="{{ route('comments.store', $post) }}" method="POST">
-            @csrf
-            <textarea name="body" rows="4" required
-                placeholder="コメントを入力してください"></textarea>
+        <h3>コメント</h3>
 
-            <button type="submit">投稿する</button>
-        </form>
-    @else
-        <p>
-            <a href="{{ route('login') }}">ログイン</a>するとコメントできます
-        </p>
-    @endauth
+        @auth
+            <form action="{{ route('comments.store', $post) }}" method="POST">
+                @csrf
+                <textarea
+                name="body"
+                rows="4"
+                required
+                class="comment-textarea"
+                placeholder="コメントを入力してください"
+                >
+                </textarea>
+
+                <button type="submit" class="comment-submit">
+                投稿する
+                </button>
+
+            </form>
+        @else
+            <div class="comment-login-guide">
+                <p class="comment-login-text">
+                    ログインするとコメントできます
+                </p>
+
+                <div class="comment-login-actions">
+                    <a href="{{ route('login') }}" class="btn-nav">
+                        🔑 ログイン
+                    </a>
+
+                    <a href="{{ route('register') }}" class="btn-register">
+                        ✨ 会員登録
+                    </a>
+                </div>
+            </div>
+        @endauth
+
+    </div>
+
 
     </div>
 

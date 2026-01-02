@@ -69,3 +69,44 @@
     transform: translateX(6px);
   }
 }
+
+
+/* =====================================================
+   コメント欄：SP調整
+===================================================== */
+@media (max-width: 599px) {
+  .comments h3 {
+    font-size: 0.95rem;
+  }
+
+  .comments textarea {
+    font-size: 0.8rem;
+  }
+
+  .comments button {
+    width: 100%;
+    align-self: stretch;
+  }
+
+    .comment-login-actions a {
+        flex: 1 1 45%;
+        text-align: center;
+    }
+  }
+
+/* =====================================================
+   コメント欄：PC調整
+===================================================== */
+@media (min-width: 900px) {
+  .comments {
+    margin-top: 3rem;
+  }
+
+  .comments textarea {
+    font-size: 0.9rem;
+  }
+
+  .comments button {
+    font-size: 0.85rem;
+  }
+}
