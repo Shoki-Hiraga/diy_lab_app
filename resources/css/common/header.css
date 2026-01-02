@@ -1,23 +1,26 @@
 /* =====================================================
-   ヘッダー全体
+   変数
 ===================================================== */
-.page-section {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
+:root {
+    --header-item-height: 40px;
+    --radius: 6px;
 }
 
+/* =====================================================
+   ヘッダー全体
+===================================================== */
 .post-header {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    background: #fff5eb;
     margin-bottom: 16px;
 }
 
 .post-header__inner {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 12px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .post-header__title {
@@ -25,44 +28,32 @@
     font-size: 1.4rem;
 }
 
-.post-header-wrapper {
-    top: 0;
-    z-index: 100;
-    background: #fff5eb;
-}
-
 /* =====================================================
    アクション全体
 ===================================================== */
 .header-actions {
     display: flex;
-    align-items: stretch; /* ★ 下端が揃う */
+    align-items: stretch;
     gap: 8px;
 }
 
-/* 共通：各アクションブロック */
+/* 共通：ブロック */
 .header-action {
     display: flex;
     align-items: stretch;
+    gap: 8px;
 }
 
-/* 検索は残り幅を全部使う */
+/* 検索 */
 .header-action--search {
     flex: 1 1 auto;
     min-width: 0;
 }
 
-/* ナビは必要幅のみ */
-.header-action--nav {
+/* ナビ・認証 */
+.header-action--nav,
+.header-action--auth {
     flex: 0 0 auto;
-    gap: 8px;
-}
-
-/* =====================================================
-   共通高さ定義（超重要）
-===================================================== */
-:root {
-    --header-item-height: 40px;
 }
 
 /* =====================================================
@@ -70,47 +61,42 @@
 ===================================================== */
 .header-search {
     display: flex;
-    align-items: stretch;
     gap: 6px;
     width: 100%;
 }
 
 .header-search input {
     flex: 1 1 auto;
-    min-width: 0;
     height: var(--header-item-height);
     padding: 0 12px;
-    border-radius: 6px;
+    border-radius: var(--radius);
     border: 1px solid #ccc;
     font-size: 14px;
-    line-height: 1;
 }
 
-/* 検索ボタン */
 .search-submit {
     height: var(--header-item-height);
     padding: 0 14px;
-    border-radius: 6px;
+    border-radius: var(--radius);
     border: none;
     background: #9dc5e4;
     color: #fff;
-    cursor: pointer;
     font-size: 14px;
-    line-height: 1;
+    cursor: pointer;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
 }
 
 /* =====================================================
-   ナビボタン
+   共通ボタン
 ===================================================== */
-.btn-type-nav {
+.btn-nav,
+.btn-register {
     height: var(--header-item-height);
     padding: 0 14px;
-    background: #cde6d8;
-    color: #000000;
-    border-radius: 6px;
+    border-radius: var(--radius);
     font-size: 14px;
     text-decoration: none;
     white-space: nowrap;
@@ -120,22 +106,40 @@
     justify-content: center;
 }
 
+/* ナビ */
+.btn-nav {
+    background: #cde6d8;
+    color: #000;
+}
+
+/* 会員登録 */
+.btn-register {
+    background: #f0ad4e;
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-register:hover {
+    background: #ec971f;
+}
+
 /* =====================================================
-   SP（既存挙動維持）
+   SP
 ===================================================== */
 @media (max-width: 599px) {
 
     .header-actions {
         flex-direction: column;
-        align-items: stretch;
         gap: 12px;
     }
 
-    .header-action--nav {
+    .header-action--nav,
+    .header-action--auth {
         flex-wrap: wrap;
     }
 
-    .btn-type-nav {
-        flex: 1 1 40%;
+    .btn-nav,
+    .btn-register {
+        flex: 1 1 45%;
     }
 }

@@ -11,8 +11,8 @@
             {{-- 検索 --}}
             <div class="header-action header-action--search">
                 <form action="{{ route('search.index') }}"
-                    method="GET"
-                    class="header-search">
+                      method="GET"
+                      class="header-search">
 
                     <input
                         type="text"
@@ -29,13 +29,26 @@
 
             {{-- ナビ --}}
             <div class="header-action header-action--nav">
-                <a href="{{ route('categories.index') }}" class="btn-type-nav">📂 カテゴリ</a>
-                <a href="{{ route('difficulties.index') }}" class="btn-type-nav">⭐ 難易度</a>
-                <a href="{{ route('tags.index') }}" class="btn-type-nav">🏷️ タグ</a>
-                <a href="{{ route('users.top') }}" class="btn-type-nav">🏠 HOME</a>
+                <a href="{{ route('categories.index') }}" class="btn-nav">📂 カテゴリ</a>
+                <a href="{{ route('difficulties.index') }}" class="btn-nav">⭐ 難易度</a>
+                <a href="{{ route('tags.index') }}" class="btn-nav">🏷️ タグ</a>
+
+                @auth
+                    <a href="{{ route('users.top') }}" class="btn-nav">🏠 HOME</a>
+                @endauth
             </div>
+
+            {{-- 認証 --}}
+            @guest
+            <div class="header-action header-action--auth">
+                <a href="{{ route('login') }}" class="btn-nav">🔑 ログイン</a>
+                <a href="{{ route('register') }}" class="btn-register">✨ 会員登録</a>
+            </div>
+            @endguest
+
         </div>
 
-    @include('components.search-js')
+    </div>
 
+    @include('components.search-js')
 </header>
