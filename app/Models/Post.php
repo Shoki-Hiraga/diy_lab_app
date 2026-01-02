@@ -3,6 +3,7 @@
 namespace App\Models;
 use App\Models\Tag;
 use App\Models\PostTag;
+use App\Models\Comment;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -76,11 +77,22 @@ class Post extends Model
     }
 
     /**
-     * コメント
+     * コメント（全件）
      */
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * 親コメント（投稿に直接ついたもの）
+     */
+    public function rootComments()
+    {
+        return $this->hasMany(Comment::class)
+            ->whereNull('parent_comment_id')
+            ->with('replies.user') // 返信も一緒に取得
+            ->latest();
     }
 
     /**
@@ -108,4 +120,5 @@ class Post extends Model
 
         return $firstContent ? $firstContent->image_path : null;
     }
+
 }

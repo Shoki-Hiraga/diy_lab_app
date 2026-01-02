@@ -9,6 +9,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DifficultyController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CreatorController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,10 +55,20 @@ Route::get('/creators', [CreatorController::class, 'index'])
 Route::get('/creators/{user}', [CreatorController::class, 'show'])
     ->name('creators.show');
 
-    use App\Http\Controllers\SearchController;
 
 Route::get('/search', [SearchController::class, 'index'])
     ->name('search.index');
+
+/*
+|--------------------------------------------------------------------------
+| Comment Routes
+|--------------------------------------------------------------------------
+*/
+Route::middleware('auth')->group(function () {
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])
+        ->name('comments.store');
+});
+
 
 /*
 |--------------------------------------------------------------------------

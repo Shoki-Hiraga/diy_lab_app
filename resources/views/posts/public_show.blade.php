@@ -122,7 +122,9 @@
             @endforeach
         </div>
     @endif
- 
+ {{-- コメント欄 --}}
+<div class="comments">
+
     {{-- 戻る・編集 --}}
     <div class="post-actions">
 
@@ -139,6 +141,23 @@
                 </a>
             @endif
         @endauth
+
+    </div>
+    <h3>コメント</h3>
+
+    @auth
+        <form action="{{ route('comments.store', $post) }}" method="POST">
+            @csrf
+            <textarea name="body" rows="4" required
+                placeholder="コメントを入力してください"></textarea>
+
+            <button type="submit">投稿する</button>
+        </form>
+    @else
+        <p>
+            <a href="{{ route('login') }}">ログイン</a>するとコメントできます
+        </p>
+    @endauth
 
     </div>
 
