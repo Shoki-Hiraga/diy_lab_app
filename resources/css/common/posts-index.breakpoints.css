@@ -79,10 +79,6 @@
     font-size: 0.95rem;
   }
 
-  .comments textarea {
-    font-size: 0.8rem;
-  }
-
   .comments button {
     width: 100%;
     align-self: stretch;
@@ -107,6 +103,7 @@
   }
 
   .comments button {
-    font-size: 0.85rem;
+    width: 100%;
+    align-self: stretch;
   }
 }
