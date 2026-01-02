@@ -1,15 +1,19 @@
 @extends('layouts.public')
 
+{{-- ▼ ページタイトル --}}
+@section('title', request('q') ? request('q').'の検索結果' : '検索結果')
 
-{{-- ▼ post-header --}}
+{{-- ▼ noindex（検索ページ用） --}}
+@push('meta')
+<meta name="robots" content="noindex">
+@endpush
+
+{{-- ▼ ページ専用ヘッダー --}}
 @section('post-header')
     @include('components.post-header')
-
-@section('title', request('q') ? request('q').'の検索結果' : '検索結果')
 @endsection
 
-<meta name="robots" content="noindex">
-
+{{-- ▼ メインコンテンツ --}}
 @section('content')
 
 <section class="page-section">
@@ -18,9 +22,6 @@
         {{ request('q') ? request('q').'の検索結果' : '検索結果' }}
     </h2>
 
-    {{-- =========================
-         ▼ 検索条件チップ
-         ========================= --}}
     @if(request()->filled('q') || request()->filled('difficulty_id'))
         <div class="search-chips">
 
@@ -47,9 +48,6 @@
         </div>
     @endif
 
-    {{-- =========================
-         ▼ 検索フォーム
-         ========================= --}}
     <form method="GET" action="{{ route('search.index') }}" class="search-form">
 
         <div class="search-row">
@@ -77,8 +75,10 @@
 
         <button type="submit">検索</button>
     </form>
+@include('components.post-card')
 
-    {{-- =========================
-         ▼ 検索結果一覧
-         ========================= --}}
-    @include('components.post-card')
+@include('components.search-js')
+
+</section>
+
+@endsection

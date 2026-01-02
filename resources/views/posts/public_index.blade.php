@@ -12,3 +12,4 @@
 <section class="page-section">
 
     @include('components.post-card')
+@endsection

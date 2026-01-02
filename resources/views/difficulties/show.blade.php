@@ -25,3 +25,4 @@
     </h2>
 
     @include('components.post-card')
+@endsection
