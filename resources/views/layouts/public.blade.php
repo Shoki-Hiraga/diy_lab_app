@@ -3,6 +3,7 @@
 <head>
     <meta name="robots" content="noindex">
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', 'DIY投稿サイト')</title>
 

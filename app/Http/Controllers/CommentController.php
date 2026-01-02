@@ -8,18 +8,55 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    /**
+     * コメント投稿（AJAX）
+     */
     public function store(Request $request, Post $post)
     {
         $request->validate([
             'body' => 'required|string|max:1000',
         ]);
 
-        Comment::create([
-            'post_id' => $post->id,
+        $comment = $post->comments()->create([
             'user_id' => auth()->id(),
+            'body'    => $request->body,
+        ]);
+
+        // AJAX用：コメント1件のHTMLを返す
+        return view('components.comments.item', [
+            'comment' => $comment->load('user'),
+        ]);
+    }
+
+    /**
+     * コメント更新（AJAX・インライン編集）
+     */
+    public function update(Request $request, Comment $comment)
+    {
+        abort_unless($comment->user_id === auth()->id(), 403);
+
+        $request->validate([
+            'body' => 'required|string|max:1000',
+        ]);
+
+        $comment->update([
             'body' => $request->body,
         ]);
 
-        return back()->with('success', 'コメントを投稿しました');
+        return response()->json([
+            'body' => $comment->body,
+        ]);
+    }
+
+    /**
+     * コメント削除（AJAX）
+     */
+    public function destroy(Comment $comment)
+    {
+        abort_unless($comment->user_id === auth()->id(), 403);
+
+        $comment->delete();
+
+        return response()->noContent();
     }
 }

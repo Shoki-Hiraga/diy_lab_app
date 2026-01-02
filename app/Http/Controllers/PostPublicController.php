@@ -27,7 +27,18 @@ class PostPublicController extends Controller
     {
         $post = Post::published()
             ->whereKey($post->id)
-            ->with(['categories', 'tools', 'tags', 'contents', 'user.profile'])
+            ->with([
+                'categories',
+                'tools',
+                'tags',
+                'contents',
+                'user.profile',
+
+                // コメント関連を追加
+                'rootComments.user',
+                'rootComments.replies.user',
+            ])
+            ->withCount('comments') // コメント件数
             ->firstOrFail();
 
         return view('posts.public_show', compact('post'));
