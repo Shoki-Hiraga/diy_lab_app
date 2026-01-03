@@ -321,3 +321,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ← ここに投稿・削除・編集・返信のJS
 });
+
+/**
+ * ============================
+ * コメント返信のトグル制御
+ * ============================
+ */
+document.addEventListener('click', function (e) {
+
+  const toggle = e.target.closest('.comment-replies-toggle');
+  if (!toggle) return;
+
+  e.preventDefault();
+
+  const targetId = toggle.dataset.target;
+  const replies = document.getElementById(targetId);
+  if (!replies) return;
+
+  const isOpen = !replies.hasAttribute('hidden');
+
+  if (isOpen) {
+    replies.setAttribute('hidden', '');
+    toggle.classList.remove('is-open');
+  } else {
+    replies.removeAttribute('hidden');
+    toggle.classList.add('is-open');
+  }
+
+  const count = toggle.textContent.match(/\d+/)[0];
+  toggle.textContent = isOpen
+    ? `${count}件の返信`
+    : `${count}件の返信を非表示`;
+});

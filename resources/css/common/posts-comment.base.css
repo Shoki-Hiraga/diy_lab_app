@@ -253,3 +253,43 @@
   color: #aaa;
   white-space: nowrap;
 }
+
+/* =====================================================
+   返信トグル（{n}件の返信）
+===================================================== */
+.comment-replies-toggle {
+  margin-top: 0.45rem;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: 1.0rem;
+  color: #9a6b47;          /* 返信のボーダー色と統一 */
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* 矢印アイコン風 */
+.comment-replies-toggle::before {
+  content: '▸';
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+/* 展開中 */
+.comment-replies-toggle.is-open::before {
+  transform: rotate(90deg);
+}
+
+.comment-replies-toggle:hover {
+  text-decoration: underline;
+  color: #2f7a4f;
+}
+
+/* =====================================================
+   返信一覧（折り畳み）
+===================================================== */
+.comment-replies {
+  margin-top: 0.6rem;
+}

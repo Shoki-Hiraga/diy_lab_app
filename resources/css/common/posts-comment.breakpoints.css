@@ -30,6 +30,11 @@
     opacity: 1;
   }
 
+  .comment-replies-toggle {
+    font-size: 0.75rem;
+    padding: 0.2rem 0;
+  }
+
 }
 
   .comment-item {
