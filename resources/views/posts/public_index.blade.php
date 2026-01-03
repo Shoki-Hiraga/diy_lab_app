@@ -9,7 +9,9 @@
 
 @section('content')
 
-<section class="page-section">
-
-    @include('components.post-card')
+    <section class="page-section">
+    <div class="post-wrapper">
+        @include('components.post-card')
+    </div>
+    </section>
 @endsection

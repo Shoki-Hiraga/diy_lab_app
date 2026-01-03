@@ -11,18 +11,21 @@
 @section('content')
 
 <section class="page-section">
+    <div class="post-wrapper">
+        <a href="{{ route('difficulties.index') }}" class="back-link">
+            ← 難易度一覧へ戻る
+        </a>
 
-    <a href="{{ route('difficulties.index') }}" class="back-link">
-        ← 難易度一覧へ戻る
-    </a>
+        <h2 class="page-title">
+            難易度
+            <span class="stars">
+                {{ str_repeat('★', $difficulty->id) }}
+            </span>
+            の投稿一覧
+        </h2>
 
-    <h2 class="page-title">
-        難易度
-        <span class="stars">
-            {{ str_repeat('★', $difficulty->id) }}
-        </span>
-        の投稿一覧
-    </h2>
+        @include('components.post-card')
 
-    @include('components.post-card')
+    </div>
+
 @endsection

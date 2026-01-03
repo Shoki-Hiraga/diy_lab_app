@@ -9,14 +9,16 @@
 @section('content')
 
 <section class="page-section">
+    <div class="post-wrapper">
+        <a href="{{ route('tags.index') }}" class="back-link">
+            ← タグ一覧へ戻る
+        </a>
 
-    <a href="{{ route('tags.index') }}" class="back-link">
-        ← タグ一覧へ戻る
-    </a>
+        <h2 class="page-title">
+            #{{ $tag->name }} の投稿一覧
+        </h2>
 
-    <h2 class="page-title">
-        #{{ $tag->name }} の投稿一覧
-    </h2>
+        @include('components.post-card')
+    </div>
 
-    @include('components.post-card')
 @endsection
