@@ -93,15 +93,21 @@
 
         {{-- タグ --}}
         <div class="form-group">
-            <label for="tags">タグ</label>
+            <label for="tag-input">タグ</label>
 
-            <input type="text"
-                name="tags"
-                id="tags"
-                value="{{ old('tags') }}"
-                placeholder="#DIY #木工 #初心者">
+            <div class="tag-input-wrapper">
+                <div id="tag-list"></div>
+
+                <input type="text"
+                    id="tag-input"
+                    placeholder="タグを入力してEnter"
+                    autocomplete="off">
+            </div>
+
+            {{-- 実際に送信する値 --}}
+            <input type="hidden" name="tags" id="tags" value="{{ old('tags') }}">
         </div>
-
+        @include('components.tags-js')
         {{-- 写真＋コメント --}}
         <div class="form-group">
             <label>写真とコメント</label>

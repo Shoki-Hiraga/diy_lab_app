@@ -177,15 +177,36 @@
             );
         @endphp
 
-        <div class="form-group">
-            <label for="tags">タグ</label>
+        {{-- タグ --}}
+        @php
+            $tagString = old(
+                'tags',
+                $post->tags
+                    ->pluck('name')
+                    ->implode(',')
+            );
+        @endphp
 
-            <input type="text"
+        <div class="form-group">
+            <label for="tag-input">タグ</label>
+
+            <div class="tag-input-wrapper">
+                <div id="tag-list"></div>
+
+                <input type="text"
+                    id="tag-input"
+                    placeholder="タグを入力してEnter"
+                    autocomplete="off">
+            </div>
+
+            {{-- 実際に送信する値 --}}
+            <input type="hidden"
                 name="tags"
                 id="tags"
-                value="{{ $tagString }}"
-                placeholder="#DIY #木工 #初心者">
+                value="{{ $tagString }}">
         </div>
+
+        @include('components.tags-js')
 
         {{-- 写真＋コメント --}}
         <div class="form-group">

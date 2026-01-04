@@ -39,19 +39,15 @@
     {{-- ログイン状態で表示を切り替え --}}
     @auth
         <div class="links">
-            <a href="{{ route('users.posts.index') }}">MY DIY 投稿</a>
+            <a href="{{ route('users.posts.index') }}">投稿一覧</a>
             <a href="{{ route('users.posts.create') }}">新規投稿</a>
-
+            <a href="{{ route('users.likes') }}">いいね一覧</a>
+            <a href="{{ route('users.bookmarks') }}">ブックマーク一覧</a>
             {{-- ✅ ログイン中の自分のプロフィール --}}
             <a href="{{ route('users.profile.show', ['id' => Auth::id()]) }}">
                 MYプロフィール
             </a>
         </div>
-<div class="user-actions">
-    <a href="{{ route('users.posts.index') }}">投稿一覧</a>
-    <a href="{{ route('users.likes') }}">いいね</a>
-    <a href="{{ route('users.bookmarks') }}">ブックマーク</a>
-</div>
 
         <div class="small">
             <p>ログイン中です。</p>

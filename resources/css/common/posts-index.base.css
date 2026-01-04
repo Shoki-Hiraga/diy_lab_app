@@ -334,6 +334,7 @@ a {
   border-radius: 999px;
   border: 1px solid #cde6d8;
   transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+  cursor: pointer;
 }
 
 /* hover で「押せる」感じ */
@@ -341,10 +342,6 @@ a {
   background: #2f7a4f;
   color: #ffffff;
   transform: translateY(-1px);
-}
-
-.category {
-  cursor: pointer;
 }
 
 .category:focus-visible {
@@ -377,6 +374,108 @@ a {
 }
 .category-label {
   width: 100%;
+}
+
+/* =====================================================
+   タグ入力（投稿作成）
+===================================================== */
+.tag-input-wrapper {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #f9fafb;
+}
+
+/* 入力欄 */
+#tag-input {
+  border: none;
+  outline: none;
+  background: transparent;
+
+  font-size: 0.8rem;
+  min-width: 120px;
+  flex: 1;
+}
+
+/* タグ本体（category流用思想） */
+.tag-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+
+  background: #eef6f1;
+  color: #2f7a4f;
+
+  border-radius: 999px;
+  border: 1px solid #cde6d8;
+}
+
+/* 削除ボタン */
+.tag-remove {
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #2f7a4f;
+  line-height: 1;
+  margin-left: 2px;
+}
+
+/* hover（押せる感） */
+.tag-remove:hover {
+  color: #ffffff;
+}
+
+/* タグ hover（カテゴリと同じ挙動） */
+.tag-item:hover {
+  background: #2f7a4f;
+  color: #ffffff;
+}
+
+/* focus 可視化 */
+.tag-input-wrapper:focus-within {
+  outline: 2px solid #9dc5e4;
+  outline-offset: 2px;
+}
+
+.tag-suggest {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-top: 4px;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.tag-suggest-item {
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.tag-suggest-item:hover {
+  background: #eef6f1;
+}
+
+.tag-item.dragging {
+  opacity: 0.4;
+}
+
+/* タグ上限到達時 */
+#tag-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* =====================================================
