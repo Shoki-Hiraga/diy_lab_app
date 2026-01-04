@@ -33,6 +33,7 @@ class DifficultyController extends Controller
          */
         $posts = Post::where('difficulty_id', $difficulty->id)
             ->where('status', 'published')
+            ->withListRelations()
             ->withCommentCount()
             ->with(['categories', 'user'])
             ->latest()

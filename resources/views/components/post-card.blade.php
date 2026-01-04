@@ -60,6 +60,7 @@
                 </a>
                 <div class="post-meta-outside">
                     @include('components.comments.count', ['post' => $post])
+                    @include('components.reactions.reaction')
                 </div>
             </div>
 

@@ -81,5 +81,23 @@ class User extends Authenticatable
         return $this->hasMany(Post::class)
             ->where('status', Post::STATUS_PUBLISHED);
     }
-    
+
+    /**
+     * リアクション
+     */
+    public function reactions()
+    {
+        return $this->hasMany(Reaction::class);
+    }
+
+    /**
+     * いいね
+     */
+    public function likedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'reactions')
+            ->withPivot('reaction_type_id')
+            ->wherePivot('reaction_type_id', ReactionType::where('name','like')->value('id'));
+    }
+
 }

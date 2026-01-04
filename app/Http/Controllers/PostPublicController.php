@@ -13,6 +13,7 @@ class PostPublicController extends Controller
     public function index()
     {
         $posts = Post::published()
+            ->withListRelations()
             ->withCommentCount()
             ->with(['user.profile', 'contents'])
             ->latest()

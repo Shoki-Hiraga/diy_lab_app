@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Models\Tag;
 use App\Models\PostTag;
 use App\Models\Comment;
+use App\Models\ReactionType;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -104,6 +105,24 @@ class Post extends Model
     }
 
     /**
+     * いいね
+     */
+    public function likes()
+    {
+        return $this->reactions()
+            ->whereHas('type', fn ($q) => $q->where('name', 'like'));
+    }
+
+    /**
+     * ブックマーク
+     */
+    public function bookmarks()
+    {
+        return $this->reactions()
+            ->whereHas('type', fn ($q) => $q->where('name', 'bookmark'));
+    }
+
+    /**
      * 公開済みのみ取得するスコープ
      */
     public function scopePublished($query)
@@ -127,6 +146,26 @@ class Post extends Model
         $firstContent = $this->contents->first();
 
         return $firstContent ? $firstContent->image_path : null;
+    }
+
+    public function isReactedBy(string $type, ?int $userId = null): bool
+    {
+        if (!$userId) return false;
+
+        return $this->reactions()
+            ->where('user_id', $userId)
+            ->whereHas('type', fn ($q) => $q->where('name', $type))
+            ->exists();
+    }
+
+    public function scopeWithListRelations($query)
+    {
+        return $query->with([
+            'contents',
+            'categories',
+            'user.profile',
+            'reactions.type',
+        ]);
     }
 
 }

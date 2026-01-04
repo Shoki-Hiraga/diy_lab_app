@@ -24,6 +24,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $posts = $category->publishedPosts()
+            ->withListRelations()
             ->withCommentCount()
             ->with(['user', 'contents', 'categories'])
             ->latest()

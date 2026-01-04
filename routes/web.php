@@ -11,6 +11,7 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\CreatorController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ReactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +72,10 @@ Route::middleware('auth')->group(function () {
         ->name('comments.destroy');
     Route::put('/comments/{comment}', [CommentController::class, 'update'])
         ->name('comments.update');
+    Route::post('/posts/{post}/reaction/{type}', 
+        [ReactionController::class, 'toggle']
+        )->name('posts.reaction');
+
 });
 
 

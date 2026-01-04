@@ -18,6 +18,17 @@
     .post-title {
       font-size: 0.9rem;    /* タイトルを小さくする */
     }
+
+    .post-reactions {
+    gap: 6px;
+  }
+
+  .reaction-btn,
+  .reaction-count {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+
   }
 
 

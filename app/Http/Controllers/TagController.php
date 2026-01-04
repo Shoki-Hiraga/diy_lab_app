@@ -33,6 +33,7 @@ class TagController extends Controller
          * 指定タグに紐づく「公開済み投稿」のみ取得
          */
         $posts = $tag->publishedPosts()
+            ->withListRelations()
             ->withCommentCount()
             ->with(['user', 'categories', 'tags', 'difficulty'])
             ->latest()

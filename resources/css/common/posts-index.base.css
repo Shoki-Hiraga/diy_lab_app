@@ -380,11 +380,86 @@ a {
 }
 
 /* =====================================================
+   投稿リアクション（いいね / ブックマーク）
+===================================================== */
+.post-reactions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 0.4rem;
+}
+
+.reaction-form {
+  display: inline;
+}
+
+.reaction-btn,
+.reaction-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  font-size: 0.78rem;
+  padding: 4px 8px;
+  border-radius: 999px;
+
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  color: #666;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+
+/* button reset */
+.reaction-btn {
+  border: none;
+  cursor: pointer;
+}
+
+/* hover（押せる感） */
+.reaction-btn:hover {
+  background: #eef6f1;
+  color: #2f7a4f;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* いいね ON */
+.reaction-btn.like.active {
+  background: #ffecec;
+  color: #e74c3c;
+  border-color: #f5c2c7;
+}
+
+/* ブックマーク ON */
+.reaction-btn.bookmark.active {
+  background: #fff6dc;
+  color: #f1c40f;
+  border-color: #f6e3a1;
+}
+
+/* 押下時 */
+.reaction-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* フォーカス可視化 */
+.reaction-btn:focus-visible {
+  outline: 2px solid #9dc5e4;
+  outline-offset: 2px;
+}
+
+/* =====================================================
    投稿カード外メタ情報
 ===================================================== */
 .post-meta-outside {
-  padding: 0.6rem 0.8rem 0.8rem;
+  padding: 0.1rem 0.8rem 0.8rem;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.1rem;
 }

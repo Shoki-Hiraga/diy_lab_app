@@ -11,6 +11,7 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         $query = Post::published()
+            ->withListRelations()
             ->withCommentCount()
             ->with(['difficulty', 'tags', 'user']);
 
