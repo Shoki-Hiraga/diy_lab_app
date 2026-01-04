@@ -29,7 +29,22 @@
     padding: 3px 6px;
   }
 
+  /* アイコンを少し大きく */
+  .author-icon-link {
+    width: 34px;
+    height: 34px;
   }
+
+  /* Font Awesome もバランス調整 */
+  .author-icon-circle i {
+    font-size: 1.1rem;
+  }
+
+  /* 名前も少し目立たせる */
+  .author-name {
+    font-size: 0.85rem;
+  }
+}
 
 
 /* =====================================================

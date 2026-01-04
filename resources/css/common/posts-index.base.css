@@ -183,6 +183,28 @@ a {
   color: #777;
 }
 
+/* =========================
+   投稿者アイコン hover 演出
+========================= */
+.author-icon-circle {
+  border-radius: 50%;
+  background: #f3f4f6;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.author-link:hover .author-icon-circle {
+  background: #eef6f1;        /* 緑寄り */
+  transform: translateY(-1px);
+}
+
+/* 投稿者名 hover */
+.author-name {
+  transition: color 0.2s ease;
+}
+
+.author-link:hover .author-name {
+  color: #1f6f43;             /* 既存 author-link と同系色 */
+}
 
 /* =====================================================
    ユーザーアイコンリンク（形崩れ防止・最終版）
