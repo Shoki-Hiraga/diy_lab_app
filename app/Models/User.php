@@ -2,21 +2,16 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Post;
+use App\Models\Reaction;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'username',
         'email',
@@ -27,21 +22,11 @@ class User extends Authenticatable
         'icon',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -49,6 +34,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /* =============================
+       リレーション
+    ============================== */
 
     public function profile()
     {
@@ -60,44 +49,54 @@ class User extends Authenticatable
         return $this->hasMany(UserSocialLink::class);
     }
 
-    public function getRouteKeyName()
-    {
-        return 'username';
-    }
-    
-    /**
-     * 投稿
-     */
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
 
-    /**
-     * 公開済み投稿のみ
-     */
     public function publishedPosts()
     {
         return $this->hasMany(Post::class)
             ->where('status', Post::STATUS_PUBLISHED);
     }
 
-    /**
-     * リアクション
-     */
     public function reactions()
     {
         return $this->hasMany(Reaction::class);
     }
 
+    /* =============================
+       リアクション系（一覧取得用）
+    ============================== */
+
     /**
-     * いいね
+     * いいねした投稿
      */
     public function likedPosts()
     {
-        return $this->belongsToMany(Post::class, 'reactions')
-            ->withPivot('reaction_type_id')
-            ->wherePivot('reaction_type_id', ReactionType::where('name','like')->value('id'));
+        return Post::whereHas('reactions', function ($q) {
+            $q->where('user_id', $this->id)
+              ->whereHas('type', fn ($q) => $q->where('name', 'like'));
+        });
     }
 
+    /**
+     * ブックマークした投稿
+     */
+    public function bookmarkedPosts()
+    {
+        return Post::whereHas('reactions', function ($q) {
+            $q->where('user_id', $this->id)
+              ->whereHas('type', fn ($q) => $q->where('name', 'bookmark'));
+        });
+    }
+
+    /* =============================
+       ルートキー
+    ============================== */
+
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
 }

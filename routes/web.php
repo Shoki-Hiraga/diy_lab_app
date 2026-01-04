@@ -12,6 +12,7 @@ use App\Http\Controllers\CreatorController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ReactionController;
+use App\Http\Controllers\User\ReactionPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,6 +111,14 @@ Route::middleware('auth')->prefix('users')->group(function () {
     // 削除
     Route::delete('/posts/{post}', [UserPostController::class, 'destroy'])
         ->name('users.posts.destroy');
+
+    // いいね
+    Route::get('/likes', [ReactionPostController::class, 'likes'])
+        ->name('users.likes');
+
+    // ブックマーク
+    Route::get('/bookmarks', [ReactionPostController::class, 'bookmarks'])
+        ->name('users.bookmarks');
 
     // ------------------------------------------------------------------
     // 自分自身のユーザー画面（/users/{id} 系）

@@ -85,7 +85,7 @@
                             @else
                                 <a href="{{ route('users.posts.show', $post) }}"
                                    class="btn-detail">
-                                    詳細を見る
+                                    確認
                                 </a>
                                 <a href="{{ route('users.posts.edit', $post) }}"
                                    class="btn-edit">

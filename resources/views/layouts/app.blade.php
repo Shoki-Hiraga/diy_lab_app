@@ -13,6 +13,8 @@
         'resources/css/common/header.css',
         'resources/css/common/posts-index.base.css',
         'resources/css/common/posts-index.breakpoints.css',
+        'resources/css/common/posts-comment.base.css',
+        'resources/css/common/posts-comment.breakpoints.css',
         'resources/css/common/search.css',
         'resources/css/users/posts-form.base.css',
         'resources/css/users/posts-form.breakpoints.css',

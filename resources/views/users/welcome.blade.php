@@ -47,6 +47,11 @@
                 MYプロフィール
             </a>
         </div>
+<div class="user-actions">
+    <a href="{{ route('users.posts.index') }}">投稿一覧</a>
+    <a href="{{ route('users.likes') }}">いいね</a>
+    <a href="{{ route('users.bookmarks') }}">ブックマーク</a>
+</div>
 
         <div class="small">
             <p>ログイン中です。</p>
