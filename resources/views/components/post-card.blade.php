@@ -56,13 +56,11 @@
                             {{ $post->title }}
                         </h3>
 
-                        <p class="post-text">
-                            {{ Str::limit($post->content ?? '', 80, '…') }}
-                        </p>
-
                     </div>
                 </a>
-                @include('components.comments.count', ['post' => $post])
+                <div class="post-meta-outside">
+                    @include('components.comments.count', ['post' => $post])
+                </div>
             </div>
 
             {{-- =========================
