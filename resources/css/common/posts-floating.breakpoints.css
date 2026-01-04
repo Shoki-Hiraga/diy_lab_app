@@ -1,0 +1,22 @@
+/* =====================================================
+   Floating Navigation（Breakpoints）
+===================================================== */
+
+/* =====================================================
+   SP（〜599px）
+===================================================== */
+@media (max-width: 599px) {
+  body.layout-public {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+}
+
+/* =====================================================
+   Tablet（600px〜899px）
+===================================================== */
+@media (min-width: 600px) and (max-width: 899px) {
+  body.layout-public {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+}
+

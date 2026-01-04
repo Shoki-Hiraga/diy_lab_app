@@ -1,0 +1,116 @@
+/* =====================================================
+   Floating Navigation（Base / 安定版）
+===================================================== */
+
+.floating-nav {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 72px; /* ← ナビ自体を高くする */
+
+  padding-bottom: env(safe-area-inset-bottom);
+
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  z-index: 1000;
+}
+
+/* -----------------------------------------------------
+   リスト
+----------------------------------------------------- */
+.floating-nav__list {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* -----------------------------------------------------
+   各アイテム
+----------------------------------------------------- */
+.floating-nav__item {
+  flex: 1;
+  text-align: center;
+}
+
+/* -----------------------------------------------------
+   通常リンク
+----------------------------------------------------- */
+.floating-nav__link {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.65rem;
+  color: #9ca3af;
+}
+
+.floating-nav__link i {
+  font-size: 1.1rem;
+  margin-bottom: 2px;
+}
+
+/* -----------------------------------------------------
+   中央 ＋ ボタン（浮かせない・安定）
+----------------------------------------------------- */
+.floating-nav__link--center {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+
+  background: #10b981;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto; /* ← ナビ中央に自然配置 */
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+}
+
+.floating-nav__link--center i {
+  font-size: 1.3rem;
+}
+
+/* -----------------------------------------------------
+   Hover / Active
+----------------------------------------------------- */
+.floating-nav__link:hover {
+  color: #111827;
+}
+
+.floating-nav__link--center:hover {
+  opacity: 0.9;
+}
+
+.floating-nav__link.is-active {
+  color: #10b981;
+  font-weight: 600;
+}
+
+/* -----------------------------------------------------
+   Floating Nav Inner（コンテンツ幅合わせ）
+----------------------------------------------------- */
+.floating-nav__inner {
+  max-width: 520px;        /* ← post-wrapper と同じ */
+  margin: 0 auto;
+  height: 100%;
+}
+
+/* PCサイズは post-wrapper が広がるので合わせる */
+@media (min-width: 900px) {
+  .floating-nav__inner {
+    max-width: 1100px;
+  }
+}

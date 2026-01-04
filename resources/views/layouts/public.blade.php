@@ -21,6 +21,8 @@
         'resources/css/common/posts-index.breakpoints.css',
         'resources/css/common/posts-comment.base.css',
         'resources/css/common/posts-comment.breakpoints.css',
+        'resources/css/common/posts-floating.base.css',
+        'resources/css/common/posts-floating.breakpoints.css',
         'resources/css/common/search.css',
         'resources/js/app.js'
     ])
@@ -43,11 +45,14 @@
     <main class="main-content">
         @yield('content')
     </main>
+    {{-- ナビボタン --}}
+    @include('components.common.floating-nav')
 
     {{-- ▼ フッター --}}
     <footer class="public-footer">
         <p>&copy; {{ date('Y') }} DIY SNS</p>
     </footer>
+
 
 </body>
 </html>
