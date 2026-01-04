@@ -2,7 +2,7 @@
 
 {{-- ▼ post-header --}}
 @section('post-header')
-    @include('components.post-header')
+    @include('components.common.post-header')
 @endsection
 
 @section('content')

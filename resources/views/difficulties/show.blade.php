@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('post-header')
-    @include('components.post-header')
+    @include('components.common.post-header')
 
 @section(
     'title',
@@ -24,7 +24,7 @@
             の投稿一覧
         </h2>
 
-        @include('components.post-card')
+        @include('components.common.post-card')
 
     </div>
 

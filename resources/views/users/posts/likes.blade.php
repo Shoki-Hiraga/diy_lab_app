@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('post-header')
-    @include('components.post-header')
+    @include('components.common.post-header')
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
 
     @if ($posts->count())
         <div class="post-list">
-            @include('components.post-card')
+            @include('components.common.post-card')
         </div>
 
         <div class="pagination-wrapper">

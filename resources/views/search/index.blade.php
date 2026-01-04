@@ -10,7 +10,7 @@
 
 {{-- ▼ ページ専用ヘッダー --}}
 @section('post-header')
-    @include('components.post-header')
+    @include('components.common.post-header')
 @endsection
 
 {{-- ▼ メインコンテンツ --}}
@@ -76,10 +76,10 @@
 
             <button type="submit">検索</button>
         </form>
-        @include('components.post-card')
+        @include('components.common.post-card')
     </div>
 
-@include('components.search-js')
+@include('components.common.search-js')
 
 </section>
 

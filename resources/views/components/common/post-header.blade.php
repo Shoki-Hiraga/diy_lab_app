@@ -50,5 +50,5 @@
 
     </div>
 
-    @include('components.search-js')
+    @include('components.common.search-js')
 </header>

@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('post-header')
-    @include('components.post-header')
+    @include('components.common.post-header')
 
 @section(
     'title',
