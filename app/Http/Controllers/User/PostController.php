@@ -11,6 +11,7 @@ use App\Models\PostContent;
 use App\Models\Category;
 use App\Models\Tool;
 use App\Models\Tag;
+use App\Services\ImageCompressor;
 
 class PostController extends Controller
 {
@@ -58,7 +59,6 @@ class PostController extends Controller
             'tags'          => 'nullable|string|max:255',
         ]);
 
-        // 投稿作成
         $post = Post::create([
             'user_id'       => Auth::id(),
             'title'         => $request->title,
@@ -69,15 +69,18 @@ class PostController extends Controller
         $post->categories()->sync($request->category_id);
         $post->tools()->sync($request->tools ?? []);
 
-        // ✅ タグ保存（マスタ方式）
+        // タグ同期
         $tagIds = $this->syncTags($request->tags);
         $post->tags()->sync($tagIds);
 
-        // 画像＋コメント保存
+        // === 画像＋コメント保存（40KB圧縮） ===
         foreach ($request->file('images', []) as $index => $image) {
             if (!$image) continue;
 
-            $path = $image->store('posts', 'public_fileassets');
+            $path = ImageCompressor::compressAndStore(
+                $image,
+                'posts'
+            );
 
             PostContent::create([
                 'post_id'    => $post->id,
@@ -123,11 +126,11 @@ class PostController extends Controller
         $post->categories()->sync($request->category_id);
         $post->tools()->sync($request->tools ?? []);
 
-        // ✅ タグ更新
+        // タグ同期
         $tagIds = $this->syncTags($request->tags);
         $post->tags()->sync($tagIds);
 
-        // === 既存画像処理 ===
+        // === 既存画像処理（40KB圧縮） ===
         if ($request->filled('existing_contents')) {
             foreach ($request->existing_contents as $id => $data) {
                 $content = $post->contents()->find($id);
@@ -145,23 +148,30 @@ class PostController extends Controller
 
                 if ($request->hasFile("existing_contents.$id.image")) {
                     Storage::disk('public_fileassets')->delete($content->image_path);
-                    $content->image_path = $request
-                        ->file("existing_contents.$id.image")
-                        ->store('posts', 'public_fileassets');
+
+                    $content->image_path = ImageCompressor::compressAndStore(
+                        $request->file("existing_contents.$id.image"),
+                        'posts'
+                    );
                 }
 
                 $content->save();
             }
         }
 
-        // === 新規画像 ===
+        // === 新規画像追加（40KB圧縮） ===
         if ($request->hasFile('images')) {
             $maxOrder = $post->contents()->max('order') ?? 0;
 
             foreach ($request->file('images') as $i => $image) {
+                $path = ImageCompressor::compressAndStore(
+                    $image,
+                    'posts'
+                );
+
                 PostContent::create([
                     'post_id'    => $post->id,
-                    'image_path' => $image->store('posts', 'public_fileassets'),
+                    'image_path' => $path,
                     'comment'    => $request->comments[$i] ?? null,
                     'order'      => $maxOrder + $i + 1,
                 ]);
@@ -196,21 +206,17 @@ class PostController extends Controller
     }
 
     /**
-     * タグ同期（マスタ方式）
+     * タグ同期
      */
     private function syncTags(?string $tagString): array
     {
-        if (!$tagString) {
-            return [];
-        }
+        if (!$tagString) return [];
 
         return collect(preg_split('/[\s,]+/', $tagString))
             ->map(fn ($tag) => mb_strtolower(ltrim($tag, '#')))
             ->filter()
             ->unique()
-            ->map(function ($name) {
-                return Tag::firstOrCreate(['name' => $name])->id;
-            })
+            ->map(fn ($name) => Tag::firstOrCreate(['name' => $name])->id)
             ->values()
             ->toArray();
     }
