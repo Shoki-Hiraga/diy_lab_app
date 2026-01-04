@@ -17,8 +17,8 @@
 
             {{-- 検索 --}}
             <li class="floating-nav__item">
-                <a href="{{ route('users.posts.index') }}"
-                class="floating-nav__link {{ $isActive('users.posts.index') }}">
+                <a href="{{ route('search.index') }}"
+                class="floating-nav__link {{ $isActive('search.index') }}">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <span>検索</span>
                 </a>
@@ -59,14 +59,6 @@
                 未ログイン
             ========================= --}}
             @guest
-                {{-- 中央＋（ログイン誘導） --}}
-                <li class="floating-nav__item floating-nav__item--center">
-                    <a href="{{ route('login') }}"
-                    class="floating-nav__link floating-nav__link--center">
-                        <i class="fa-solid fa-plus"></i>
-                    </a>
-                </li>
-
                 {{-- ログイン --}}
                 <li class="floating-nav__item">
                     <a href="{{ route('login') }}"

@@ -5,13 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     @vite([
         'resources/css/app.css',
         'resources/css/common/header.css',
         'resources/css/users/login.css',
+        'resources/css/common/posts-floating.base.css',
+        'resources/css/common/posts-floating.breakpoints.css',
         'resources/css/common/search.css',
         'resources/js/app.js'
     ])
@@ -32,6 +37,9 @@
     <main class="guest-main">
         @yield('content')
     </main>
+
+    {{-- ナビボタン --}}
+    @include('components.common.floating-nav')
 
 </body>
 </html>
