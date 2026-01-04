@@ -96,10 +96,24 @@
                         class="author-link"
                         title="投稿者：{{ $post->user->username }}"
                     >
-                        <i class="fa-solid fa-user"></i>
+
+                        {{-- アイコン --}}
+                        <span class="author-icon-link author-icon-circle">
+                            @if ($post->user->profile && $post->user->profile->profile_image_url)
+                                <img
+                                    src="{{ asset('fileassets/icons/' . $post->user->profile->profile_image_url) }}"
+                                    alt="{{ $post->user->username }}"
+                                    class="user-icon"
+                                >
+                            @else
+                                <i class="fa-solid fa-user"></i>
+                            @endif
+                        </span>
+
                         <span class="author-name">
                             {{ \Illuminate\Support\Str::limit($post->user->username, 10, '…') }}
                         </span>
+
                     </a>
                 </div>
 

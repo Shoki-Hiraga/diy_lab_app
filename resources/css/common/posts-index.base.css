@@ -171,6 +171,18 @@ a {
   border-radius: 50%;
 }
 
+/* 投稿カード用：アイコンを丸にする */
+.author-icon-circle {
+  border-radius: 50%;
+  background: #f3f4f6;        /* 薄グレー */
+}
+
+/* Font Awesome を中央寄せ */
+.author-icon-circle i {
+  font-size: 0.9rem;
+  color: #777;
+}
+
 
 /* =====================================================
    ユーザーアイコンリンク（形崩れ防止・最終版）
