@@ -11,6 +11,7 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         $query = Post::published()
+            ->withCommentCount()
             ->with(['difficulty', 'tags', 'user']);
 
         if ($request->filled('q')) {

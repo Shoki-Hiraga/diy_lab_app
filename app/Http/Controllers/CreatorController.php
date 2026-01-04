@@ -33,6 +33,7 @@ class CreatorController extends Controller
         abort_if(!$user->is_active, 404);
 
         $posts = $user->publishedPosts()
+            ->withCommentCount()
             ->with(['categories', 'tags', 'difficulty'])
             ->latest()
             ->paginate(10);

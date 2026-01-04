@@ -112,6 +112,14 @@ class Post extends Model
     }
 
     /**
+     * コメント件数を必ず付与するスコープ
+     */
+    public function scopeWithCommentCount($query)
+    {
+        return $query->withCount('comments');
+    }
+
+    /**
      * 代表画像（最初の画像）
      */
     public function getMainImagePathAttribute()

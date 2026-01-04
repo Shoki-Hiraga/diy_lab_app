@@ -62,6 +62,7 @@
 
                     </div>
                 </a>
+                @include('components.comments.count', ['post' => $post])
             </div>
 
             {{-- =========================

@@ -13,6 +13,7 @@ class PostPublicController extends Controller
     public function index()
     {
         $posts = Post::published()
+            ->withCommentCount()
             ->with(['user.profile', 'contents'])
             ->latest()
             ->paginate(12);
@@ -27,6 +28,7 @@ class PostPublicController extends Controller
     {
         $post = Post::published()
             ->whereKey($post->id)
+            ->withCommentCount()
             ->with([
                 'categories',
                 'tools',
@@ -38,7 +40,6 @@ class PostPublicController extends Controller
                 'rootComments.user',
                 'rootComments.replies.user',
             ])
-            ->withCount('comments') // コメント件数
             ->firstOrFail();
 
         return view('posts.public_show', compact('post'));
