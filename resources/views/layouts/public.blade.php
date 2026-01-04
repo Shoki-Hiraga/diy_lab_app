@@ -45,6 +45,7 @@
     <main class="main-content">
         @yield('content')
     </main>
+
     {{-- ナビボタン --}}
     @include('components.common.floating-nav')
 
