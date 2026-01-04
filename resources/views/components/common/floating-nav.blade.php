@@ -41,7 +41,7 @@
                     <a href="{{ route('users.top') }}"
                     class="floating-nav__link {{ $isActive('users.top') }}">
                         <i class="fa-regular fa-bell"></i>
-                        <span>お知らせ</span>
+                        <span>お知らせ(準備中)</span>
                     </a>
                 </li>
 
@@ -50,7 +50,7 @@
                     <a href="{{ route('users.top') }}"
                     class="floating-nav__link {{ $isActive('users.profile.*') }}">
                         <i class="fa-regular fa-user"></i>
-                        <span>マイページ</span>
+                        <span>MYページ</span>
                     </a>
                 </li>
             @endauth

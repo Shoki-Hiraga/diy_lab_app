@@ -1,72 +1,129 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOPページ</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f9fafb;
-            color: #333;
-            text-align: center;
-            padding: 40px;
-        }
-        h1 { margin-bottom: 40px; }
-        .links {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
-        a {
-            display: inline-block;
-            text-decoration: none;
-            color: white;
-            background-color: #3490dc;
-            padding: 12px 24px;
-            border-radius: 8px;
-            transition: 0.3s;
-            width: 260px;
-        }
-        a:hover { background-color: #2779bd; }
-        .small { font-size: 0.9em; color: #555; margin-top: 40px; }
-    </style>
-</head>
-<body>
-    <h1>ようこそ！TOPページへ</h1>
+@extends('layouts.app')
 
-    {{-- ログイン状態で表示を切り替え --}}
-    @auth
-        <div class="links">
-            <a href="{{ route('users.posts.index') }}">投稿一覧</a>
-            <a href="{{ route('users.posts.create') }}">新規投稿</a>
-            <a href="{{ route('users.likes') }}">いいね一覧</a>
-            <a href="{{ route('users.bookmarks') }}">ブックマーク一覧</a>
-            {{-- ✅ ログイン中の自分のプロフィール --}}
-            <a href="{{ route('users.profile.show', ['id' => Auth::id()]) }}">
-                MYプロフィール
-            </a>
-        </div>
+@section('title', 'マイページ')
+@section('description', 'ユーザーのマイページです。投稿管理やお気に入りを確認できます。')
 
-        <div class="small">
-            <p>ログイン中です。</p>
-        </div>
-    @endauth
+@section('post-header')
+    @include('components.common.post-header')
+@endsection
 
-    @guest
-        <div class="links">
-            <a href="{{ route('login') }}">ログイン</a>
-            @if (Route::has('register'))
-                <a href="{{ route('register') }}">ユーザー登録</a>
-            @endif
-            {{-- 認証後アクセス可能なページ例（そのまま押すとログインへリダイレクト） --}}
-            <a href="{{ route('users.posts.create') }}">ユーザー作成（要ログイン）</a>
-            <a href="{{ route('users.profile.show', ['id' => 1]) }}">ユーザー詳細（要ログイン）</a>
-        </div>
-        <div class="small">
-            <p>※ 認証が必要なページは、未ログイン時はログイン画面にリダイレクトされます。</p>
-        </div>
-    @endguest
-</body>
-</html>
+@section('content')
+<section class="page-section">
+    <div class="post-wrapper">
+
+        {{-- =========================
+             ▼ ユーザー情報
+             ========================= --}}
+        @auth
+            @php
+                $iconPath = Auth::user()->profile && Auth::user()->profile->profile_image_url
+                    ? asset('fileassets/icons/' . Auth::user()->profile->profile_image_url)
+                    : asset('fileassets/images/default_icon.png');
+            @endphp
+
+            <div class="user-info">
+
+                {{-- ユーザーアイコン --}}
+                <a
+                    href="{{ route('users.profile.show', Auth::id()) }}"
+                    class="user-icon-link"
+                    title="プロフィールを見る"
+                >
+                    <img
+                        src="{{ $iconPath }}"
+                        alt="{{ Auth::user()->username }}"
+                        class="user-icon"
+                    >
+                </a>
+
+                {{-- ユーザー名 --}}
+                <div class="user-text">
+                    <span class="username">
+                        <strong>{{ Auth::user()->username }}</strong>
+                    </span>
+                    <span class="date">
+                        マイページ
+                    </span>
+                </div>
+
+            </div>
+        @endauth
+
+        {{-- =========================
+             ▼ マイページメニュー
+             ========================= --}}
+        @auth
+            <h2>MYページ</h2>
+
+            <ul class="type-list">
+
+                <li class="type-item">
+                    <a href="{{ route('users.posts.index') }}">
+                        <span>自分の投稿一覧</span>
+                        <span class="type-count">→</span>
+                    </a>
+                </li>
+
+                <li class="type-item">
+                    <a href="{{ route('users.posts.create') }}">
+                        <span>新規投稿</span>
+                        <span class="type-count">＋</span>
+                    </a>
+                </li>
+
+                <li class="type-item">
+                    <a href="{{ route('users.likes') }}">
+                        <span>いいね一覧</span>
+                        <span class="type-count">♥</span>
+                    </a>
+                </li>
+
+                <li class="type-item">
+                    <a href="{{ route('users.bookmarks') }}">
+                        <span>ブックマーク一覧</span>
+                        <span class="type-count">★</span>
+                    </a>
+                </li>
+
+                <li class="type-item">
+                    <a href="{{ route('users.profile.show', Auth::id()) }}">
+                        <span>プロフィール詳細</span>
+                        <span class="type-count">👤</span>
+                    </a>
+                </li>
+
+            </ul>
+        @endauth
+
+        {{-- =========================
+             ▼ ゲスト表示
+             ========================= --}}
+        @guest
+            <h2>ログインが必要です</h2>
+
+            <p class="no-posts">
+                マイページを利用するにはログインしてください
+            </p>
+
+            <ul class="type-list" style="margin-top: 1rem;">
+                <li class="type-item">
+                    <a href="{{ route('login') }}">
+                        <span>ログイン</span>
+                        <span class="type-count">→</span>
+                    </a>
+                </li>
+
+                @if (Route::has('register'))
+                <li class="type-item">
+                    <a href="{{ route('register') }}">
+                        <span>ユーザー登録</span>
+                        <span class="type-count">＋</span>
+                    </a>
+                </li>
+                @endif
+            </ul>
+        @endguest
+
+    </div>
+</section>
+@endsection
