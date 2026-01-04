@@ -83,7 +83,7 @@
 
         {{-- ボタン --}}
         <div class="button-group">
-            <a href="{{ url()->previous() }}" class="btn-cancel">キャンセル</a>
+            <a href="{{ url()->previous() }}" class="btn-danger">キャンセル</a>
             <button type="submit" class="btn-submit">保存する</button>
         </div>
     </form>
