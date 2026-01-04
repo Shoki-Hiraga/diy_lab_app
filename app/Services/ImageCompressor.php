@@ -15,7 +15,7 @@ class ImageCompressor
         UploadedFile $file,
         string $path,
         string $disk = 'public_fileassets',
-        int $maxKb = 40
+        int $maxKb = 60
     ): string {
         $manager = new ImageManager(new Driver());
         $image = $manager->read($file->getPathname());
