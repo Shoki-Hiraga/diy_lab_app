@@ -32,6 +32,11 @@ class CreatorController extends Controller
         // 非アクティブユーザーは404
         abort_if(!$user->is_active, 404);
 
+        $user->load([
+            'profile',
+            'socialLinks.platform',
+        ]);
+
         $posts = $user->publishedPosts()
             ->withListRelations()
             ->withCommentCount()

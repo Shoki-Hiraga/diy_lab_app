@@ -2,12 +2,14 @@ model,table,primaryKey,fillable,guarded,casts,functions,relations
 Category,,id,name,,,"posts, publishedPosts","posts:belongsToMany, publishedPosts:belongsToMany"
 Comment,,id,"post_id, user_id, parent_comment_id, body",,,"post, user, replies","post:belongsTo, user:belongsTo, replies:hasMany"
 Difficulty,,id,name,,,"posts, publishedPosts","posts:hasMany, publishedPosts:hasMany"
-Post,,id,"user_id, title, difficulty_id, status, view_count",,,"user, contents, categories, tools, tags, difficulty, comments, rootComments, reactions, scopePublished, scopeWithCommentCount, getMainImagePathAttribute","user:belongsTo, contents:hasMany, categories:belongsToMany, tools:belongsToMany, tags:belongsToMany, difficulty:belongsTo, comments:hasMany, rootComments:hasMany, reactions:hasMany"
+Post,,id,"user_id, title, difficulty_id, status, view_count",,,"user, contents, categories, tools, tags, difficulty, comments, rootComments, reactions, likes, bookmarks, scopePublished, scopeWithCommentCount, getMainImagePathAttribute, isReactedBy, scopeWithListRelations","user:belongsTo, contents:hasMany, categories:belongsToMany, tools:belongsToMany, tags:belongsToMany, difficulty:belongsTo, comments:hasMany, rootComments:hasMany, reactions:hasMany"
 PostContent,,id,"post_id, image_path, comment, order",,,post,post:belongsTo
 PostTag,,id,"post_id, tag",,,post,post:belongsTo
+Reaction,,id,"user_id, post_id, reaction_type_id",,,"user, post, type","user:belongsTo, post:belongsTo, type:belongsTo"
+ReactionType,,id,name,,,reactions,reactions:hasMany
 SocialPlatform,,id,name,,,links,links:hasMany
 Tag,,id,name,,,"posts, publishedPosts","posts:belongsToMany, publishedPosts:belongsToMany"
 Tool,,id,name,,,posts,posts:belongsToMany
-User,,id,"username, email, password, introduction, x_id, youtube_url, icon",,,"profile, socialLinks, getRouteKeyName, posts, publishedPosts","profile:hasOne, socialLinks:hasMany, posts:hasMany, publishedPosts:hasMany"
+User,,id,"username, email, password, introduction, x_id, youtube_url, icon",,,"profile, socialLinks, posts, publishedPosts, reactions, likedPosts, bookmarkedPosts, getRouteKeyName","profile:hasOne, socialLinks:hasMany, posts:hasMany, publishedPosts:hasMany, reactions:hasMany"
 UserProfile,,id,"user_id, profile, profile_image_url",,,user,user:belongsTo
 UserSocialLink,,id,"user_id, social_platforms_id, url",,,platform,platform:belongsTo

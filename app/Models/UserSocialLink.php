@@ -13,6 +13,11 @@ class UserSocialLink extends Model
         'url',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function platform()
     {
         return $this->belongsTo(SocialPlatform::class, 'social_platforms_id');

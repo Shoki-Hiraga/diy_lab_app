@@ -5,21 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
 use App\Models\Post;
 use App\Models\Reaction;
+use App\Models\UserProfile;
+use App\Models\UserSocialLink;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    /* =============================
+       基本設定
+    ============================== */
+
     protected $fillable = [
         'username',
         'email',
         'password',
-        'introduction',
-        'x_id',
-        'youtube_url',
-        'icon',
+        'is_active',
     ];
 
     protected $hidden = [
@@ -32,6 +36,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
         ];
     }
 
@@ -39,27 +44,48 @@ class User extends Authenticatable
        リレーション
     ============================== */
 
+    /**
+     * プロフィール（1対1）
+     * profile が存在しなくても null にならない
+     */
     public function profile()
     {
-        return $this->hasOne(UserProfile::class);
+        return $this->hasOne(UserProfile::class)
+            ->withDefault([
+                'profile' => '',
+                'profile_image_url' => null,
+            ]);
     }
 
+    /**
+     * SNSリンク（1対多）
+     * 常に Collection が返る
+     */
     public function socialLinks()
     {
         return $this->hasMany(UserSocialLink::class);
     }
 
+    /**
+     * 投稿（全件）
+     */
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
 
+    /**
+     * 公開済み投稿
+     */
     public function publishedPosts()
     {
         return $this->hasMany(Post::class)
             ->where('status', Post::STATUS_PUBLISHED);
     }
 
+    /**
+     * リアクション
+     */
     public function reactions()
     {
         return $this->hasMany(Reaction::class);
@@ -92,9 +118,12 @@ class User extends Authenticatable
     }
 
     /* =============================
-       ルートキー
+       ルートモデルバインディング
     ============================== */
 
+    /**
+     * /creators/{username}
+     */
     public function getRouteKeyName()
     {
         return 'username';

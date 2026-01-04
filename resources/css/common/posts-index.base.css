@@ -589,6 +589,31 @@ a {
 }
 
 /* =====================================================
+   投稿者プロフィール（詳細ページ）
+===================================================== */
+.creator-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 1rem 0;
+}
+
+.creator-profile-image {
+  width: 72px;              /* ← ここが重要 */
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #f3f4f6;
+}
+
+.creator-profile-text {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* =====================================================
    投稿カード外メタ情報
 ===================================================== */
 .post-meta-outside {

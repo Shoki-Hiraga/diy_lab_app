@@ -19,4 +19,12 @@ class UserProfile extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getIconUrlAttribute()
+    {
+        return $this->profile_image_url
+            ? asset('fileassets/icons/' . $this->profile_image_url)
+            : null;
+    }
+
 }
