@@ -108,6 +108,7 @@
             <input type="hidden" name="tags" id="tags" value="{{ old('tags') }}">
         </div>
         @include('components.tags-js')
+
         {{-- 写真＋コメント --}}
         <div class="form-group">
             <label>写真とコメント</label>
