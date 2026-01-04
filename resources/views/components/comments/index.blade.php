@@ -4,11 +4,13 @@
         コメント（<span id="comment-count">{{ $post->comments_count }}</span>件）
     </h3>
 
-    <div id="comment-list">
+    {{-- コメント一覧 --}}
+    <div id="comment-list" class="comment-list">
         @foreach ($post->rootComments as $comment)
             @include('components.comments.item', ['comment' => $comment])
         @endforeach
     </div>
 
+    {{-- コメント投稿 --}}
     @include('components.comments.form')
 </div>
