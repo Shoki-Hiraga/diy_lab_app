@@ -7,7 +7,7 @@
                     <a href="{{ $crumb['url'] }}">
                         {{ $crumb['label'] }}
                     </a>
-                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-separator">🔧</span>
                 @else
                     <span class="breadcrumb-current">
                         {{ $crumb['label'] }}

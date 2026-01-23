@@ -32,10 +32,11 @@
                 <a href="{{ route('categories.index') }}" class="btn-nav">📂 カテゴリ</a>
                 <a href="{{ route('difficulties.index') }}" class="btn-nav">⭐ 難易度</a>
                 <a href="{{ route('tags.index') }}" class="btn-nav">🏷️ タグ</a>
-
+                {{-- ホームボタン廃止
                 @auth
                     <a href="{{ route('users.top') }}" class="btn-nav">🏠 HOME</a>
                 @endauth
+                --}}
             </div>
 
             {{-- 認証 --}}

@@ -12,7 +12,7 @@
 
   padding-bottom: env(safe-area-inset-bottom);
 
-  background: #ffffff;
+  background: #fff5eb;
   border-top: 1px solid #e5e7eb;
   z-index: 1000;
 }

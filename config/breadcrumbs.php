@@ -62,8 +62,9 @@ return [
         ['label' => 'トップ', 'route' => 'public.posts.index'],
         ['label' => '難易度一覧', 'route' => 'difficulties.index'],
         [
-            'label' => fn(Difficulty $difficulty) => $difficulty->name,
-            'route' => fn(Difficulty $difficulty) => route('difficulties.show', $difficulty),
+            // 🔑 型ヒントに依存しないで、値だけ使う
+            'label' => fn($difficulty) => '★' . $difficulty->id,
+            'route' => fn($difficulty) => route('difficulties.show', $difficulty),
         ],
     ],
 

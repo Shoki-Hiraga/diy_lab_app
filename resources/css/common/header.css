@@ -133,9 +133,36 @@
         gap: 12px;
     }
 
-    .header-action--nav,
+    /* 🔽 ナビを横スクロールバー化 */
+    .header-action--nav {
+        display: flex;
+        flex-wrap: nowrap;              /* 折り返さない */
+        overflow-x: auto;               /* 横スクロール有効 */
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        gap: 8px;
+        padding-bottom: 4px;            /* スクロールバー分の余白 */
+    }
+
+    /* スクロールバー非表示（見た目 note 寄せ） */
+    .header-action--nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .header-action--nav {
+        scrollbar-width: none; /* Firefox */
+    }
+
+    /* 🔽 ボタンは幅固定で横に並ぶ */
+    .header-action--nav .btn-nav {
+        flex: 0 0 auto;                 /* 縮まない */
+        white-space: nowrap;
+    }
+
+    /* 認証エリアは今まで通り折り返しOK */
     .header-action--auth {
         flex-wrap: wrap;
+        gap: 8px;
     }
 
     .btn-nav,
