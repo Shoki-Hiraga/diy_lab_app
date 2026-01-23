@@ -119,9 +119,18 @@ a {
 
 /* タイトル・本文 */
 .post-title {
-  font-size: 1.05rem;
-  font-weight: bold;
-  margin: 0.2rem 0 0.4rem;
+  line-height: 1.45;
+  height: calc(1.45em * 3);   /* ← 常に3行分の高さを確保 */
+  display: flex;
+  align-items: center;       /* ← 1行のとき上下中央 */
+  margin: 0.3rem 0 0;
+}
+
+.post-title-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;     /* ← 最大3行 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .post-text {

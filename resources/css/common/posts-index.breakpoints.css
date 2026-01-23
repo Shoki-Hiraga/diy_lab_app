@@ -16,8 +16,11 @@
     }
 
     .post-title {
-      font-size: 0.9rem;    /* タイトルを小さくする */
+      font-size: 0.8rem;
+      line-height: 1.45;
+      height: calc(1.45em * 2);
     }
+
 
     .post-reactions {
     gap: 6px;
@@ -79,7 +82,9 @@
   }
 
   .post-title {
-    font-size: 1.0rem;
+    font-size: 1.0rem;       /* ← 既存指定をここに統合 */
+    line-height: 1.45;
+    height: calc(1.45em * 2);
   }
 
   .post-text {

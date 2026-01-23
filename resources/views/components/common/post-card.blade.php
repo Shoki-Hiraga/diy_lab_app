@@ -53,7 +53,9 @@
                         </div>
 
                         <h3 class="post-title">
+                        <span class="post-title-text">
                             {{ $post->title }}
+                        </span>
                         </h3>
 
                     </div>
