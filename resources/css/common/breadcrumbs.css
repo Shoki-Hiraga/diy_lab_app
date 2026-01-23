@@ -1,0 +1,63 @@
+/* =====================================================
+   パンくずリスト
+===================================================== */
+.breadcrumbs {
+    max-width: 1100px;
+    margin: 0 auto 12px;
+    padding: 0 20px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #666;
+}
+
+.breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+/* リンク */
+.breadcrumbs a {
+    color: #4a7db3;
+    text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+/* 区切りスラッシュ */
+.breadcrumbs .breadcrumb-separator {
+    color: #aaa;
+    margin-left: 2px;
+}
+
+/* 現在地 */
+.breadcrumbs .breadcrumb-current {
+    font-weight: 600;
+    color: #333;
+}
+
+/* =====================================================
+   SP
+===================================================== */
+@media (max-width: 599px) {
+    .breadcrumbs {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+
+    .breadcrumbs li {
+        gap: 6px;
+    }
+}

@@ -14,6 +14,7 @@
     @vite([
         'resources/css/app.css',
         'resources/css/common/header.css',
+        'resources/css/common/breadcrumbs.css',
         'resources/css/users/login.css',
         'resources/css/common/posts-floating.base.css',
         'resources/css/common/posts-floating.breakpoints.css',
@@ -32,6 +33,9 @@
             </div>
         </div>
     @endif
+
+    {{-- パンくずリスト --}}
+    @include('components.common.breadcrumbs')
 
     {{-- ▼ ログイン専用メイン --}}
     <main class="guest-main">

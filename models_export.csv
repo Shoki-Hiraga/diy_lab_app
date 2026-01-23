@@ -10,6 +10,6 @@ ReactionType,,id,name,,,reactions,reactions:hasMany
 SocialPlatform,,id,name,,,links,links:hasMany
 Tag,,id,name,,,"posts, publishedPosts","posts:belongsToMany, publishedPosts:belongsToMany"
 Tool,,id,name,,,posts,posts:belongsToMany
-User,,id,"username, email, password, introduction, x_id, youtube_url, icon",,,"profile, socialLinks, posts, publishedPosts, reactions, likedPosts, bookmarkedPosts, getRouteKeyName","profile:hasOne, socialLinks:hasMany, posts:hasMany, publishedPosts:hasMany, reactions:hasMany"
-UserProfile,,id,"user_id, profile, profile_image_url",,,user,user:belongsTo
-UserSocialLink,,id,"user_id, social_platforms_id, url",,,platform,platform:belongsTo
+User,,id,"username, email, password, is_active",,,"profile, socialLinks, posts, publishedPosts, reactions, likedPosts, bookmarkedPosts, getRouteKeyName","profile:hasOne, socialLinks:hasMany, posts:hasMany, publishedPosts:hasMany, reactions:hasMany"
+UserProfile,,id,"user_id, profile, profile_image_url",,,"user, getIconUrlAttribute",user:belongsTo
+UserSocialLink,,id,"user_id, social_platforms_id, url",,,"user, platform","user:belongsTo, platform:belongsTo"
