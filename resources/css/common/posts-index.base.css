@@ -128,10 +128,14 @@ a {
 
 .post-title-text {
   display: -webkit-box;
-  -webkit-line-clamp: 3;     /* ← 最大3行 */
   -webkit-box-orient: vertical;
+  /* 非標準（現役で一番広く使われている） */
+  -webkit-line-clamp: 3;     /* ← 最大3行 */
+  /* 将来の標準仕様（まだほぼ未対応だけど害はない） */
+  line-clamp: 3;
   overflow: hidden;
 }
+
 
 .post-text {
   font-size: 0.88rem;
