@@ -106,9 +106,10 @@
                                     src="{{ asset('fileassets/icons/' . $post->user->profile->profile_image_url) }}"
                                     alt="{{ $post->user->username }}"
                                     class="user-icon"
+                                    onerror="this.onerror=null; this.outerHTML='<i class=&quot;fa-solid fa-user user-icon&quot;></i>';"
                                 >
                             @else
-                                <i class="fa-solid fa-user"></i>
+                                <i class="fa-solid fa-user user-icon"></i>
                             @endif
                         </span>
 

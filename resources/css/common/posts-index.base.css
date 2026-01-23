@@ -184,6 +184,36 @@ a {
   border-radius: 50%;
 }
 
+/* アイコンの外枠（すでにあるなら不要） */
+.author-icon-circle {
+  width: 40px;              /* ← 既存サイズに合わせて */
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #eee;        /* 任意：未設定時の見た目安定用 */
+}
+
+/* img と i の共通見た目を強制 */
+.user-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* img 用 */
+  display: block;          /* img / i 両対応 */
+}
+
+/* i 専用の補正 */
+.author-icon-circle i.user-icon {
+  display: flex;           /* 中央寄せ */
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;         /* ← 既存デザインに合わせて */
+  line-height: 1;
+  color: #777;             /* 任意 */
+}
+
 /* 投稿カード用：アイコンを丸にする */
 .author-icon-circle {
   border-radius: 50%;
