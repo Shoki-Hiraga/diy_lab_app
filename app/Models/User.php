@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Models\Reaction;
 use App\Models\UserProfile;
 use App\Models\UserSocialLink;
+use App\Models\Notification;
 
 class User extends Authenticatable
 {
@@ -117,6 +118,22 @@ class User extends Authenticatable
             ->where('is_active', true) //アクティブ非アクティブに変更
             ->whereHas('type', fn ($q) => $q->where('name', 'bookmark'));
         });
+    }
+
+    /**
+    * 通知
+    */
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    /**
+    * 未読通知
+    */
+    public function unreadNotifications()
+    {
+        return $this->notifications()->whereNull('read_at');
     }
 
     /* =============================

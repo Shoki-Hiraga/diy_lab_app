@@ -40,8 +40,26 @@
                 <li class="floating-nav__item">
                     <a href="{{ route('users.top') }}"
                     class="floating-nav__link {{ $isActive('users.top') }}">
-                        <i class="fa-regular fa-bell"></i>
-                        <span>お知らせ(準備)</span>
+
+                        <span class="icon-wrapper">
+                            <i class="fa-regular fa-bell"></i>
+
+                            @auth
+                                @php
+                                    $unreadCount = auth()->user()
+                                        ->unreadNotifications()
+                                        ->count();
+                                @endphp
+
+                                @if ($unreadCount > 0)
+                                    <span class="notification-badge">
+                                        {{ $unreadCount }}
+                                    </span>
+                                @endif
+                            @endauth
+                        </span>
+
+                        <span>お知らせ</span>
                     </a>
                 </li>
 

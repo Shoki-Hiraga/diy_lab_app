@@ -85,13 +85,29 @@
                     </a>
                 </li>
 
-                 <li class="type-item">
-                    <a href="{{ route('users.others.likes') }}">
+                <li class="type-item">
+                    <a href="{{ route('users.others.likes') }}" class="type-link-with-badge">
+
                         <span>いいねされた一覧</span>
+
+                        @auth
+                            @php
+                                $unreadLikeCount = Auth::user()
+                                    ->unreadNotifications()
+                                    ->where('type', 'like')
+                                    ->count();
+                            @endphp
+
+                            @if ($unreadLikeCount > 0)
+                                <span class="notification-badge">
+                                    {{ $unreadLikeCount }}
+                                </span>
+                            @endif
+                        @endauth
+
                         <span class="type-count">♥</span>
                     </a>
                 </li>
-
 
                 <li class="type-item">
                     <a href="{{ route('users.profile.show', Auth::id()) }}">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Notification;
 
 class LikedByOthersPostController extends Controller
 {
@@ -14,11 +15,28 @@ class LikedByOthersPostController extends Controller
     {
         $userId = auth()->id();
 
+        /*
+        |----------------------------------------
+        | 👍 いいね通知を既読にする
+        |----------------------------------------
+        */
+        Notification::where('user_id', $userId)
+            ->where('type', 'like')
+            ->whereNull('read_at')
+            ->update([
+                'read_at' => now(),
+            ]);
+
+        /*
+        |----------------------------------------
+        | 👍 いいねされた投稿一覧
+        |----------------------------------------
+        */
         $posts = Post::where('user_id', $userId)
             ->whereHas('reactions', function ($q) use ($userId) {
-                $q->where('is_active', true)                 // ⭐ 有効のみ
-                  ->where('user_id', '!=', $userId)         // ⭐ 自分以外
-                  ->whereHas('type', fn ($q) => $q->where('name', 'like'));
+                $q->where('is_active', true)
+                ->where('user_id', '!=', $userId)
+                ->whereHas('type', fn ($q) => $q->where('name', 'like'));
             })
             ->withListRelations()
             ->withCommentCount()
