@@ -3,6 +3,9 @@
         @forelse ($posts as $post)
 
         <article class="post-item">
+            {{-- ユーザー向けオーバーレイ（通知用） 
+            @include('components.common.users-post-overlay')
+            --}}
 
             {{-- =========================
                  ▼ クリック可能なカード

@@ -32,3 +32,75 @@
 .type-link-with-badge .notification-badge {
     margin-left: 8px;
 }
+
+.post-item {
+    position: relative;
+}
+
+.post-overlay-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 10;
+
+    padding: 4px 8px;
+    border-radius: 6px;
+
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.post-item {
+  position: relative; /* ← バッジの基準 */
+}
+
+/* =====================================================
+   通知オーバーレイ（いいね・コメント）
+===================================================== */
+.post-overlay-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 20;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 4px 8px;
+  border-radius: 999px;
+
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1;
+
+  color: #fff;
+  background: rgba(0,0,0,0.75);
+
+  pointer-events: none; /* ← クリック阻害しない */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+}
+
+/* 👍 いいね */
+.post-overlay-badge.like {
+  background: rgba(231, 76, 60, 0.92); /* 赤系 */
+}
+
+/* 💬 コメント */
+.post-overlay-badge.comment {
+  background: rgba(30, 136, 229, 0.92); /* 青系 */
+}
+
+.post-card:hover .post-overlay-badge {
+  opacity: 0.85;
+}
+
+@media (max-width: 599px) {
+  .post-overlay-badge {
+    top: 6px;
+    right: 6px;
+    font-size: 0.65rem;
+    padding: 3px 6px;
+  }
+}
