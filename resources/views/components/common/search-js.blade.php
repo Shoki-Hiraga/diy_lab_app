@@ -1,15 +1,19 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const searchForm = document.querySelector('[data-search]');
-    const toggle = document.querySelector('.search-toggle');
+    const toggleBtn = document.querySelector('.search-toggle');
+    const searchContainer = document.getElementById('search-container');
+    const searchInput = searchContainer?.querySelector('input[name="q"]');
 
-    if (!searchForm || !toggle) return;
+    if (!toggleBtn || !searchContainer) return;
 
-    toggle.addEventListener('click', () => {
-        searchForm.classList.toggle('is-open');
+    toggleBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        searchContainer.classList.toggle('is-open');
 
-        const input = searchForm.querySelector('input[name="q"]');
-        if (input) input.focus();
+        // 表示されたら自動フォーカス
+        if (searchContainer.classList.contains('is-open')) {
+            searchInput.focus();
+        }
     });
 });
 </script>
