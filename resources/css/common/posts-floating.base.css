@@ -8,11 +8,11 @@
   bottom: 0;
 
   width: 100%;
-  height: 72px; /* ← ナビ自体を高くする */
+  height: 55px; /* ← ナビ自体を高くする */
 
   padding-bottom: env(safe-area-inset-bottom);
 
-  background: #fff5eb;
+  background: #ffdfbd;
   border-top: 1px solid #e5e7eb;
   z-index: 1000;
 }
@@ -51,11 +51,11 @@
   justify-content: center;
 
   font-size: 0.65rem;
-  color: #9ca3af;
+  color: #000000;
 }
 
 .floating-nav__link i {
-  font-size: 1.1rem;
+  font-size: 1.20rem;
   margin-bottom: 2px;
 }
 
@@ -63,8 +63,8 @@
    中央 ＋ ボタン（浮かせない・安定）
 ----------------------------------------------------- */
 .floating-nav__link--center {
-  width: 48px;
-  height: 48px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
 
   background: #10b981;
@@ -112,5 +112,33 @@
 @media (min-width: 900px) {
   .floating-nav__inner {
     max-width: 1100px;
+  }
+}
+
+/* タブレット・PC向けの調整 */
+@media (min-width: 768px) {
+  .floating-nav {
+    height: 70x; /* ナビ自体の高さを少し出す */
+  }
+
+  /* 通常アイコンをさらに大きく */
+  .floating-nav__link i {
+    font-size: 1.35rem; 
+    margin-bottom: 4px;
+  }
+  
+  /* 下の文字も少し大きくして読みやすく */
+  .floating-nav__link {
+    font-size: 0.8rem;
+  }
+
+  /* 中央ボタンのサイズアップ */
+  .floating-nav__link--center {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .floating-nav__link--center i {
+    font-size: 1.7rem;
   }
 }

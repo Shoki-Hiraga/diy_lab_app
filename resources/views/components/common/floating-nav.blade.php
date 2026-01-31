@@ -41,7 +41,7 @@
                     <a href="{{ route('users.top') }}"
                     class="floating-nav__link {{ $isActive('users.top') }}">
                         <i class="fa-regular fa-bell"></i>
-                        <span>お知らせ(準備中)</span>
+                        <span>お知らせ(準備)</span>
                     </a>
                 </li>
 
