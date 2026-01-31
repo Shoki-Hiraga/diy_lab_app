@@ -40,6 +40,8 @@
 
     {{-- 公開用SEO --}}
     <meta name="description" content="@yield('description', 'DIYのアイデア投稿一覧')">
+    {{-- クエリパラメータを除いたURLをcanonicalに設定 --}}
+    <link rel="canonical" href="{{ url()->current() }}">
 </head>
 
 <body class="layout-public">

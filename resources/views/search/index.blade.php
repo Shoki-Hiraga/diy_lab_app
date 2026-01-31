@@ -1,12 +1,12 @@
 @extends('layouts.public')
 
-{{-- ▼ ページタイトル --}}
-@section('title', request('q') ? request('q').'の検索結果' : '検索結果')
-
 {{-- ▼ noindex（検索ページ用） --}}
 @push('meta')
 <meta name="robots" content="noindex">
 @endpush
+
+{{-- ▼ ページタイトル --}}
+@section('title', request('q') ? request('q').'の検索結果' : '検索結果')
 
 {{-- ▼ ページ専用ヘッダー --}}
 @section('post-header')
