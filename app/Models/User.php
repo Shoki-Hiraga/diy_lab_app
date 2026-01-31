@@ -131,10 +131,14 @@ class User extends Authenticatable
     /**
     * 未読通知
     */
-    public function unreadNotifications()
+    public function unreadNotificationCount(): int
     {
-        return $this->notifications()->whereNull('read_at');
+        return $this->notifications()
+            ->whereNull('read_at')
+            ->whereIn('type', ['like', 'comment'])
+            ->count();
     }
+
 
     /* =============================
        ルートモデルバインディング

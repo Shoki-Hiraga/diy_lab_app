@@ -93,7 +93,8 @@
                         @auth
                             @php
                                 $unreadLikeCount = Auth::user()
-                                    ->unreadNotifications()
+                                    ->notifications()
+                                    ->whereNull('read_at')
                                     ->where('type', 'like')
                                     ->count();
                             @endphp
@@ -108,6 +109,32 @@
                         <span class="type-count">♥</span>
                     </a>
                 </li>
+
+                <li class="type-item">
+                    <a href="{{ route('users.others.comments') }}" class="type-link-with-badge">
+
+                        <span>コメントされた一覧</span>
+
+                        @auth
+                            @php
+                                $unreadCommentCount = Auth::user()
+                                    ->notifications()
+                                    ->whereNull('read_at')
+                                    ->where('type', 'comment')
+                                    ->count();
+                            @endphp
+
+                            @if ($unreadCommentCount > 0)
+                                <span class="notification-badge">
+                                    {{ $unreadCommentCount }}
+                                </span>
+                            @endif
+                        @endauth
+
+                        <span class="type-count">💬</span>
+                    </a>
+                </li>
+
 
                 <li class="type-item">
                     <a href="{{ route('users.profile.show', Auth::id()) }}">

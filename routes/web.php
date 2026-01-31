@@ -15,6 +15,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ReactionController;
 use App\Http\Controllers\User\ReactionPostController;
 use App\Http\Controllers\User\LikedByOthersPostController;
+use App\Http\Controllers\User\CommentedByOthersPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -134,6 +135,10 @@ Route::middleware('auth')->prefix('users')->group(function () {
         // 👍 いいねされた投稿一覧
         Route::get('/like', [LikedByOthersPostController::class, 'likes'])
             ->name('users.others.likes');
+
+        // 💬 コメントされた投稿一覧
+        Route::get('/comment', [CommentedByOthersPostController::class, 'comments'])
+            ->name('users.others.comments');
 
         // 将来用
         // Route::get('/bookmark', ...)->name('users.others.bookmarks');

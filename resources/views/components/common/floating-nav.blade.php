@@ -46,9 +46,7 @@
 
                             @auth
                                 @php
-                                    $unreadCount = auth()->user()
-                                        ->unreadNotifications()
-                                        ->count();
+                                    $unreadCount = auth()->user()->unreadNotificationCount();
                                 @endphp
 
                                 @if ($unreadCount > 0)
@@ -62,6 +60,7 @@
                         <span>お知らせ</span>
                     </a>
                 </li>
+
 
                 {{-- マイページ --}}
                 <li class="floating-nav__item">
