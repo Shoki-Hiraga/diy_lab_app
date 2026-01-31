@@ -15,47 +15,51 @@ class CommentController extends Controller
      */
     public function store(Request $request, Post $post)
     {
-        $request->validate([
+        // 🔐 未ログイン防止（AJAXでも必須）
+        abort_unless(Auth::check(), 401);
+
+        // ✅ バリデーション
+        $validated = $request->validate([
             'body' => 'required|string|max:1000',
             'parent_comment_id' => 'nullable|exists:comments,id',
         ]);
 
         $userId = Auth::id();
 
-        // コメント作成
+        // ✅ コメント作成
         $comment = $post->comments()->create([
             'user_id'           => $userId,
-            'body'              => $request->body,
-            'parent_comment_id' => $request->parent_comment_id,
+            'body'              => $validated['body'],
+            'parent_comment_id' => $validated['parent_comment_id'] ?? null,
         ]);
 
         /*
-         |--------------------------------------------------
-         | 🔔 コメント通知
-         |--------------------------------------------------
-         */
+        |--------------------------------------------------------------------------
+        | 🔔 通知処理
+        |--------------------------------------------------------------------------
+        */
 
         // ① 投稿主への通知（自分以外）
         if ($post->user_id !== $userId) {
             Notification::create([
-                'user_id'  => $post->user_id, // 投稿主
-                'actor_id' => $userId,         // コメントした人
+                'user_id'  => $post->user_id,
+                'actor_id' => $userId,
                 'post_id'  => $post->id,
                 'type'     => 'comment',
             ]);
         }
 
-        // ② 親コメントへの返信通知（自分以外・重複防止）
-        if ($request->parent_comment_id) {
-            $parentComment = Comment::find($request->parent_comment_id);
+        // ② 親コメントへの通知（自分以外・重複防止）
+        if (!empty($validated['parent_comment_id'])) {
+            $parent = Comment::find($validated['parent_comment_id']);
 
             if (
-                $parentComment &&
-                $parentComment->user_id !== $userId &&
-                $parentComment->user_id !== $post->user_id
+                $parent &&
+                $parent->user_id !== $userId &&
+                $parent->user_id !== $post->user_id
             ) {
                 Notification::create([
-                    'user_id'  => $parentComment->user_id, // 親コメントの投稿者
+                    'user_id'  => $parent->user_id,
                     'actor_id' => $userId,
                     'post_id'  => $post->id,
                     'type'     => 'comment',
@@ -63,9 +67,13 @@ class CommentController extends Controller
             }
         }
 
-        return view('components.comments.item', [
-            'comment' => $comment->load('user'),
-            'isReply' => (bool) $request->parent_comment_id,
+        // ✅ JSONでHTMLを返す（AJAX用 正解）
+        return response()->json([
+            'success' => true,
+            'html' => view('components.comments.item', [
+                'comment' => $comment->fresh(['user']),
+                'isReply' => !empty($validated['parent_comment_id']),
+            ])->render(),
         ]);
     }
 
@@ -74,19 +82,23 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
+        // 🔐 権限チェック
         abort_unless($comment->user_id === Auth::id(), 403);
 
-        $request->validate([
+        // ✅ バリデーション
+        $validated = $request->validate([
             'body' => 'required|string|max:1000',
         ]);
 
+        // ✅ 更新
         $comment->update([
-            'body' => $request->body,
+            'body' => $validated['body'],
         ]);
 
         // ❗ 更新では通知しない（UX的に正解）
 
         return response()->json([
+            'success' => true,
             'body' => $comment->body,
         ]);
     }
@@ -96,12 +108,15 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
+        // 🔐 権限チェック
         abort_unless($comment->user_id === Auth::id(), 403);
 
+        // ✅ 削除
         $comment->delete();
 
         // ❗ 削除でも通知しない
 
+        // ✅ fetch と相性の良い 204
         return response()->noContent();
     }
 }
