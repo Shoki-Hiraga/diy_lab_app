@@ -1,2 +1,13 @@
 User-agent: *
-Disallow:
+
+# 検索エンジンにインデックスさせないパス
+Disallow: /users/
+Disallow: /login
+Disallow: /register
+Disallow: /password/
+Disallow: /search
+Disallow: /*?sort=
+Disallow: /*?filter=
+
+# サイトマップの場所を明示（フルパスで記述）
+Sitemap: https://diy-lab.net/sitemap.xml

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\User\PostController as UserPostController;
 use App\Http\Controllers\User\UserController as UserUserController;
 use App\Http\Controllers\User\PostlistController as UserPostlistController;
@@ -139,5 +140,7 @@ Route::middleware('auth')->prefix('users')->group(function () {
     });
 
 });
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
 require __DIR__.'/auth.php';
