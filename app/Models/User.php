@@ -96,24 +96,26 @@ class User extends Authenticatable
     ============================== */
 
     /**
-     * いいねした投稿
-     */
+    * いいねした投稿（現在有効のみ）
+    */
     public function likedPosts()
     {
         return Post::whereHas('reactions', function ($q) {
             $q->where('user_id', $this->id)
-              ->whereHas('type', fn ($q) => $q->where('name', 'like'));
+            ->where('is_active', true) //アクティブ非アクティブに変更
+            ->whereHas('type', fn ($q) => $q->where('name', 'like'));
         });
     }
 
     /**
-     * ブックマークした投稿
-     */
+    * ブックマークした投稿（現在有効のみ）
+    */
     public function bookmarkedPosts()
     {
         return Post::whereHas('reactions', function ($q) {
             $q->where('user_id', $this->id)
-              ->whereHas('type', fn ($q) => $q->where('name', 'bookmark'));
+            ->where('is_active', true) //アクティブ非アクティブに変更
+            ->whereHas('type', fn ($q) => $q->where('name', 'bookmark'));
         });
     }
 

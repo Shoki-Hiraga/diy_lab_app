@@ -14,6 +14,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ReactionController;
 use App\Http\Controllers\User\ReactionPostController;
+use App\Http\Controllers\User\LikedByOthersPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,7 +104,7 @@ Route::middleware('auth')->prefix('users')->group(function () {
     Route::post('/new', [UserPostController::class, 'store'])
         ->name('users.posts.store');
 
-    // 編集・更新（投稿は所有権チェックを Controller / Policy 側で）
+    // 編集・更新
     Route::get('/posts/{post}/edit', [UserPostController::class, 'edit'])
         ->name('users.posts.edit');
     Route::put('/posts/{post}', [UserPostController::class, 'update'])
@@ -113,13 +114,44 @@ Route::middleware('auth')->prefix('users')->group(function () {
     Route::delete('/posts/{post}', [UserPostController::class, 'destroy'])
         ->name('users.posts.destroy');
 
-    // いいね
+    // ------------------------------------------------------------------
+    // リアクション系（自分が押したもの）
+    // ------------------------------------------------------------------
+
+    // 自分がいいねした投稿
     Route::get('/likes', [ReactionPostController::class, 'likes'])
         ->name('users.likes');
 
-    // ブックマーク
+    // 自分がブックマークした投稿
     Route::get('/bookmarks', [ReactionPostController::class, 'bookmarks'])
         ->name('users.bookmarks');
+
+    // ------------------------------------------------------------------
+    // 🔔 通知系（相手から来たもの）
+    // ------------------------------------------------------------------
+    Route::middleware('auth')->prefix('users/others')->group(function () {
+
+        // 👍 いいねされた投稿一覧
+        Route::get('/like', [LikedByOthersPostController::class, 'likes'])
+            ->name('users.others.likes');
+
+        // 将来用
+        // Route::get('/bookmark', ...)->name('users.others.bookmarks');
+    });
+
+
+    // ------------------------------------------------------------------
+    // 自分自身のユーザー画面（/users/{id}）
+    // ------------------------------------------------------------------
+    Route::middleware('self.user')->group(function () {
+
+        // プロフィール
+        Route::get('/{id}', [UserUserController::class, 'show'])
+            ->name('users.profile.show');
+
+        Route::put('/{id}', [UserUserController::class, 'update'])
+            ->name('users.profile.update');
+    });
 
     // ------------------------------------------------------------------
     // 自分自身のユーザー画面（/users/{id} 系）

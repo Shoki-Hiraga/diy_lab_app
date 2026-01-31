@@ -71,19 +71,27 @@
                     </a>
                 </li>
 
-                <li class="type-item">
-                    <a href="{{ route('users.likes') }}">
-                        <span>いいね一覧</span>
-                        <span class="type-count">♥</span>
-                    </a>
-                </li>
-
-                <li class="type-item">
+               <li class="type-item">
                     <a href="{{ route('users.bookmarks') }}">
                         <span>ブックマーク一覧</span>
                         <span class="type-count">★</span>
                     </a>
                 </li>
+ 
+                <li class="type-item">
+                    <a href="{{ route('users.likes') }}">
+                        <span>MYいいね一覧</span>
+                        <span class="type-count">♥</span>
+                    </a>
+                </li>
+
+                 <li class="type-item">
+                    <a href="{{ route('users.others.likes') }}">
+                        <span>いいねされた一覧</span>
+                        <span class="type-count">♥</span>
+                    </a>
+                </li>
+
 
                 <li class="type-item">
                     <a href="{{ route('users.profile.show', Auth::id()) }}">

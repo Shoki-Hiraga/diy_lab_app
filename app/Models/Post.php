@@ -110,6 +110,7 @@ class Post extends Model
     public function likes()
     {
         return $this->reactions()
+            ->where('is_active', true) //アクティブ非アクティブに変更
             ->whereHas('type', fn ($q) => $q->where('name', 'like'));
     }
 
@@ -119,6 +120,7 @@ class Post extends Model
     public function bookmarks()
     {
         return $this->reactions()
+            ->where('is_active', true) //アクティブ非アクティブに変更
             ->whereHas('type', fn ($q) => $q->where('name', 'bookmark'));
     }
 
@@ -154,6 +156,7 @@ class Post extends Model
 
         return $this->reactions()
             ->where('user_id', $userId)
+            ->where('is_active', true) //アクティブ非アクティブに変更
             ->whereHas('type', fn ($q) => $q->where('name', $type))
             ->exists();
     }

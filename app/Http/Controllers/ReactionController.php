@@ -20,14 +20,18 @@ class ReactionController extends Controller
         ])->first();
 
         if ($reaction) {
-            $reaction->delete();
+            // ❌ deleteしない
+            $reaction->is_active = ! $reaction->is_active;
+            $reaction->save();
         } else {
             Reaction::create([
                 'user_id' => auth()->id(),
                 'post_id' => $post->id,
                 'reaction_type_id' => $reactionType->id,
+                'is_active' => true,
             ]);
         }
+
 
         return back();
     }
