@@ -1,0 +1,103 @@
+/* =========================
+   Dashboard（共通）
+   ========================= */
+
+.dashboard-wrapper {
+    margin-top: 2rem;
+}
+
+.dashboard-box {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-title {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.dashboard-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dashboard-item {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.dashboard-count {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #212529;
+}
+
+/* =========================
+   TB（タブレット）
+   ========================= */
+@media (max-width: 991px) {
+    .dashboard-box {
+        padding: 1.5rem;
+    }
+
+    .dashboard-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-count {
+        font-size: 1.6rem;
+    }
+}
+
+/* =========================
+   SP（スマホ）
+   ========================= */
+@media (max-width: 575px) {
+    .dashboard-wrapper {
+        margin-top: 1.5rem;
+    }
+
+    .dashboard-title {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+
+    .dashboard-list {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .dashboard-item {
+        padding: 1.2rem 1rem;
+    }
+
+    .dashboard-label {
+        font-size: 0.9rem;
+    }
+
+    .dashboard-count {
+        font-size: 2rem;
+    }
+}

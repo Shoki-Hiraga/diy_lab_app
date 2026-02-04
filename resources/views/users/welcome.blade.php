@@ -58,6 +58,15 @@
             <ul class="type-list">
 
                 <li class="type-item">
+                    <a href="{{ route('users.dashboard') }}">
+                        <span>ダッシュボード</span>
+                        <span class="type-count">📊</span>
+                    </a>
+                </li>
+
+            <ul class="type-list">
+
+                <li class="type-item">
                     <a href="{{ route('users.posts.index') }}">
                         <span>自分の投稿一覧</span>
                         <span class="type-count">→</span>

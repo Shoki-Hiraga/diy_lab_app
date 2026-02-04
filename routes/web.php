@@ -17,6 +17,7 @@ use App\Http\Controllers\User\ReactionPostController;
 use App\Http\Controllers\User\LikedByOthersPostController;
 use App\Http\Controllers\User\CommentedByOthersPostController;
 use App\Http\Controllers\User\CommentPostController;
+use App\Http\Controllers\User\RankingDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,6 +116,8 @@ Route::middleware(['auth', 'verified'])->prefix('users')->group(function () {
     // 削除
     Route::delete('/posts/{post}', [UserPostController::class, 'destroy'])
         ->name('users.posts.destroy');
+    Route::get('/dashboard', [RankingDashboardController::class, 'index'])
+        ->name('users.dashboard');
 
     // ------------------------------------------------------------------
     // リアクション系（自分が押したもの）

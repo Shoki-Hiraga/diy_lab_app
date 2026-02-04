@@ -35,6 +35,7 @@
         'resources/css/users/posts-form.base.css',
         'resources/css/users/posts-form.breakpoints.css',
         'resources/css/users/users.css',
+        'resources/css/users/dashboard.css',
         'resources/js/app.js'
     ])
 </head>
