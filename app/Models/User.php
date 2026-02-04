@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,7 +13,7 @@ use App\Models\UserProfile;
 use App\Models\UserSocialLink;
 use App\Models\Notification;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -32,6 +33,12 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    /**
+     * 属性のキャスト定義
+     * - email_verified_at: 日時として扱う
+     * - password: Laravelのhashed castで保存時に自動ハッシュ
+     * - is_active: true/false として扱う（DBの 0/1 を boolean に変換）
+     */
     protected function casts(): array
     {
         return [
@@ -39,6 +46,15 @@ class User extends Authenticatable
             'password' => 'hashed',
             'is_active' => 'boolean',
         ];
+    }
+
+    /**
+     * 利用可能ユーザーか？
+     * - is_active が false の場合は停止ユーザー（BAN/凍結など）
+     */
+    public function isActive(): bool
+    {
+        return $this->is_active === true;
     }
 
     /* =============================
@@ -97,40 +113,40 @@ class User extends Authenticatable
     ============================== */
 
     /**
-    * いいねした投稿（現在有効のみ）
-    */
+     * いいねした投稿（現在有効のみ）
+     */
     public function likedPosts()
     {
         return Post::whereHas('reactions', function ($q) {
             $q->where('user_id', $this->id)
-            ->where('is_active', true) //アクティブ非アクティブに変更
-            ->whereHas('type', fn ($q) => $q->where('name', 'like'));
+                ->where('is_active', true)
+                ->whereHas('type', fn ($q) => $q->where('name', 'like'));
         });
     }
 
     /**
-    * ブックマークした投稿（現在有効のみ）
-    */
+     * ブックマークした投稿（現在有効のみ）
+     */
     public function bookmarkedPosts()
     {
         return Post::whereHas('reactions', function ($q) {
             $q->where('user_id', $this->id)
-            ->where('is_active', true) //アクティブ非アクティブに変更
-            ->whereHas('type', fn ($q) => $q->where('name', 'bookmark'));
+                ->where('is_active', true)
+                ->whereHas('type', fn ($q) => $q->where('name', 'bookmark'));
         });
     }
 
     /**
-    * 通知
-    */
+     * 通知
+     */
     public function notifications()
     {
         return $this->hasMany(Notification::class);
     }
 
     /**
-    * 未読通知
-    */
+     * 未読通知
+     */
     public function unreadNotificationCount(): int
     {
         return $this->notifications()
@@ -138,7 +154,6 @@ class User extends Authenticatable
             ->whereIn('type', ['like', 'comment'])
             ->count();
     }
-
 
     /* =============================
        ルートモデルバインディング

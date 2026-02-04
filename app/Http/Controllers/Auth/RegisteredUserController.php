@@ -46,6 +46,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect()->intended('/users');
+        // 会員登録後のリダイレクト
+        return redirect()->route('verification.notice');
     }
 }

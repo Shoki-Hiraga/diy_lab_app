@@ -112,4 +112,9 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+    // 会員登録メール認証 24時間
+    'verification' => [
+    'expire' => 60 * 24, // 24時間（分単位）
+    ],
+
 ];

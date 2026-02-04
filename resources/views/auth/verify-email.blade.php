@@ -1,36 +1,42 @@
-{{-- ▼ post-header --}}
+@extends('layouts.guest')
+
 @section('post-header')
     @include('components.common.post-header')
 @endsection
 
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-    </div>
+@section('content')
+<div class="guest-form">
+    <div class="login-container">
+        <h1>メールアドレス確認</h1>
 
-    @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-        </div>
-    @endif
+        <p>
+            ご登録ありがとうございます。<br>
+            ご登録のメールアドレスに確認メールを送信しました。
+        </p>
 
-    <div class="mt-4 flex items-center justify-between">
+        <p>
+            メール内のリンクをクリックして、登録を完了してください。
+        </p>
+
+        @if (session('status') === 'verification-link-sent')
+            <p class="success">
+                新しい確認メールを送信しました。
+            </p>
+        @endif
+
         <form method="POST" action="{{ route('verification.send') }}">
             @csrf
-
-            <div>
-                <x-primary-button>
-                    {{ __('Resend Verification Email') }}
-                </x-primary-button>
-            </div>
+            <button type="submit">
+                確認メールを再送する
+            </button>
         </form>
 
-        <form method="POST" action="{{ route('logout') }}">
+        <form method="POST" action="{{ route('logout') }}" style="margin-top: 1rem;">
             @csrf
-
-            <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                {{ __('Log Out') }}
+            <button type="submit" class="link-button">
+                ログアウト
             </button>
         </form>
     </div>
-</x-guest-layout>
+</div>
+@endsection
