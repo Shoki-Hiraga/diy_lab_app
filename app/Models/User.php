@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\VerifyEmailCustom;
 
 use App\Models\Post;
 use App\Models\Reaction;
@@ -153,6 +154,15 @@ class User extends Authenticatable implements MustVerifyEmail
             ->whereNull('read_at')
             ->whereIn('type', ['like', 'comment'])
             ->count();
+    }
+
+    /**
+     * メールアドレス確認メールをカスタム通知で送信
+     * （Laravel標準の VerifyEmail を差し替え）
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmailCustom);
     }
 
     /* =============================
