@@ -175,6 +175,15 @@
             </ul>
         @endguest
 
+        @auth
+        <form method="POST" action="{{ route('logout') }}" class="logout-form">
+            @csrf
+            <button type="submit" class="logout-link">
+                ⎋ ログアウト
+            </button>
+        </form>
+        @endauth
+
     </div>
 </section>
 @endsection

@@ -665,3 +665,40 @@ a {
   flex-direction: column;
   gap: 0.1rem;
 }
+
+/* =========================
+   マイページ：ログアウト
+========================= */
+.post-wrapper {
+  position: relative; /* ← これ重要 */
+}
+
+.logout-form {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+}
+
+.logout-link {
+  background: transparent;
+  border: none;
+  padding: 4px 8px;
+
+  font-size: 0.8rem;
+  color: #999;
+  cursor: pointer;
+
+  border-radius: 6px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.logout-link:hover {
+  background: #f3f4f6;
+  color: #333;
+}
+
+.logout-link:focus-visible {
+  outline: 2px solid #9dc5e4;
+  outline-offset: 2px;
+}
+
