@@ -5,7 +5,7 @@
     <title>メールアドレス確認</title>
 </head>
 <body>
-<p>{{ $user->name ?? 'ユーザー様' }}</p>
+<p>{{ $user->username ?? 'ユーザー様' }}</p>
 
 <p>
     この度はご登録ありがとうございます。<br>

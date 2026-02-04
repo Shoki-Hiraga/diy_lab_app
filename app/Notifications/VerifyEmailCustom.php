@@ -7,12 +7,15 @@ use Illuminate\Notifications\Messages\MailMessage;
 
 class VerifyEmailCustom extends VerifyEmail
 {
-    protected function buildMailMessage($url)
+    public function toMail($notifiable)
     {
+        $url = $this->verificationUrl($notifiable);
+
         return (new MailMessage)
             ->subject('メールアドレス確認のお願い')
             ->view('mails.verify_email_min', [
-                'url' => $url,
+                'url'  => $url,
+                'user' => $notifiable, // ← Userモデルがそのまま入る
             ]);
     }
 }
