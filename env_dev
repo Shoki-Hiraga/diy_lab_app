@@ -1,9 +1,8 @@
 APP_NAME=diy_lab_app
-APP_ENV=dev
+APP_ENV=local
 APP_KEY=base64:neOWOryARx4BrhessINzF+ZzTkqZoj9k3sA1KAlSdhE=
 APP_DEBUG=true
 APP_URL=http://localhost
-FILESYSTEM_DISK=public_fileassets
 
 # 言語設定
 APP_LOCALE=ja
@@ -43,6 +42,7 @@ SESSION_DOMAIN=null
 
 # 各種ドライバ（Laravel 12 流の命名へ変更）
 BROADCAST_CONNECTION=log
+FILESYSTEM_DISK=local
 QUEUE_CONNECTION=sync
 CACHE_STORE=file
 # CACHE_PREFIX=
@@ -56,14 +56,14 @@ REDIS_PASSWORD=null
 REDIS_PORT=6379
 
 # メール
-MAIL_MAILER=smtp
+MAIL_MAILER=log
 MAIL_SCHEME=null
 MAIL_HOST=mailpit
 MAIL_PORT=1025
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
-MAIL_FROM_ADDRESS="hello@example.com"
-MAIL_FROM_NAME="${APP_NAME}"
+MAIL_FROM_ADDRESS="info@diy-lab.com"
+MAIL_FROM_NAME="DIY LAB"
 
 # AWS
 AWS_ACCESS_KEY_ID=
