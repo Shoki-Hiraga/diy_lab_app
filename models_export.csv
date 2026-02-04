@@ -2,6 +2,7 @@ model,table,primaryKey,fillable,guarded,casts,functions,relations
 Category,,id,name,,,"posts, publishedPosts","posts:belongsToMany, publishedPosts:belongsToMany"
 Comment,,id,"post_id, user_id, parent_comment_id, body",,,"post, user, replies","post:belongsTo, user:belongsTo, replies:hasMany"
 Difficulty,,id,name,,,"posts, publishedPosts","posts:hasMany, publishedPosts:hasMany"
+Notification,,id,"user_id, actor_id, post_id, type, read_at",,read_at => datetime,"actor, post","actor:belongsTo, post:belongsTo"
 Post,,id,"user_id, title, difficulty_id, status, view_count",,,"user, contents, categories, tools, tags, difficulty, comments, rootComments, reactions, likes, bookmarks, scopePublished, scopeWithCommentCount, getMainImagePathAttribute, isReactedBy, scopeWithListRelations","user:belongsTo, contents:hasMany, categories:belongsToMany, tools:belongsToMany, tags:belongsToMany, difficulty:belongsTo, comments:hasMany, rootComments:hasMany, reactions:hasMany"
 PostContent,,id,"post_id, image_path, comment, order",,,post,post:belongsTo
 PostTag,,id,"post_id, tag",,,post,post:belongsTo
@@ -10,6 +11,6 @@ ReactionType,,id,name,,,reactions,reactions:hasMany
 SocialPlatform,,id,name,,,links,links:hasMany
 Tag,,id,name,,,"posts, publishedPosts","posts:belongsToMany, publishedPosts:belongsToMany"
 Tool,,id,name,,,posts,posts:belongsToMany
-User,,id,"username, email, password, is_active",,,"profile, socialLinks, posts, publishedPosts, reactions, likedPosts, bookmarkedPosts, getRouteKeyName","profile:hasOne, socialLinks:hasMany, posts:hasMany, publishedPosts:hasMany, reactions:hasMany"
+User,,id,"username, email, password, is_active",,,"isActive, profile, socialLinks, posts, publishedPosts, reactions, likedPosts, bookmarkedPosts, notifications, unreadNotificationCount, sendEmailVerificationNotification, getRouteKeyName","profile:hasOne, socialLinks:hasMany, posts:hasMany, publishedPosts:hasMany, reactions:hasMany, notifications:hasMany"
 UserProfile,,id,"user_id, profile, profile_image_url",,,"user, getIconUrlAttribute",user:belongsTo
 UserSocialLink,,id,"user_id, social_platforms_id, url",,,"user, platform","user:belongsTo, platform:belongsTo"

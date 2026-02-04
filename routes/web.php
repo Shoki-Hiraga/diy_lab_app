@@ -16,6 +16,7 @@ use App\Http\Controllers\ReactionController;
 use App\Http\Controllers\User\ReactionPostController;
 use App\Http\Controllers\User\LikedByOthersPostController;
 use App\Http\Controllers\User\CommentedByOthersPostController;
+use App\Http\Controllers\User\CommentPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,6 +127,10 @@ Route::middleware(['auth', 'verified'])->prefix('users')->group(function () {
     // 自分がブックマークした投稿
     Route::get('/bookmarks', [ReactionPostController::class, 'bookmarks'])
         ->name('users.bookmarks');
+
+    // 自分がコメントした投稿
+    Route::get('/comments', [CommentPostController::class, 'comments'])
+        ->name('my.comments');
 
     // ------------------------------------------------------------------
     // 🔔 通知系（相手から来たもの）

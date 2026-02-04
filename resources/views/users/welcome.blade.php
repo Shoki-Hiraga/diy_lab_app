@@ -86,6 +86,13 @@
                 </li>
 
                 <li class="type-item">
+                    <a href="{{ route('my.comments') }}">
+                        <span>MYコメント一覧</span>
+                        <span class="type-count">💬</span>
+                    </a>
+                </li>
+
+                <li class="type-item">
                     <a href="{{ route('users.others.likes') }}" class="type-link-with-badge">
 
                         <span>いいねされた一覧</span>
