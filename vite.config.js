@@ -16,6 +16,7 @@ export default defineConfig({
                 'resources/css/common/posts-comment.base.css',
                 'resources/css/common/posts-comment.breakpoints.css',
                 'resources/css/common/search.css',
+                'resources/css/common/cta-card.css',
                 'resources/css/users/login.css',
                 'resources/css/users/posts-form.base.css',
                 'resources/css/users/posts-form.breakpoints.css',
