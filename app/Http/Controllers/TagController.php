@@ -37,7 +37,7 @@ class TagController extends Controller
             ->withCommentCount()
             ->with(['user', 'categories', 'tags', 'difficulty'])
             ->latest()
-            ->paginate(10);
+            ->paginate(30);
 
         return view('tags.show', compact('tag', 'posts'));
     }

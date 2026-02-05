@@ -21,7 +21,7 @@ class PostPublicController extends Controller
             ->withCommentCount()
             ->with(['user.profile', 'contents'])
             ->latest()
-            ->paginate(12);
+            ->paginate(30);
 
         return view('posts.public_index', compact('posts'));
     }

@@ -34,7 +34,7 @@ class SearchController extends Controller
         }
 
         return view('search.index', [
-            'posts' => $query->latest()->paginate(12),
+            'posts' => $query->latest()->paginate(30),
             'difficulties' => Difficulty::all(),
         ]);
     }
