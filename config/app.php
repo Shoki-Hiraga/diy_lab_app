@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    // 環境noindex制御
+    'noindex' => env('NOINDEX', false),
 ];

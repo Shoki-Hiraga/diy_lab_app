@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta name="robots" content="noindex">
+    @if (config('app.noindex'))
+        <meta name="robots" content="noindex">
+    @endif
 
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
