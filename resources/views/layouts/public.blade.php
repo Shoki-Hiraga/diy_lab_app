@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    @if (config('app.noindex'))
+    <!-- staging環境noindex -->
+    <meta name="robots" content="noindex">
+    @endif
+
+    <!-- 開発中のnoindex -->
     <meta name="robots" content="noindex">
 
     <!-- Google Tag Manager -->
