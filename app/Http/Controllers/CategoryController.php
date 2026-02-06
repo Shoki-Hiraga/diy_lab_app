@@ -28,7 +28,7 @@ class CategoryController extends Controller
             ->withCommentCount()
             ->with(['user', 'contents', 'categories'])
             ->latest()
-            ->paginate(10);
+            ->paginate(30);
 
         return view('categories.show', compact('category', 'posts'));
     }

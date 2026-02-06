@@ -42,7 +42,7 @@ class CreatorController extends Controller
             ->withCommentCount()
             ->with(['categories', 'tags', 'difficulty'])
             ->latest()
-            ->paginate(10);
+            ->paginate(30);
 
         return view('creators.show', compact('user', 'posts'));
     }

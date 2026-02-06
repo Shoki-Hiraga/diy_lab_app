@@ -149,6 +149,8 @@
 
     </div>
 
+    @include('components.common.cta-card')
+
     <div class="pagination-wrapper">
         {{ $posts->links('pagination::bootstrap-5') }}
     </div>

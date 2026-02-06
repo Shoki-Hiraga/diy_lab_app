@@ -33,6 +33,7 @@
         'resources/css/common/posts-comment.breakpoints.css',
         'resources/css/common/posts-floating.base.css',
         'resources/css/common/posts-floating.breakpoints.css',
+        'resources/css/common/cta-card.css',
         'resources/css/common/search.css',
         'resources/js/app.js'
     ])

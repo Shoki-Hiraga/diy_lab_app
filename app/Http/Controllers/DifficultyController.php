@@ -37,7 +37,7 @@ class DifficultyController extends Controller
             ->withCommentCount()
             ->with(['categories', 'user'])
             ->latest()
-            ->paginate(10);
+            ->paginate(30);
 
         return view('difficulties.show', compact('difficulty', 'posts'));
     }
