@@ -523,3 +523,54 @@ a {
   outline-offset: 2px;
 }
 
+/* =====================================================
+   もっと見る / 閉じる トグルボタン
+===================================================== */
+.toggle-btn {
+  margin-top: 0.6rem;
+  padding: 0.45rem 0.9rem;
+
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  background: #f9fafb;
+  color: #555;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+
+/* hover：押せそう感 */
+.toggle-btn:hover {
+  background: #eef6f1;
+  color: #2f7a4f;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* active：押し込み */
+.toggle-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* フォーカス（キーボード操作対応） */
+.toggle-btn:focus-visible {
+  outline: 2px solid #9dc5e4;
+  outline-offset: 2px;
+}
+
+/* 開いている状態（JSで .open を付ける想定） */
+.toggle-btn.open {
+  background: #2f7a4f;
+  color: #fff;
+  border-color: #2f7a4f;
+}

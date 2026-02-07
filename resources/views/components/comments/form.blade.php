@@ -10,7 +10,7 @@
                         placeholder="コメントを入力してください"></textarea>
 
             <button type="submit" class="comment-submit">
-                投稿する
+                コメントする
             </button>
         </form>
     @else

@@ -93,7 +93,7 @@ $breadcrumbs = [
         @auth
             @if (auth()->id() === $post->user_id)
                 <a href="{{ route('users.posts.edit', $post) }}" class="btn-edit">
-                    編集する
+                    投稿の編集
                 </a>
             @endif
         @endauth

@@ -68,7 +68,11 @@
                         </div>
 
                         {{-- タイトル --}}
-                        <h3 class="post-title">{{ $post->title }}</h3>
+                        <h3 class="post-title">
+                        <span class="post-title-text">
+                            {{ $post->title }}
+                        </span>
+                        </h3>
 
                         {{-- 本文（無くてもOK） --}}
                         <p class="post-text">
@@ -80,7 +84,7 @@
                             @if ($post->status === \App\Models\Post::STATUS_DRAFT)
                                 <a href="{{ route('users.posts.edit', $post) }}"
                                    class="btn-edit">
-                                    下書きを編集
+                                    下書き編集
                                 </a>
                             @else
                                 <a href="{{ route('users.posts.show', $post) }}"
