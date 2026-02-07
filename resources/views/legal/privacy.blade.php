@@ -2,6 +2,10 @@
 
 @section('title', 'プライバシーポリシー')
 
+@section('post-header')
+    @include('components.common.post-header')
+@endsection
+
 @section('content')
 <div class="legal">
     <div class="legal__container">

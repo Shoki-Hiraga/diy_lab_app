@@ -48,6 +48,13 @@
             <a href="{{ route('tags.index') }}" class="nav-link">タグ</a>
         </nav>
 
+        <nav class="header-nav">
+            <a href="{{ route('legal.terms') }}" class="nav-link">利用規約</a>
+            <a href="{{ route('legal.privacy') }}" class="nav-link">プライバシーポリシー</a>
+        </nav>
+
+        </nav>
+
     </div>
 
     @include('components.common.search-js')

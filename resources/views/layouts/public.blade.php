@@ -83,7 +83,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     {{-- ▼ フッター --}}
     <footer class="public-footer">
-        <p>&copy; {{ date('Y') }} DIY LAB</p>
+    @include('components.common.post-footer')
+
+    <p class="copyright">&copy; {{ date('Y') }} DIY LAB</p>
     </footer>
 
 
