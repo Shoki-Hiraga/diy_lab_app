@@ -7,10 +7,6 @@
     '#' . $tag->name . ' が付いたDIY投稿一覧ページです。'
 )
 
-@section('post-header')
-    @include('components.common.post-header')
-@endsection
-
 @section('content')
 
 @php

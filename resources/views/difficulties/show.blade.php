@@ -15,10 +15,6 @@
     '難易度 ' . $difficulty->id . '（' . str_repeat('★', $difficulty->id) . '）のDIY投稿一覧ページです。'
 )
 
-@section('post-header')
-    @include('components.common.post-header')
-@endsection
-
 @section('content')
 
 @php

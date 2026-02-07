@@ -8,10 +8,6 @@
 {{-- ▼ ページタイトル --}}
 @section('title', request('q') ? request('q').'の検索結果' : '検索結果')
 
-{{-- ▼ ページ専用ヘッダー --}}
-@section('post-header')
-    @include('components.common.post-header')
-@endsection
 
 {{-- ▼ メインコンテンツ --}}
 @section('content')
@@ -78,8 +74,6 @@
         </form>
         @include('components.common.post-card')
     </div>
-
-@include('components.common.search-js')
 
 </section>
 

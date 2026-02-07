@@ -1,19 +1,23 @@
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const toggleBtn = document.querySelector('.search-toggle');
-    const searchContainer = document.getElementById('search-container');
-    const searchInput = searchContainer?.querySelector('input[name="q"]');
+(() => {
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.search-toggle');
+        if (!btn) return;
 
-    if (!toggleBtn || !searchContainer) return;
+        const searchContainer =
+            document.getElementById('search-container');
+        const searchInput = searchContainer?.querySelector(
+            '.header-search-form input[name="q"]'
+        );
 
-    toggleBtn.addEventListener('click', (e) => {
+        if (!searchContainer) return;
+
         e.preventDefault();
         searchContainer.classList.toggle('is-open');
 
-        // 表示されたら自動フォーカス
         if (searchContainer.classList.contains('is-open')) {
-            searchInput.focus();
+            searchInput?.focus();
         }
     });
-});
+})();
 </script>

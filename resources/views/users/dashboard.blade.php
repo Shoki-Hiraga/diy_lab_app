@@ -2,10 +2,6 @@
 @section('title', 'ダッシュボード')
 @section('description', 'ダッシュボードです。')
 
-@section('post-header')
-    @include('components.common.post-header')
-@endsection
-
 @section('content')
     @isset($dashboard)
         <div class="dashboard-wrapper">

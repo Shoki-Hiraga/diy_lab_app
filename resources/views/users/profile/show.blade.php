@@ -1,10 +1,5 @@
 @extends('layouts.app')
 
-{{-- ▼ post-header --}}
-@section('post-header')
-    @include('components.common.post-header')
-@endsection
-
 @section('content')
 
 <div class="post-wrapper">

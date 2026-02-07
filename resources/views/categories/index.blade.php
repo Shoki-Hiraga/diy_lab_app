@@ -4,10 +4,6 @@
 @section('ogp_title', 'カテゴリ一覧｜DIY LAB')
 @section('ogp_description', 'DIY LABカテゴリ一覧ページです。')
 
-@section('post-header')
-    @include('components.common.post-header')
-@endsection
-
 @section('content')
 
 @php

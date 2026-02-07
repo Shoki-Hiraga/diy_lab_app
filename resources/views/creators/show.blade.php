@@ -16,10 +16,6 @@ $ogpImage = $user->profile && $user->profile->profile_image_url
 @endphp
 @section('ogp_image', $ogpImage)
 
-@section('post-header')
-    @include('components.common.post-header')
-@endsection
-
 @section('content')
 
 @php

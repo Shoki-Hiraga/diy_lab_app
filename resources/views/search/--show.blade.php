@@ -5,8 +5,6 @@
 <meta name="robots" content="noindex">
 @endpush
 
-@section('post-header')
-    @include('components.common.post-header')
 
 @section(
     'title',

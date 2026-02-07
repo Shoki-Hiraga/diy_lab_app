@@ -2,10 +2,6 @@
 
 @section('title', 'タグ一覧')
 
-@section('post-header')
-    @include('components.common.post-header')
-@endsection
-
 @section('content')
 
 @php

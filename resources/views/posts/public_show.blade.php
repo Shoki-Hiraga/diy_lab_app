@@ -21,10 +21,6 @@ $ogpImage = optional($post->contents->first())->image_path
 
 @section('ogp_image', $ogpImage)
 
-@section('post-header')
-    @include('components.common.post-header')
-@endsection
-
 @section('content')
 
 @php

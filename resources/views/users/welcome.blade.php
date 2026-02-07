@@ -3,10 +3,6 @@
 @section('title', 'マイページ')
 @section('description', 'ユーザーのマイページです。投稿管理やお気に入りを確認できます。')
 
-@section('post-header')
-    @include('components.common.post-header')
-@endsection
-
 @section('content')
 <section class="page-section">
     <div class="post-wrapper">

@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('post-header')
-    @include('components.common.post-header')
-@endsection
-
 @section('content')
 <div class="post-wrapper">
     <h2>いいねされた投稿</h2>

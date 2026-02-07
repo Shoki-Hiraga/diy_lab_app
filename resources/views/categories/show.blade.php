@@ -7,9 +7,6 @@
     $category->name . ' に属するDIY投稿一覧ページです。'
 )
 
-@section('post-header')
-    @include('components.common.post-header')
-@endsection
 
 @section('content')
 

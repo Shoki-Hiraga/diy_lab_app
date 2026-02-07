@@ -4,9 +4,6 @@
 @section('ogp_title', 'DIY LAB｜DIY投稿一覧')
 @section('ogp_description', 'DIY初心者から上級者まで。人気のDIYや最新の投稿を一覧でチェックできます。')
 
-@section('post-header')
-    @include('components.common.post-header')
-@endsection
 
 @section('content')
 

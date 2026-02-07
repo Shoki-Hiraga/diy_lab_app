@@ -1,9 +1,5 @@
 @extends('layouts.guest')
 
-@section('post-header')
-    @include('components.common.post-header')
-@endsection
-
 @section('content')
 
 <div class="guest-form">

@@ -54,6 +54,10 @@
     <meta name="description" content="@yield('description', 'DIYのアイデア投稿一覧')">
     {{-- クエリパラメータを除いたURLをcanonicalに設定 --}}
     <link rel="canonical" href="{{ url()->current() }}">
+
+<div class="post-header-wrapper">
+    @yield('post-header', View::make('components.common.post-header'))
+</div>
 </head>
 
 <body class="layout-public">
@@ -88,6 +92,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="copyright">&copy; {{ date('Y') }} DIY LAB</p>
     </footer>
 
-
+    @include('components.common.search-js')
 </body>
 </html>

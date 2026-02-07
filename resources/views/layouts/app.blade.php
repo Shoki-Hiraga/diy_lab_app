@@ -41,6 +41,10 @@
         'resources/css/users/dashboard.css',
         'resources/js/app.js'
     ])
+
+<div class="post-header-wrapper">
+    @yield('post-header', View::make('components.common.post-header'))
+</div>
 </head>
 
 <body class="layout-app">
