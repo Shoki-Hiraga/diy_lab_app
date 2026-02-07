@@ -82,7 +82,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     {{-- ▼ フッター --}}
     <footer class="public-footer">
-        <p>&copy; {{ date('Y') }} DIY SNS</p>
+        <p>&copy; {{ date('Y') }} DIY LAB</p>
     </footer>
 
 
