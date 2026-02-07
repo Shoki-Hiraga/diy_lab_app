@@ -7,11 +7,35 @@
     120
 ))
 
+@section('ogp_title', $post->title . '｜DIYラボ')
+@section(
+    'ogp_description',
+    Str::limit(optional($post->contents->first())->comment ?? '', 120)
+)
+
+@php
+$ogpImage = optional($post->contents->first())->image_path
+    ? asset('fileassets/'.$post->contents->first()->image_path)
+    : asset('images/ogp/default.png');
+@endphp
+
+@section('ogp_image', $ogpImage)
+
 @section('post-header')
     @include('components.common.post-header')
 @endsection
 
 @section('content')
+
+@php
+$breadcrumbs = [
+    ['label' => 'ホーム', 'url' => route('public.posts.index')],
+    ['label' => $post->title, 'url' => null],
+];
+@endphp
+
+@include('components.seo.breadcrumbs-jsonld', ['breadcrumbs' => $breadcrumbs])
+
 <div class="post-wrapper">
 
     {{-- =====================
