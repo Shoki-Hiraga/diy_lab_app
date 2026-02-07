@@ -25,7 +25,8 @@
     @vite([
         'resources/css/app.css',
         'resources/css/common/header.css',
-        'resources/css/common/footer.css',        'resources/css/common/breadcrumbs.css',
+        'resources/css/common/footer.css',
+        'resources/css/common/breadcrumbs.css',
         'resources/css/common/posts-index.base.css',
         'resources/css/common/posts-index.breakpoints.css',
         'resources/css/common/post-card.css',
@@ -38,6 +39,7 @@
         'resources/css/users/posts-form.base.css',
         'resources/css/users/posts-form.breakpoints.css',
         'resources/css/users/users.css',
+        'resources/css/users/users-post.search.css',
         'resources/css/users/dashboard.css',
         'resources/js/app.js'
     ])
