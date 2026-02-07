@@ -2,26 +2,37 @@
 
 @section('title', 'タグ一覧')
 
-{{-- ▼ post-header --}}
 @section('post-header')
     @include('components.common.post-header')
 @endsection
 
 @section('content')
-<div class="type-wrapper">
-    <h2>タグ一覧</h2>
 
-    <ul class="type-list">
-        @foreach ($tags as $tag)
-            <li class="type-item">
-                <a href="{{ route('tags.show', $tag) }}">
-                    #{{ $tag->name }}
-                    <span class="type-count">
-                        {{ $tag->published_posts_count }}
-                    </span>
-                </a>
-            </li>
-        @endforeach
-    </ul>
-</div>
+@php
+$breadcrumbs = [
+    ['label' => 'ホーム', 'url' => route('public.posts.index')],
+    ['label' => 'タグ一覧', 'url' => null],
+];
+@endphp
+
+{{-- ▼ パンくず構造化データ --}}
+@include('components.seo.breadcrumbs-jsonld', ['breadcrumbs' => $breadcrumbs])
+
+{{-- ▼ 一覧構造化データ --}}
+@include('components.seo.item-list-jsonld', [
+    'title' => 'タグ一覧',
+    'description' => 'DIY LABタグ一覧ページです。',
+    'items' => $tags,
+    'routeName' => 'tags.show',
+])
+
+{{-- ▼ 一覧UI --}}
+@include('components.common.type-list', [
+    'title' => 'タグ一覧',
+    'items' => $tags,
+    'routeName' => 'tags.show',
+    'countField' => 'published_posts_count',
+    'labelCallback' => fn ($tag) => '#' . $tag->name,
+])
+
 @endsection
