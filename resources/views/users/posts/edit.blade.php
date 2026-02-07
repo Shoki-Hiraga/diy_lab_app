@@ -224,7 +224,7 @@
                             class="delete-flag">
 
                         <div class="image-upload">
-                            <div class="preview">
+                            <div class="preview post-preview">
                                 <div class="preview-wrapper">
                                     <img src="{{ asset('fileassets/'.$content->image_path) }}"
                                         class="preview-image">
@@ -267,7 +267,7 @@
                             写真を追加
                         </label>
 
-                        <div class="preview"></div>
+                        <div class="preview post-preview"></div>
                     </div>
                     <textarea name="comments[]" placeholder="この写真の説明を入力..."></textarea>
                 </div>

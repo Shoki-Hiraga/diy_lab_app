@@ -56,12 +56,12 @@
             @endphp
 
             {{-- ✅ プレビュー表示 --}}
-            <div class="preview" id="preview-area" style="display: block;">
+            <div class="preview profile-preview" id="preview-area">
                 <img id="preview-image"
-                     src="{{ $iconPath }}"
-                     alt="アイコン画像"
-                     style="width:120px;height:120px;border-radius:50%;object-fit:cover;">
+                    src="{{ $iconPath }}"
+                    alt="アイコン画像">
             </div>
+
         </div>
 
         {{-- SNSリンク --}}

@@ -126,7 +126,7 @@
                             写真を追加
                         </label>
 
-                        <div class="preview"></div>
+                        <div class="preview post-preview"></div>
                     </div>
                     <textarea name="comments[]" placeholder="この写真の説明を入力..."></textarea>
                 </div>

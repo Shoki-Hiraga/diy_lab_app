@@ -1,17 +1,17 @@
 
 /* ==========================
-   プロフィール画像プレビュー（users.show専用）
+   プロフィール画像プレビュー専用
    ========================== */
-.post-wrapper .preview {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
+.profile-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     margin-top: 0.8rem;
     text-align: center;
 }
 
-.post-wrapper .preview img {
+.profile-preview img {
     display: block;
     width: 120px;
     height: 120px;
@@ -20,6 +20,11 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     margin: 0 auto;
 }
+
+.image-upload input[type="file"] {
+    display: none;
+}
+
 
 /* =====================================================
    いいね通知
