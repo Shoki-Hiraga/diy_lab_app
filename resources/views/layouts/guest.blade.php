@@ -17,6 +17,7 @@
     @vite([
         'resources/css/app.css',
         'resources/css/common/header.css',
+        'resources/css/common/footer.css',
         'resources/css/common/breadcrumbs.css',
         'resources/css/users/login.css',
         'resources/css/common/posts-floating.base.css',
@@ -52,5 +53,11 @@
     {{-- ナビボタン --}}
     @include('components.common.floating-nav')
 
+    {{-- ▼ フッター --}}
+    <footer class="public-footer">
+    @include('components.common.post-footer')
+
+    <p class="copyright">&copy; {{ date('Y') }} DIY LAB</p>
+    </footer>
 </body>
 </html>

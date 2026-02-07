@@ -8,6 +8,7 @@ export default defineConfig({
             [
                 'resources/css/app.css',
                 'resources/css/common/header.css',
+                'resources/css/common/footer.css',
                 'resources/css/common/breadcrumbs.css',
                 'resources/css/common/posts-index.base.css',
                 'resources/css/common/posts-index.breakpoints.css',

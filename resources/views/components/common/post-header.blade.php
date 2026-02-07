@@ -1,21 +1,20 @@
-{{-- 投稿一覧ヘッダー＆フィルタ --}}
-<header class="post-header">
+{{-- 投稿一覧ヘッダー中身 --}}
+<div class="post-header">
     <div class="post-header__inner">
         
         {{-- メインエリア --}}
         <div class="post-header__main">
-            {{-- ロゴ --}}
             <h2 class="post-header__title">
                 <a href="{{ route('public.posts.index') }}">DIY LAB</a>
             </h2>
 
-            {{-- 検索窓：PCでは中央に表示 / スマホではトグルで下段に表示 --}}
+            {{-- 検索窓 --}}
             <div class="header-search-container" id="search-container">
                 <form action="{{ route('search.index') }}" method="GET" class="header-search-form">
-                    <input 
-                        type="text" 
-                        name="q" 
-                        placeholder="キーワード検索" 
+                    <input
+                        type="text"
+                        name="q"
+                        placeholder="キーワード検索"
                         value="{{ request('q') }}"
                         autocomplete="off"
                     >
@@ -23,14 +22,11 @@
                 </form>
             </div>
 
-            {{-- アクションボタン --}}
             <div class="header-actions">
-                {{-- スマホ専用：検索表示ボタン --}}
                 <button type="button" class="search-toggle" aria-label="検索を開く">
                     🔍
                 </button>
 
-                {{-- 認証系 --}}
                 <div class="header-auth">
                     @guest
                         <a href="{{ route('login') }}" class="link-login">ログイン</a>
@@ -40,7 +36,7 @@
             </div>
         </div>
 
-        {{-- 下段：ナビゲーション（テキストリンク形式） --}}
+        {{-- ナビ --}}
         <nav class="header-nav">
             <a href="{{ route('public.posts.index') }}" class="nav-link">TOP</a>
             <a href="{{ route('categories.index') }}" class="nav-link">カテゴリ</a>
@@ -51,4 +47,4 @@
     </div>
 
     @include('components.common.search-js')
-</header>
+</div>

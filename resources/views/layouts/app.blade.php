@@ -25,7 +25,7 @@
     @vite([
         'resources/css/app.css',
         'resources/css/common/header.css',
-        'resources/css/common/breadcrumbs.css',
+        'resources/css/common/footer.css',        'resources/css/common/breadcrumbs.css',
         'resources/css/common/posts-index.base.css',
         'resources/css/common/posts-index.breakpoints.css',
         'resources/css/common/post-card.css',
@@ -73,5 +73,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     {{-- ナビボタン --}}
     @include('components.common.floating-nav')
+
+    {{-- ▼ フッター --}}
+    <footer class="public-footer">
+    @include('components.common.post-footer')
+
+    <p class="copyright">&copy; {{ date('Y') }} DIY LAB</p>
+    </footer>
+
 </body>
 </html>

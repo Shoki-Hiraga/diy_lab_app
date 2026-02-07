@@ -34,6 +34,7 @@
     @vite([
         'resources/css/app.css',
         'resources/css/common/header.css',
+        'resources/css/common/footer.css',
         'resources/css/common/breadcrumbs.css',
         'resources/css/common/posts-index.base.css',
         'resources/css/common/posts-index.breakpoints.css',
@@ -92,6 +93,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="copyright">&copy; {{ date('Y') }} DIY LAB</p>
     </footer>
 
-    @include('components.common.search-js')
 </body>
 </html>

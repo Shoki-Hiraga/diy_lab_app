@@ -1,0 +1,136 @@
+/* =====================================================
+   変数（header.cssを流用）
+===================================================== */
+:root {
+    --header-bg: #ffffff;
+    --border-color: #e6e6e6;
+    --text-main: #333;
+    --text-sub: #666;
+    --accent-orange: #f0ad4e;
+    --hover-orange: #ec971f;
+}
+
+/* =====================================================
+   フッター全体
+===================================================== */
+.post-footer {
+    background: var(--header-bg);
+    border-top: 1px solid var(--border-color);
+    margin-top: 24px;
+}
+
+.post-footer__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px 16px 20px;
+}
+
+/* =====================================================
+   上段：ロゴ＋アクション
+===================================================== */
+.post-footer__main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.post-footer__title {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.post-footer__title a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: bold;
+}
+
+/* =====================================================
+   アクション・認証（ヘッダーの設計を踏襲）
+===================================================== */
+.footer-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-auth {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.link-login {
+    text-decoration: none;
+    color: var(--text-sub);
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.btn-register {
+    background: var(--accent-orange);
+    color: #fff !important;
+    padding: 8px 14px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* =====================================================
+   ナビゲーション（フッター）
+===================================================== */
+.footer-nav {
+    display: flex;
+    gap: 20px;
+    padding: 10px 0;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-nav--legal {
+    border-top: none;
+    padding-top: 6px;
+}
+
+.footer-nav::-webkit-scrollbar { display: none; }
+.footer-nav { scrollbar-width: none; }
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-sub);
+    font-size: 14px;
+}
+
+/* =====================================================
+   コピーライト
+===================================================== */
+.post-footer__copy {
+    margin: 12px 0 0;
+    font-size: 12px;
+    color: var(--text-sub);
+    text-align: center;
+}
+
+/* =====================================================
+   スマホ (600px未満)
+===================================================== */
+@media (max-width: 599px) {
+    .post-footer__inner {
+        padding: 14px 16px 18px;
+    }
+
+    .post-footer__main {
+        min-height: 52px;
+    }
+
+    .post-footer__title {
+        font-size: 1.1rem;
+    }
+}
