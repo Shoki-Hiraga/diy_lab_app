@@ -21,7 +21,7 @@ $breadcrumbs = [
 {{-- ▼ 一覧構造化データ --}}
 @include('components.seo.item-list-jsonld', [
     'title' => '投稿者一覧',
-    'description' => 'DIYラボの投稿者一覧ページです。',
+    'description' => 'DIY LABの投稿者一覧ページです。',
     'items' => $creators->map(function ($creator) {
         $creator->name = $creator->username;
         return $creator;

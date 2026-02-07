@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'カテゴリ一覧')
-@section('ogp_title', 'カテゴリ一覧｜DIYラボ')
+@section('ogp_title', 'カテゴリ一覧｜DIY LAB')
 @section('ogp_description', 'DIY LABカテゴリ一覧ページです。')
 
 @section('post-header')

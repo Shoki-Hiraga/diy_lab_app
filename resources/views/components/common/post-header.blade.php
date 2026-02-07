@@ -6,7 +6,7 @@
         <div class="post-header__main">
             {{-- ロゴ --}}
             <h2 class="post-header__title">
-                <a href="{{ route('public.posts.index') }}">DIY ラボ</a>
+                <a href="{{ route('public.posts.index') }}">DIY LAB</a>
             </h2>
 
             {{-- 検索窓：PCでは中央に表示 / スマホではトグルで下段に表示 --}}

@@ -7,7 +7,7 @@
     120
 ))
 
-@section('ogp_title', $post->title . '｜DIYラボ')
+@section('ogp_title', $post->title . '｜DIY LAB')
 @section(
     'ogp_description',
     Str::limit(optional($post->contents->first())->comment ?? '', 120)

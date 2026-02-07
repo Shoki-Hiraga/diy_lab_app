@@ -25,7 +25,7 @@ $data = [
     ],
     'publisher' => [
         '@type' => 'Organization',
-        'name' => 'DIYラボ',
+        'name' => 'DIY LAB',
         'logo' => [
             '@type' => 'ImageObject',
             'url' => asset('images/ogp/logo.png'),

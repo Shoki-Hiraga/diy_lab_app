@@ -1,6 +1,6 @@
 @php
 $title = trim($__env->yieldContent('ogp_title')) ?: config('app.name');
-$description = trim($__env->yieldContent('ogp_description')) ?: 'DIYラボ｜DIY初心者から上級者まで役立つ情報を発信';
+$description = trim($__env->yieldContent('ogp_description')) ?: 'DIY LAB｜DIY初心者から上級者まで役立つ情報を発信';
 $image = trim($__env->yieldContent('ogp_image')) ?: asset('images/ogp/default.png');
 $url = trim($__env->yieldContent('ogp_url')) ?: url()->current();
 @endphp
