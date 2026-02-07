@@ -25,6 +25,7 @@ export default defineConfig({
                 'resources/css/users/users.css',
                 'resources/css/users/dashboard.css',
                 'resources/js/comments.js',
+                'resources/css/common/legal.css',
                 'resources/js/app.js'
             ],
             refresh: true,

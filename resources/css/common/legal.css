@@ -1,0 +1,189 @@
+/* =====================================================
+   Legal Pages Base
+===================================================== */
+
+.legal {
+  margin-top: 1.5rem;
+}
+
+/* 投稿カードと同じ思想のラッパー */
+.legal__container {
+  max-width: 520px;
+  margin: 1.5rem auto;
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* =====================================================
+   Header
+===================================================== */
+
+.legal__meta {
+  font-size: 0.75rem;
+  color: #777;
+  margin-bottom: 0.6rem;
+}
+
+.legal__title {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.legal__summary {
+  margin: 0 auto 0.5rem;
+  font-size: 0.75rem;
+  color: #555;
+}
+
+.legal__summary-row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.legal__summary-label {
+  font-weight: 500;
+}
+
+.legal__divider {
+  margin: 1.2rem 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
+
+/* =====================================================
+   Table of Contents
+===================================================== */
+
+.legal__toc-title {
+  font-size: 0.85rem;
+  margin-bottom: 0.6rem;
+  color: #444;
+}
+
+.legal__toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.legal__toc-link {
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.75rem;
+
+  background: #eef6f1;
+  color: #2f7a4f;
+
+  border-radius: 999px;
+  border: 1px solid #cde6d8;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.legal__toc-link:hover {
+  background: #2f7a4f;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.legal__toc-link:focus-visible {
+  outline: 2px solid #2f7a4f;
+  outline-offset: 2px;
+}
+
+/* =====================================================
+   Content
+===================================================== */
+
+.legal__content {
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+.legal__content p {
+  margin-bottom: 1rem;
+}
+
+.legal__section {
+  margin-top: 1.6rem;
+}
+
+.legal__heading {
+  font-size: 1rem;
+  margin-bottom: 0.6rem;
+  color: #333;
+}
+
+/* ordered list */
+.legal__list {
+  padding-left: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.legal__list > li {
+  margin-bottom: 0.4rem;
+}
+
+/* nested list */
+.legal__list--nested {
+  margin-top: 0.4rem;
+}
+
+/* =====================================================
+   Footer note
+===================================================== */
+
+.legal__note {
+  font-size: 0.75rem;
+  color: #777;
+  background: #f9fafb;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+}
+
+/* =====================================================
+   SP only（〜599px）
+===================================================== */
+@media (max-width: 599px) {
+  .legal__title {
+    font-size: 1.25rem;
+  }
+
+  .legal__content {
+    font-size: 0.85rem;
+  }
+}
+
+/* =====================================================
+   PC（900px〜）
+===================================================== */
+@media (min-width: 900px) {
+  .legal__container {
+    max-width: 1100px;
+    padding: 2rem;
+  }
+
+  .legal__title {
+    font-size: 1.6rem;
+  }
+
+  .legal__content {
+    font-size: 0.95rem;
+  }
+
+  .legal__heading {
+    font-size: 1.1rem;
+  }
+}

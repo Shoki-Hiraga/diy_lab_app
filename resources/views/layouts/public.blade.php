@@ -45,6 +45,7 @@
         'resources/css/common/posts-floating.breakpoints.css',
         'resources/css/common/cta-card.css',
         'resources/css/common/search.css',
+        'resources/css/common/legal.css',
         'resources/js/app.js'
     ])
     @stack('scripts')
