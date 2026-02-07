@@ -1,0 +1,75 @@
+/* =====================================================
+   SP only（〜599px）
+===================================================== */
+@media (max-width: 599px) {
+
+  /* 投稿メタ */
+  .post-meta {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .difficulty {
+    white-space: normal;
+    font-size: 0.7rem;
+  }
+
+  /* タイトル */
+  .post-title {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    height: calc(1.45em * 2);
+  }
+
+  /* 投稿者 */
+  .author-link {
+    text-decoration: none;
+  }
+
+  /* アイコンを少し大きく */
+  .author-icon-link {
+    width: 34px;
+    height: 34px;
+  }
+
+  .author-icon-circle i {
+    font-size: 1.1rem;
+  }
+
+  .author-name {
+    font-size: 0.85rem;
+  }
+}
+
+
+/* =====================================================
+   Tablet（600px〜）
+===================================================== */
+@media (min-width: 600px) {
+
+  .post-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+
+/* =====================================================
+   PC（900px〜）
+===================================================== */
+@media (min-width: 900px) {
+
+  .post-list {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+  }
+
+  .post-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .post-title {
+    font-size: 1rem;
+    line-height: 1.45;
+    height: calc(1.45em * 2);
+  }
+}

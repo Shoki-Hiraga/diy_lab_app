@@ -11,6 +11,8 @@ export default defineConfig({
                 'resources/css/common/breadcrumbs.css',
                 'resources/css/common/posts-index.base.css',
                 'resources/css/common/posts-index.breakpoints.css',
+                'resources/css/common/post-card.css',
+                'resources/css/common/post-card.breakpoints.css',
                 'resources/css/common/posts-floating.base.css',
                 'resources/css/common/posts-floating.breakpoints.css',
                 'resources/css/common/posts-comment.base.css',
