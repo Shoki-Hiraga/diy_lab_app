@@ -35,18 +35,6 @@
     flex-wrap: wrap; /* 重要：スマホで検索窓を下に落とすため */
 }
 
-.post-header__title {
-    margin: 0;
-    font-size: 1.4rem;
-    order: 1; /* PC・スマホ共通で一番左 */
-}
-
-.post-header__title a {
-    text-decoration: none;
-    color: var(--text-main);
-    font-weight: bold;
-}
-
 /* =====================================================
    検索窓（PC常時 / SPトグル）
 ===================================================== */
@@ -144,6 +132,12 @@
     text-decoration: none;
     color: var(--text-sub);
     font-size: 14px;
+}
+.post-header__title img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;  /* ← cover から変更 */
+    display: block;
 }
 
 /* =====================================================

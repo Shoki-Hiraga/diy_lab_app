@@ -1,4 +1,6 @@
-{{-- フッター中身（layoutの<footer>内で使う） --}}
+
+@include('components.common.cta-card')
+
 <div class="post-footer">
     <div class="post-footer__inner">
 

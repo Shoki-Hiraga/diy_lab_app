@@ -17,6 +17,8 @@
     })(window,document,'script','dataLayer','GTM-PNGZSLM8');</script>
     <!-- End Google Tag Manager -->
 
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 

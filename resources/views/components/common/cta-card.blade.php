@@ -2,7 +2,7 @@
 <div class="cta-card">
     <div class="cta-card__inner">
         <div class="cta-card__image">
-            <img src="{{ asset('images/cta/mascot.png') }}" alt="">
+            <img src="{{ asset('/static/images/DIY_LAB_low.jpg') }}" alt="">
         </div>
 
         <div class="cta-card__body">

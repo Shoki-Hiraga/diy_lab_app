@@ -5,7 +5,9 @@
         {{-- メインエリア --}}
         <div class="post-header__main">
             <h2 class="post-header__title">
-                <a href="{{ route('public.posts.index') }}">DIY LAB</a>
+                <a href="{{ route('public.posts.index') }}">
+                    <img src="{{ asset('static/images/DIY_LAB_low.jpg') }}" alt="DIY LAB">
+                </a>
             </h2>
 
             {{-- 検索窓 --}}
