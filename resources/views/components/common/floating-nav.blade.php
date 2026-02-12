@@ -36,7 +36,7 @@
                         <i class="fa-solid fa-plus"></i>
                     </a>
                 </li>
-
+                {{-- 
                 {{-- お知らせ --}}
                 <li class="floating-nav__item">
                     <a href="{{ route('users.top') }}"
@@ -58,15 +58,14 @@
                             @endauth
                         </span>
 
-                        <span>お知らせ</span>
+                        <span>お知らせ 準備中</span>
                     </a>
                 </li>
-
 
                 {{-- マイページ --}}
                 <li class="floating-nav__item">
                     <a href="{{ route('users.top') }}"
-                    class="floating-nav__link {{ $isActive('users.profile.*') }}">
+                    class="floating-nav__link {{ $isActive('users.top') }}">
                         <i class="fa-regular fa-user"></i>
                         <span>MYページ</span>
                     </a>
@@ -77,8 +76,29 @@
             {{-- =========================
                 未ログイン
             ========================= --}}
+            {{-- =========================
+                認証済みログイン
+            ========================= --}}
+            @auth
+                @if(auth()->user()->isVerified())
+                    {{-- フルメニュー --}}
+                @else
+                    {{-- 未認証ログイン --}}
+                    <li class="floating-nav__item">
+                        <a href="{{ route('verification.notice') }}"
+                        class="floating-nav__link">
+                            <i class="fa-solid fa-envelope-circle-check"></i>
+                            <span>メール確認</span>
+                        </a>
+                    </li>
+                @endif
+            @endauth
+
+
+            {{-- =========================
+                未ログイン
+            ========================= --}}
             @guest
-                {{-- ログイン --}}
                 <li class="floating-nav__item">
                     <a href="{{ route('login') }}"
                     class="floating-nav__link {{ $isActive('login') }}">
@@ -87,7 +107,6 @@
                     </a>
                 </li>
 
-                {{-- 会員登録 --}}
                 @if (Route::has('register'))
                     <li class="floating-nav__item">
                         <a href="{{ route('register') }}"
