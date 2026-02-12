@@ -31,10 +31,36 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'username' => ['required', 'string', 'max:255', 'unique:users,username'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'username' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        // 🔥 username チェック
+        $existingUsernameUser = User::where('username', $request->username)->first();
+
+        if ($existingUsernameUser) {
+            if ($existingUsernameUser->hasVerifiedEmail()) {
+                return back()
+                    ->withErrors(['username' => 'このユーザー名は既に使用されています。'])
+                    ->withInput();
+            }
+
+            $existingUsernameUser->delete();
+        }
+
+        // 🔥 email チェック
+        $existingEmailUser = User::where('email', $request->email)->first();
+
+        if ($existingEmailUser) {
+            if ($existingEmailUser->hasVerifiedEmail()) {
+                return back()
+                    ->withErrors(['email' => 'このメールアドレスは既に登録されています。'])
+                    ->withInput();
+            }
+
+            $existingEmailUser->delete();
+        }
 
         $user = User::create([
             'username' => $request->username,
@@ -46,7 +72,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        // 会員登録後のリダイレクト
         return redirect()->route('verification.notice');
     }
+
 }
