@@ -47,7 +47,11 @@ $breadcrumbs = [
 
     <div class="user-info">
         <a href="{{ route('creators.show', $post->user) }}" class="user-icon-link">
-            <img src="{{ $iconPath }}" class="user-icon">
+            <img src="{{ $iconPath }}"
+                alt="{{ $post->user->username }}"
+                class="user-icon"
+                onerror="this.onerror=null; this.src='{{ asset('static/images/default_icon.png') }}';"
+            >
         </a>
 
         <div class="user-text">

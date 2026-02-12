@@ -8,13 +8,15 @@
     <div class="post-wrapper">
 
         {{-- =========================
-             ▼ ユーザー情報
-             ========================= --}}
+            ▼ ユーザー情報
+            ========================= --}}
         @auth
             @php
+                $defaultIcon = asset('static/images/default_icon.png');
+
                 $iconPath = Auth::user()->profile && Auth::user()->profile->profile_image_url
                     ? asset('fileassets/icons/' . Auth::user()->profile->profile_image_url)
-                    : asset('fileassets/images/default_icon.png');
+                    : $defaultIcon;
             @endphp
 
             <div class="user-info">
@@ -29,6 +31,7 @@
                         src="{{ $iconPath }}"
                         alt="{{ Auth::user()->username }}"
                         class="user-icon"
+                        onerror="this.onerror=null; this.src='{{ $defaultIcon }}';"
                     >
                 </a>
 

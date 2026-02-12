@@ -67,15 +67,23 @@
 
     {{-- ユーザー情報 --}}
     @php
+        $defaultIcon = asset('static/images/default_icon.png');
+
         $iconPath = $user->profile && $user->profile->profile_image_url
             ? asset('fileassets/icons/'.$user->profile->profile_image_url)
-            : asset('fileassets/images/default_icon.png');
+            : $defaultIcon;
     @endphp
 
     <div class="user-info">
-        <img src="{{ $iconPath }}" alt="ユーザー画像" class="user-icon">
+        <img
+            src="{{ $iconPath }}"
+            alt="ユーザー画像"
+            class="user-icon"
+            onerror="this.onerror=null; this.src='{{ $defaultIcon }}';"
+        >
         <span class="username">{{ $user->username }} さんの投稿一覧</span>
     </div>
+
 
     {{-- ▼ 共通カード --}}
     @include('components.common.post-card', ['posts' => $posts])
