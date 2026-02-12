@@ -28,7 +28,6 @@
                 ログイン中
             ========================= --}}
             @auth
-            @if(auth()->user()->isVerified())
                 {{-- 中央＋ --}}
                 <li class="floating-nav__item floating-nav__item--center">
                     <a href="{{ route('users.posts.create') }}"
@@ -71,7 +70,6 @@
                         <span>MYページ</span>
                     </a>
                 </li>
-            @endif
             @endauth
 
             {{-- =========================
