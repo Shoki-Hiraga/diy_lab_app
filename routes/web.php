@@ -35,10 +35,6 @@ Route::view('/privacy', 'legal.privacy', [
 | Public Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/userstop', function () {
-    return view('users.welcome');
-})->name('users.top');
-
 Route::get('/', [PostPublicController::class, 'index'])
     ->name('public.posts.index');
 
@@ -81,8 +77,13 @@ Route::get('/search', [SearchController::class, 'index'])
 |--------------------------------------------------------------------------
 | Comment Routes
 |--------------------------------------------------------------------------
+|※ ログイン＋メール認証必須
 */
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/userstop', function () {
+        return view('users.welcome');
+    })->name('users.top');
+    
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])
         ->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])

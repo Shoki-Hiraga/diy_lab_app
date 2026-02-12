@@ -58,6 +58,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->is_active === true;
     }
 
+    /**
+    * メール認証済みか？
+    */
+    public function isVerified(): bool
+    {
+        return !is_null($this->email_verified_at);
+    }
+
     /* =============================
        リレーション
     ============================== */
