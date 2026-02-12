@@ -39,6 +39,12 @@ Route::middleware('auth')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
 
+    Route::view('/verification-expired', 'auth.verification-expired')
+        ->name('verification.expired');
+
+    Route::view('/verification-sent', 'auth.verification-sent')
+        ->name('verification.sent');
+
     Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
         ->middleware(['signed', 'throttle:6,1'])
         ->name('verification.verify');
