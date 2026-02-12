@@ -43,7 +43,9 @@
                     class="floating-nav__link {{ $isActive('users.top') }}">
 
                         <span class="icon-wrapper">
-                            <i class="fa-regular fa-bell"></i>
+                            <i class="fa-regular fa-user"></i>
+
+                            {{-- <i class="fa-regular fa-bell"></i> --}}
 
                             @auth
                                 @php
@@ -58,11 +60,14 @@
                             @endauth
                         </span>
 
-                        <span>お知らせ 準備中</span>
+                        <span>MYページ</span>
                     </a>
                 </li>
+                @endif
+                @endauth
 
                 {{-- マイページ --}}
+                {{--
                 <li class="floating-nav__item">
                     <a href="{{ route('users.top') }}"
                     class="floating-nav__link {{ $isActive('users.top') }}">
@@ -72,6 +77,7 @@
                 </li>
             @endif
             @endauth
+            --}}
 
             {{-- =========================
                 未ログイン
