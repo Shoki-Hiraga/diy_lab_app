@@ -26,10 +26,11 @@
 
     @vite([
         'resources/css/app.css',
+        'resources/css/users/login.css',
         'resources/css/common/header.css',
         'resources/css/common/footer.css',
         'resources/css/common/breadcrumbs.css',
-        'resources/css/users/login.css',
+        'resources/css/common/post-card.css',
         'resources/css/common/posts-floating.base.css',
         'resources/css/common/posts-floating.breakpoints.css',
         'resources/css/common/search.css',
