@@ -6,7 +6,7 @@
         <div class="post-header__main">
             <h2 class="post-header__title">
                 <a href="{{ route('public.posts.index') }}">
-                    <img src="{{ asset('static/images/DIY_LAB_low.jpg') }}" alt="DIY LAB">
+                    <img src="{{ asset('static/images/DIY_LAB_low.png') }}" alt="DIY LAB">
                 </a>
             </h2>
 
