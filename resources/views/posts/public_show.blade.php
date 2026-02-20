@@ -42,7 +42,7 @@ $breadcrumbs = [
     @php
         $iconPath = $post->user->profile && $post->user->profile->profile_image_url
             ? asset('fileassets/icons/'.$post->user->profile->profile_image_url)
-            : asset('fileassets/images/default_icon.png');
+            : asset('fileassets/images/default_icon.webp');
     @endphp
 
     <div class="user-info">
@@ -50,7 +50,7 @@ $breadcrumbs = [
             <img src="{{ $iconPath }}"
                 alt="{{ $post->user->username }}"
                 class="user-icon"
-                onerror="this.onerror=null; this.src='{{ asset('static/images/default_icon.png') }}';"
+                onerror="this.onerror=null; this.src='{{ asset('static/images/default_icon.webp') }}';"
             >
         </a>
 

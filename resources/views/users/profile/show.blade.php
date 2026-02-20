@@ -47,7 +47,7 @@
             @php
                 $iconPath = $user->profile && $user->profile->profile_image_url
                     ? asset('fileassets/icons/'.$user->profile->profile_image_url)
-                    : asset('static/images/default_icon.png');
+                    : asset('static/images/default_icon.webp');
             @endphp
 
             {{-- ✅ プレビュー表示 --}}

@@ -12,7 +12,7 @@
             ========================= --}}
         @auth
             @php
-                $defaultIcon = asset('static/images/default_icon.png');
+                $defaultIcon = asset('static/images/default_icon.webp');
 
                 $iconPath = Auth::user()->profile && Auth::user()->profile->profile_image_url
                     ? asset('fileassets/icons/' . Auth::user()->profile->profile_image_url)

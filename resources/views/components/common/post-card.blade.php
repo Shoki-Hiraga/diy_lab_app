@@ -113,7 +113,7 @@
                                 <img src="{{ asset('fileassets/icons/' . $post->user->profile->profile_image_url) }}"
                                     alt="{{ $post->user->username }}"
                                     class="user-icon"
-                                    onerror="this.onerror=null; this.src='{{ asset('static/images/default_icon.png') }}';"
+                                    onerror="this.onerror=null; this.src='{{ asset('static/images/default_icon.webp') }}';"
                                 >
                             @else
                                 <i class="fa-solid fa-user user-icon"></i>

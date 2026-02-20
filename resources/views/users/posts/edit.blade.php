@@ -6,7 +6,7 @@
 
     {{-- ユーザー情報 --}}
     @php
-        $defaultIcon = asset('static/images/default_icon.png');
+        $defaultIcon = asset('static/images/default_icon.webp');
 
         $iconPath = $user->profile && $user->profile->profile_image_url
             ? asset('fileassets/icons/'.$user->profile->profile_image_url)
