@@ -13,7 +13,7 @@
             : $defaultIcon;
     @endphp
 
-    <div class="user-info">
+    <div class="users-user-info">
         <img
             src="{{ $iconPath }}"
             alt="ユーザー画像"

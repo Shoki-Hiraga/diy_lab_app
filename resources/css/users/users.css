@@ -101,6 +101,32 @@
   opacity: 0.85;
 }
 
+/* =====================================================
+   ユーザー情報（投稿作成）
+===================================================== */
+.users-user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.4rem;
+}
+
+/* アイコンサイズ固定 */
+.users-user-info .user-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* ユーザー名 */
+.users-user-info .username {
+    font-weight: bold;
+    color: #333;
+    font-size: 0.95rem;
+}
+
 @media (max-width: 599px) {
   .post-overlay-badge {
     top: 6px;
