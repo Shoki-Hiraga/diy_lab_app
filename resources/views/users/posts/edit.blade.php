@@ -170,17 +170,6 @@
             @endif
         </div>
 
-          {{-- タグ --}}
-        @php
-            $tagString = old(
-                'tags',
-                $post->tags
-                    ->pluck('name')
-                    ->map(fn ($name) => "#{$name}")
-                    ->implode(' ')
-            );
-        @endphp
-
         {{-- タグ --}}
         @php
             $tagString = old(
@@ -218,63 +207,83 @@
 
             <div id="photo-comment-area">
 
-                {{-- 既存画像 --}}
-                @foreach($post->contents->sortBy('order') as $index => $content)
+                {{-- =========================
+                    既存画像
+                ========================== --}}
+                @foreach($post->contents->sortBy('order') as $content)
                     <div class="photo-comment-block" data-existing="1">
 
+                        {{-- 削除フラグ --}}
                         <input type="hidden"
                             name="existing_contents[{{ $content->id }}][delete]"
                             value="0"
                             class="delete-flag">
 
                         <div class="image-upload">
+
+                            {{-- プレビュー --}}
                             <div class="preview post-preview">
                                 <div class="preview-wrapper">
                                     <img src="{{ asset('fileassets/'.$content->image_path) }}"
                                         class="preview-image">
 
-                                    {{-- ✅ ChatGPT風 × --}}
-                                    <button type="button"
-                                            class="btn-remove">
+                                    <button type="button" class="btn-remove">
                                         ×
                                     </button>
                                 </div>
                             </div>
 
+                            {{-- 画像差し替え --}}
                             <input type="file"
                                 name="existing_contents[{{ $content->id }}][image]"
                                 id="existing_image_{{ $content->id }}"
                                 accept="image/*"
-                                style="display:none;">
+                                hidden>
 
                             <label for="existing_image_{{ $content->id }}"
-                                class="btn-upload">
+                                class="btn-edit">
                                 写真を変更
                             </label>
                         </div>
 
-                        <textarea name="existing_contents[{{ $content->id }}][comment]"
-                                placeholder="この写真の説明を入力...">{{ $content->comment }}</textarea>
+                        <textarea
+                            name="existing_contents[{{ $content->id }}][comment]"
+                            placeholder="この写真の説明を入力...">{{ $content->comment }}</textarea>
                     </div>
                 @endforeach
 
-                {{-- ✅ 新規追加用 --}}
-                <div class="photo-comment-block">
-                    <div class="image-upload">
-                        <input type="file"
-                            name="images[]"
-                            id="image_new_0"
-                            accept="image/*"
-                            style="display:none;">
 
-                        <label for="image_new_0" class="btn-upload">
-                            写真を追加
-                        </label>
+                {{-- =========================
+                    新規追加（D&D対応）
+                ========================== --}}
+                <div class="photo-comment-block">
+
+                    <div class="image-upload">
+
+                        <div class="drop-area">
+                            <p class="drop-text">ドラッグ＆ドロップ</p>
+                            <p class="drop-sub">またはファイルを選択</p>
+
+                            <input type="file"
+                                name="images[]"
+                                id="image_new_0"
+                                accept="image/*"
+                                multiple
+                                hidden>
+
+                            <label for="image_new_0" class="btn-upload">
+                                ファイルを選択
+                            </label>
+                        </div>
 
                         <div class="preview post-preview"></div>
                     </div>
-                    <textarea name="comments[]" placeholder="この写真の説明を入力..."></textarea>
+
+                    <textarea
+                        name="comments[]"
+                        placeholder="この写真の説明を入力..."></textarea>
                 </div>
+
             </div>
         </div>
 
@@ -318,4 +327,5 @@
 </div>
 
 @include('users.posts.partials.form-scripts')
+@include('users.posts.partials.form-images-image-edit')
 @endsection

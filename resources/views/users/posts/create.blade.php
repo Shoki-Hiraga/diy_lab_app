@@ -164,5 +164,5 @@
 </div>
 
 @include('users.posts.partials.form-scripts')
-
+@include('users.posts.partials.form-images-image-create')
 @endsection

@@ -127,6 +127,17 @@ textarea {
     cursor: pointer;
 }
 
+.btn-edit {
+    display: inline-block;
+    margin-bottom: 0.6rem;
+    background: #bfdeff;
+    color: #000000;
+    padding: 0.7rem 1.6rem;
+    border-radius: 9999px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .preview img {
     max-width: 100%;
     border-radius: 8px;
