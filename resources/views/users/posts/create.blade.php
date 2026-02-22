@@ -121,22 +121,24 @@
             <div id="photo-comment-area">
                 <div class="photo-comment-block">
                     <div class="image-upload">
-                        <input type="file"
-                            name="images[]"
-                            id="image_0"
-                            accept="image/*"
-                            style="display:none;">
+                        <div class="drop-area">
+                            <p class="drop-text">ドラッグ＆ドロップ</p>
+                            <p class="drop-sub">またはファイルを選択</p>
 
-                        <label for="image_0" class="btn-upload">
-                            写真を追加
-                        </label>
+                            <input type="file"
+                                name="images[]"
+                                id="image_0"
+                                accept="image/*"
+                                multiple
+                                hidden>
+
+                            <label for="image_0" class="btn-upload">
+                                ファイルを選択
+                            </label>
+                        </div>
 
                         <div class="preview post-preview"></div>
                     </div>
-                    <textarea name="comments[]" placeholder="この写真の説明を入力..."></textarea>
-                </div>
-            </div>
-        </div>
 
         {{-- ボタン --}}
         <div class="button-group">

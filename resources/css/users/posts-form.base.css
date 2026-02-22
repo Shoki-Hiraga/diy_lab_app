@@ -237,3 +237,41 @@ textarea {
     line-height: 1;
 }
 
+.drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    background: #fafafa;
+    transition: 0.2s;
+}
+
+.drop-area.dragover {
+    background: #eef6ff;
+    border-color: #007bff;
+}
+
+.drop-text {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.drop-sub {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* SPでは通常ボタン風に */
+@media (max-width: 899px) {
+    .drop-area {
+        border: none;
+        padding: 0;
+        background: transparent;
+    }
+
+    .drop-text,
+    .drop-sub {
+        display: none;
+    }
+}
