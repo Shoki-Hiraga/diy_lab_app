@@ -13,14 +13,16 @@
             : $defaultIcon;
     @endphp
 
-    <div class="user-info">
+    <div class="post-user-info">
         <img
             src="{{ $iconPath }}"
-            alt="{{ $user->username }}"
-            class="user-icon"
+            alt="ユーザー画像"
+            class="post-user-icon"
             onerror="this.onerror=null; this.src='{{ $defaultIcon }}';"
         >
-        <span class="username">{{ $user->username }} さんの投稿</span>
+        <span class="post-username">
+            {{ $user->username }} さんの投稿一覧
+        </span>
     </div>
 
     {{-- エラーメッセージ --}}

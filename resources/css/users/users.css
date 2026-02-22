@@ -101,18 +101,17 @@
   opacity: 0.85;
 }
 
-/* =====================================================
-   ユーザー情報（投稿作成）
-===================================================== */
-.users-user-info {
+/* ===================================
+   投稿ページ用 ユーザー情報（共通）
+=================================== */
+.post-user-info {
     display: flex;
     align-items: center;
     gap: 0.8rem;
     margin-bottom: 1.4rem;
 }
 
-/* アイコンサイズ固定 */
-.users-user-info .user-icon {
+.post-user-icon {
     width: 48px;
     height: 48px;
     object-fit: cover;
@@ -120,18 +119,8 @@
     flex-shrink: 0;
 }
 
-/* ユーザー名 */
-.users-user-info .username {
+.post-username {
     font-weight: bold;
     color: #333;
     font-size: 0.95rem;
-}
-
-@media (max-width: 599px) {
-  .post-overlay-badge {
-    top: 6px;
-    right: 6px;
-    font-size: 0.65rem;
-    padding: 3px 6px;
-  }
 }
