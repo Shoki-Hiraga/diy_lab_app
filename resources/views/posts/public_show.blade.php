@@ -73,13 +73,22 @@ $breadcrumbs = [
     <div class="post-contents">
         @foreach ($post->contents as $content)
             <div class="post-content">
+
                 @if ($content->image_path)
-                    <img src="{{ asset('fileassets/'.$content->image_path) }}" class="post-image">
+                    <div class="image-zoom-wrapper">
+                        <img
+                            src="{{ asset('fileassets/'.$content->image_path) }}"
+                            class="post-image zoomable"
+                            data-full="{{ asset('fileassets/'.$content->image_path) }}"
+                            alt="投稿画像"
+                        >
+                    </div>
                 @endif
 
                 @if ($content->comment)
                     <p class="post-text">{{ $content->comment }}</p>
                 @endif
+
             </div>
         @endforeach
     </div>
@@ -103,6 +112,12 @@ $breadcrumbs = [
         コメント（AJAX）
     ===================== --}}
     @include('components.comments.index')
+
+    {{-- 画像モーダル --}}
+        <div class="image-modal" id="imageModal">
+            <img id="modalImage" alt="拡大画像">
+        </div>
+        @include('components.common.image-zoom')
     </div>
 
 {{-- コメント用JS --}}
