@@ -1,0 +1,177 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="post-wrapper">
+    <h2>投稿の作成</h2>
+
+    @php
+        $defaultIcon = asset('static/images/default_icon.webp');
+        $iconPath = $user->profile && $user->profile->profile_image_url
+            ? asset('fileassets/icons/'.$user->profile->profile_image_url)
+            : $defaultIcon;
+    @endphp
+
+    <div class="post-user-info">
+        <img src="{{ $iconPath }}"
+             alt="ユーザー画像"
+             class="post-user-icon"
+             onerror="this.onerror=null; this.src='{{ $defaultIcon }}';">
+        <span class="post-username">
+            {{ $user->username }} さんの投稿一覧
+        </span>
+    </div>
+
+    @if(session('success'))
+        <div class="alert-success">{{ session('success') }}</div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert-error">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>・{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form id="post-form"
+          action="{{ route('users.posts.store') }}"
+          method="POST"
+          enctype="multipart/form-data"
+          class="post-form">
+        @csrf
+
+        {{-- タイトル --}}
+        <div class="form-group">
+            <label for="title">タイトル</label>
+            <input type="text" name="title" id="title"
+                   value="{{ old('title') }}" required>
+        </div>
+
+        {{-- 難易度 --}}
+        <div class="form-group">
+            <label>難易度</label>
+            <div class="stars" id="difficulty-stars">
+                @for($i = 1; $i <= 5; $i++)
+                    <span class="star {{ old('difficulty_id') == $i ? 'selected' : '' }}"
+                          data-value="{{ $i }}">
+                        {{ old('difficulty_id') >= $i ? '★' : '☆' }}
+                    </span>
+                @endfor
+            </div>
+            <input type="hidden" name="difficulty_id"
+                   id="difficulty"
+                   value="{{ old('difficulty_id', 0) }}">
+        </div>
+
+        {{-- カテゴリ --}}
+        <div class="form-group">
+            <label>カテゴリ一覧</label>
+            <div class="checkbox-group collapsed" id="category-group">
+                @foreach($categories as $category)
+                    <label class="{{ $loop->index >= 10 ? 'hidden-category hidden' : '' }}">
+                        <input type="checkbox"
+                               name="category_id[]"
+                               value="{{ $category->id }}"
+                               {{ in_array($category->id, old('category_id', [])) ? 'checked' : '' }}>
+                        {{ $category->name }}
+                    </label>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- ツール --}}
+        <div class="form-group">
+            <label>使用ツール</label>
+            <div class="checkbox-group collapsed" id="tool-group">
+                @foreach($tools as $tool)
+                    <label class="{{ $loop->index >= 10 ? 'hidden-tool hidden' : '' }}">
+                        <input type="checkbox"
+                               name="tools[]"
+                               value="{{ $tool->id }}"
+                               {{ in_array($tool->id, old('tools', [])) ? 'checked' : '' }}>
+                        {{ $tool->name }}
+                    </label>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- タグ --}}
+        <div class="form-group">
+            <label>タグ</label>
+            <div class="tag-input-wrapper">
+                <div id="tag-list"></div>
+                <input type="text"
+                       id="tag-input"
+                       placeholder="タグを入力してEnter">
+            </div>
+            <input type="hidden"
+                   name="tags"
+                   id="tags"
+                   value="{{ old('tags') }}">
+        </div>
+
+        {{-- 写真 --}}
+        <div class="form-group">
+            <label>写真とコメント</label>
+
+            <div id="photo-comment-area">
+                <div class="photo-comment-block">
+                    <div class="image-upload">
+                        <div class="drop-area">
+                            <input type="file"
+                                   name="images[]"
+                                   id="image_0"
+                                   accept="image/*"
+                                   multiple
+                                   hidden>
+                            <label for="image_0" class="btn-upload">
+                                ファイルを選択
+                            </label>
+                        </div>
+                        <div class="preview post-preview"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+{{-- フローティングボタン --}}
+<div class="floating-actions">
+    <div class="post-button-group">
+
+        <button type="button"
+                class="btn-cancel"
+                onclick="history.back()">
+            キャンセル
+        </button>
+
+        <input type="hidden"
+               name="status"
+               id="status"
+               form="post-form"
+               value="{{ \App\Models\Post::STATUS_DRAFT }}">
+
+        <button type="submit"
+                form="post-form"
+                class="btn-draft"
+                onclick="document.getElementById('status').value='draft'">
+            下書き
+        </button>
+
+        <button type="submit"
+                form="post-form"
+                class="btn-submit"
+                onclick="document.getElementById('status').value='published'">
+            投稿する
+        </button>
+
+    </div>
+</div>
+
+@include('users.posts.partials.form-scripts')
+@include('users.posts.partials.form-images-image-create')
+@endsection
