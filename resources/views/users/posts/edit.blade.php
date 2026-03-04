@@ -4,28 +4,27 @@
 <div class="post-wrapper">
     <h2>投稿の編集</h2>
 
-    {{-- ユーザー情報 --}}
+    {{-- =========================
+        ユーザー情報
+    ========================== --}}
     @php
         $defaultIcon = asset('static/images/default_icon.webp');
-
         $iconPath = $user->profile && $user->profile->profile_image_url
             ? asset('fileassets/icons/'.$user->profile->profile_image_url)
             : $defaultIcon;
     @endphp
 
     <div class="post-user-info">
-        <img
-            src="{{ $iconPath }}"
-            alt="ユーザー画像"
-            class="post-user-icon"
-            onerror="this.onerror=null; this.src='{{ $defaultIcon }}';"
-        >
+        <img src="{{ $iconPath }}"
+             alt="ユーザー画像"
+             class="post-user-icon"
+             onerror="this.onerror=null; this.src='{{ $defaultIcon }}';">
         <span class="post-username">
             {{ $user->username }} さんの投稿一覧
         </span>
     </div>
 
-    {{-- エラーメッセージ --}}
+    {{-- エラー --}}
     @if ($errors->any())
         <div class="alert-error">
             <ul>
@@ -36,15 +35,18 @@
         </div>
     @endif
 
-    {{-- 更新フォーム --}}
-    <form action="{{ route('users.posts.update', $post->id) }}"
+    {{-- =========================
+        更新フォーム（1つだけ）
+    ========================== --}}
+    <form id="post-edit-form"
+          action="{{ route('users.posts.update', $post->id) }}"
           method="POST"
           enctype="multipart/form-data"
           class="post-form">
         @csrf
         @method('PUT')
 
-        {{-- ✅ status（初期値は現在の投稿状態 or old） --}}
+        {{-- status --}}
         <input type="hidden"
                name="status"
                id="status"
@@ -61,11 +63,12 @@
         </div>
 
         {{-- 難易度 --}}
+        @php
+            $difficulty = old('difficulty_id', $post->difficulty_id);
+        @endphp
+
         <div class="form-group">
             <label>難易度</label>
-            @php
-                $difficulty = old('difficulty_id', $post->difficulty_id);
-            @endphp
             <div class="stars" id="difficulty-stars">
                 @for($i = 1; $i <= 5; $i++)
                     <span class="star {{ $difficulty >= $i ? 'selected' : '' }}"
@@ -80,15 +83,9 @@
                    value="{{ $difficulty }}">
         </div>
 
-        {{-- カテゴリ --}}
-        @php
-            $checkedCategories = old(
-                'category_id',
-                $post->categories->pluck('id')->toArray()
-            );
-        @endphp
-
-        {{-- カテゴリ --}}
+        {{-- =========================
+            カテゴリ
+        ========================== --}}
         @php
             $checkedCategories = old(
                 'category_id',
@@ -103,8 +100,6 @@
                 @foreach($categories as $category)
                     @php
                         $checked = in_array($category->id, $checkedCategories);
-
-                        // ✅ 10個目以降 & 未選択 → hidden
                         $hiddenClass = ($loop->index >= 10 && !$checked)
                             ? 'hidden-category hidden'
                             : '';
@@ -112,9 +107,9 @@
 
                     <label class="{{ $hiddenClass }}">
                         <input type="checkbox"
-                            name="category_id[]"
-                            value="{{ $category->id }}"
-                            {{ $checked ? 'checked' : '' }}>
+                               name="category_id[]"
+                               value="{{ $category->id }}"
+                               {{ $checked ? 'checked' : '' }}>
                         {{ $category->name }}
                     </label>
                 @endforeach
@@ -129,7 +124,9 @@
             @endif
         </div>
 
-        {{-- ツール --}}
+        {{-- =========================
+            ツール
+        ========================== --}}
         @php
             $checkedTools = old(
                 'tools',
@@ -144,8 +141,6 @@
                 @foreach($tools as $tool)
                     @php
                         $checked = in_array($tool->id, $checkedTools);
-
-                        // ✅ 10個目以降 & 未選択 → hidden
                         $hiddenClass = ($loop->index >= 10 && !$checked)
                             ? 'hidden-tool hidden'
                             : '';
@@ -153,9 +148,9 @@
 
                     <label class="{{ $hiddenClass }}">
                         <input type="checkbox"
-                            name="tools[]"
-                            value="{{ $tool->id }}"
-                            {{ $checked ? 'checked' : '' }}>
+                               name="tools[]"
+                               value="{{ $tool->id }}"
+                               {{ $checked ? 'checked' : '' }}>
                         {{ $tool->name }}
                     </label>
                 @endforeach
@@ -170,78 +165,73 @@
             @endif
         </div>
 
-        {{-- タグ --}}
+        {{-- =========================
+            タグ
+        ========================== --}}
         @php
             $tagString = old(
                 'tags',
-                $post->tags
-                    ->pluck('name')
-                    ->implode(',')
+                $post->tags->pluck('name')->implode(',')
             );
         @endphp
 
         <div class="form-group">
-            <label for="tag-input">タグ</label>
+            <label>タグ</label>
 
             <div class="tag-input-wrapper">
                 <div id="tag-list"></div>
-
                 <input type="text"
-                    id="tag-input"
-                    placeholder="タグを入力してEnter"
-                    autocomplete="off">
+                       id="tag-input"
+                       placeholder="タグを入力してEnter"
+                       autocomplete="off">
             </div>
 
-            {{-- 実際に送信する値 --}}
             <input type="hidden"
-                name="tags"
-                id="tags"
-                value="{{ $tagString }}">
+                   name="tags"
+                   id="tags"
+                   value="{{ $tagString }}">
         </div>
 
         @include('components.tags-js')
 
-        {{-- 写真＋コメント --}}
+        {{-- =========================
+            写真＋コメント
+        ========================== --}}
         <div class="form-group">
             <label>写真とコメント</label>
 
             <div id="photo-comment-area">
 
-                {{-- =========================
-                    既存画像
-                ========================== --}}
+                {{-- 既存画像 --}}
                 @foreach($post->contents->sortBy('order') as $content)
                     <div class="photo-comment-block" data-existing="1">
 
-                        {{-- 削除フラグ --}}
                         <input type="hidden"
-                            name="existing_contents[{{ $content->id }}][delete]"
-                            value="0"
-                            class="delete-flag">
+                               name="existing_contents[{{ $content->id }}][delete]"
+                               value="0"
+                               class="delete-flag">
 
                         <div class="image-upload">
-
-                            {{-- プレビュー --}}
                             <div class="preview post-preview">
                                 <div class="preview-wrapper">
                                     <img src="{{ asset('fileassets/'.$content->image_path) }}"
-                                        class="preview-image">
+                                         class="preview-image">
 
-                                    <button type="button" class="btn-remove">
+                                    <button type="button"
+                                            class="btn-remove">
                                         ×
                                     </button>
                                 </div>
                             </div>
 
-                            {{-- 画像差し替え --}}
                             <input type="file"
-                                name="existing_contents[{{ $content->id }}][image]"
-                                id="existing_image_{{ $content->id }}"
-                                accept="image/*"
-                                hidden>
+                                   name="existing_contents[{{ $content->id }}][image]"
+                                   id="existing_image_{{ $content->id }}"
+                                   accept="image/*"
+                                   hidden>
 
                             <label for="existing_image_{{ $content->id }}"
-                                class="btn-edit">
+                                   class="btn-edit">
                                 写真を変更
                             </label>
                         </div>
@@ -252,26 +242,19 @@
                     </div>
                 @endforeach
 
-
-                {{-- =========================
-                    新規追加（D&D対応）
-                ========================== --}}
+                {{-- 新規追加 --}}
                 <div class="photo-comment-block">
-
                     <div class="image-upload">
-
                         <div class="drop-area">
-                            <p class="drop-text">ドラッグ＆ドロップ</p>
-                            <p class="drop-sub">またはファイルを選択</p>
-
                             <input type="file"
-                                name="images[]"
-                                id="image_new_0"
-                                accept="image/*"
-                                multiple
-                                hidden>
+                                   name="images[]"
+                                   id="image_new_0"
+                                   accept="image/*"
+                                   multiple
+                                   hidden>
 
-                            <label for="image_new_0" class="btn-upload">
+                            <label for="image_new_0"
+                                   class="btn-upload">
                                 ファイルを選択
                             </label>
                         </div>
@@ -279,52 +262,65 @@
                         <div class="preview post-preview"></div>
                     </div>
 
-                    <textarea
-                        name="comments[]"
-                        placeholder="この写真の説明を入力..."></textarea>
+                    <textarea name="comments[]"
+                              placeholder="この写真の説明を入力..."></textarea>
                 </div>
 
             </div>
         </div>
 
-        {{-- ボタン --}}
-        <div class="button-group">
-            <button type="button"
-                    class="btn-cancel"
-                    onclick="history.back()">
-                キャンセル
-            </button>
-
-            {{-- 下書き --}}
-            <button type="submit"
-                    class="btn-draft"
-                    onclick="document.getElementById('status').value='{{ \App\Models\Post::STATUS_DRAFT }}'">
-                下書き保存
-            </button>
-
-            {{-- 公開 --}}
-            <button type="submit"
-                    class="btn-submit"
-                    onclick="document.getElementById('status').value='{{ \App\Models\Post::STATUS_PUBLISHED }}'">
-                公開する
-            </button>
-        </div>
-    </form>
-
-    {{-- 削除フォーム --}}
-    <form action="{{ route('users.posts.destroy', $post->id) }}"
-          method="POST"
-          onsubmit="return confirm('本当に削除しますか？');"
-          style="margin-top:1.2rem;">
-        @csrf
-        @method('DELETE')
-
-        <button type="submit"
-                style="width:100%;background:#dc2626;color:#fff;border:none;border-radius:8px;padding:0.8rem;">
-            削除する
-        </button>
     </form>
 </div>
+
+{{-- =========================
+    フローティングボタン
+========================== --}}
+<div class="floating-actions">
+    <div class="post-button-group">
+
+        <button type="button"
+                class="btn-cancel"
+                onclick="history.back()">
+            キャンセル
+        </button>
+
+        <button type="submit"
+                form="post-edit-form"
+                class="btn-draft"
+                onclick="document.getElementById('status').value='{{ \App\Models\Post::STATUS_DRAFT }}'">
+            下書き
+        </button>
+
+        <button type="submit"
+                form="post-edit-form"
+                class="btn-submit"
+                onclick="document.getElementById('status').value='{{ \App\Models\Post::STATUS_PUBLISHED }}'">
+            公開する
+        </button>
+
+    </div>
+</div>
+
+{{-- 削除フォーム --}}
+<form action="{{ route('users.posts.destroy', $post->id) }}"
+      method="POST"
+      onsubmit="return confirm('本当に削除しますか？');"
+      style="margin-top:1.2rem; text-align:center;">
+    @csrf
+    @method('DELETE')
+
+    <button type="submit"
+            style="width:30%;
+                   background:#ff6c6c;
+                   color:#fff;
+                   border:none;
+                   border-radius:8px;
+                   padding:0.8rem;
+                   display:block;
+                   margin:0 auto;">
+        削除する
+    </button>
+</form>
 
 @include('users.posts.partials.form-scripts')
 @include('users.posts.partials.form-images-image-edit')
