@@ -70,7 +70,7 @@
             <label>カテゴリ一覧</label>
             <div class="checkbox-group collapsed" id="category-group">
                 @foreach($categories as $category)
-                    <label class="{{ $loop->index >= 10 ? 'hidden-category hidden' : '' }}">
+                    <label>
                         <input type="checkbox"
                                name="category_id[]"
                                value="{{ $category->id }}"
@@ -79,6 +79,13 @@
                     </label>
                 @endforeach
             </div>
+            @if(count($categories) > 10)
+                <button type="button"
+                        class="toggle-btn"
+                        data-target="category-group">
+                    他のカテゴリ ▼
+                </button>
+            @endif
         </div>
 
         {{-- ツール --}}
@@ -86,7 +93,7 @@
             <label>使用ツール</label>
             <div class="checkbox-group collapsed" id="tool-group">
                 @foreach($tools as $tool)
-                    <label class="{{ $loop->index >= 10 ? 'hidden-tool hidden' : '' }}">
+                    <label>
                         <input type="checkbox"
                                name="tools[]"
                                value="{{ $tool->id }}"
@@ -95,6 +102,13 @@
                     </label>
                 @endforeach
             </div>
+            @if(count($tools) > 10)
+                <button type="button"
+                        class="toggle-btn"
+                        data-target="tool-group">
+                    他のツール ▼
+                </button>
+            @endif
         </div>
 
         {{-- タグ --}}
