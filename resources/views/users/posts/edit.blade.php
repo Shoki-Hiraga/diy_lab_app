@@ -100,12 +100,9 @@
                 @foreach($categories as $category)
                     @php
                         $checked = in_array($category->id, $checkedCategories);
-                        $hiddenClass = ($loop->index >= 10 && !$checked)
-                            ? 'hidden-category hidden'
-                            : '';
                     @endphp
 
-                    <label class="{{ $hiddenClass }}">
+                    <label>
                         <input type="checkbox"
                                name="category_id[]"
                                value="{{ $category->id }}"
@@ -141,12 +138,9 @@
                 @foreach($tools as $tool)
                     @php
                         $checked = in_array($tool->id, $checkedTools);
-                        $hiddenClass = ($loop->index >= 10 && !$checked)
-                            ? 'hidden-tool hidden'
-                            : '';
                     @endphp
 
-                    <label class="{{ $hiddenClass }}">
+                    <label>
                         <input type="checkbox"
                                name="tools[]"
                                value="{{ $tool->id }}"
