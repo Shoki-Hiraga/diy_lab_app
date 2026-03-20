@@ -186,8 +186,6 @@
                    value="{{ $tagString }}">
         </div>
 
-        @include('components.tags-js')
-
         {{-- =========================
             写真＋コメント
         ========================== --}}
@@ -322,6 +320,7 @@
     </button>
 </form>
 
+@include('components.tags-js')
 @include('users.posts.partials.form-scripts')
 @include('users.posts.partials.form-images-image-edit')
 @endsection

@@ -125,7 +125,7 @@
                    id="tags"
                    value="{{ old('tags') }}">
         </div>
-            @include('components.tags-js')
+
         {{-- 写真 --}}
         <div class="form-group">
             <label>写真とコメント</label>
@@ -188,6 +188,7 @@
     </div>
 </div>
 
+@include('components.tags-js')
 @include('users.posts.partials.form-scripts')
 @include('users.posts.partials.form-images-image-create')
 @endsection
