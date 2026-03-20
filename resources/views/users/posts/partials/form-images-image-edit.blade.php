@@ -130,4 +130,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btn-remove')) {
+
+        const block = e.target.closest('.photo-comment-block');
+
+        // 既存画像なら削除フラグON
+        const deleteFlag = block.querySelector('.delete-flag');
+        if (deleteFlag) {
+            deleteFlag.value = 1;
+            block.style.display = 'none'; // 見た目消す
+        } else {
+            // 新規ならDOM削除
+            block.remove();
+        }
+    }
+});
+
 </script>
