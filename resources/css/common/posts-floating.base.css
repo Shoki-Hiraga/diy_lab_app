@@ -167,32 +167,82 @@
 /* =====================================================
    投稿画面フローティング専用
 ===================================================== */
+/* =====================================================
+   投稿画面フローティング（完全版）
+===================================================== */
 
-.floating-actions{
-    background: #ffffff;
+.floating-actions {
     position: fixed;
     left: 0;
-    right: 0;
-    bottom: 55px; /* ナビの高さ分 */
+    bottom: 55px; /* 下ナビ分 */
+
+    width: 100%;
+
+    background: #ffffff;
     z-index: 1100;
 
-    padding: 12px 16px;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+
     box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
 }
 
-/* 投稿用ボタン専用 */
-.post-button-group{
-    display: flex;
-    gap: 10px;
-    margin: 0;
+/* 内側ラッパー（←これが重要） */
+.floating-actions__inner {
+    max-width: 520px;
+    margin: 0 auto;
 }
 
-.post-button-group button{
+/* PC幅対応（post-wrapperと揃える） */
+@media (min-width: 900px) {
+    .floating-actions__inner {
+        max-width: 1100px;
+    }
+}
+
+/* ボタングループ */
+.post-button-group {
+    display: flex;
+    gap: 10px;
+}
+
+/* ボタン共通 */
+.post-button-group button {
     flex: 1;
+
+    height: 44px;
+
     padding: 0.8rem 1rem;
+
     font-size: 0.9rem;
     font-weight: 600;
+
     border-radius: 10px;
     border: none;
+
     cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 個別ボタン（必要なら） */
+.btn-cancel {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+.btn-draft {
+    background: #f59e0b;
+    color: #fff;
+}
+
+.btn-submit {
+    background: #10b981;
+    color: #fff;
+}
+
+/* ホバー */
+.post-button-group button:hover {
+    opacity: 0.9;
 }

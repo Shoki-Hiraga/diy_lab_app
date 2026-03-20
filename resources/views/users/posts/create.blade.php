@@ -125,7 +125,7 @@
                    id="tags"
                    value="{{ old('tags') }}">
         </div>
-
+            @include('components.tags-js')
         {{-- 写真 --}}
         <div class="form-group">
             <label>写真とコメント</label>
@@ -153,35 +153,37 @@
     </form>
 </div>
 
-{{-- フローティングボタン --}}
+{{-- =========================
+    フローティングボタン
+========================== --}}
 <div class="floating-actions">
-    <div class="post-button-group">
+    <div class="floating-actions__inner">
 
-        <button type="button"
-                class="btn-cancel"
-                onclick="history.back()">
-            キャンセル
-        </button>
+        <div class="post-button-group">
 
-        <input type="hidden"
-               name="status"
-               id="status"
-               form="post-form"
-               value="{{ \App\Models\Post::STATUS_DRAFT }}">
+            <button type="button"
+                    class="btn-cancel"
+                    onclick="history.back()">
+                キャンセル
+            </button>
 
-        <button type="submit"
-                form="post-form"
-                class="btn-draft"
-                onclick="document.getElementById('status').value='draft'">
-            下書き
-        </button>
+            {{-- 下書き --}}
+            <button type="submit"
+                    form="post-edit-form"
+                    class="btn-draft"
+                    onclick="document.getElementById('status').value='draft'">
+                下書き
+            </button>
 
-        <button type="submit"
-                form="post-form"
-                class="btn-submit"
-                onclick="document.getElementById('status').value='published'">
-            投稿する
-        </button>
+            {{-- 投稿 --}}
+            <button type="submit"
+                    form="post-edit-form"
+                    class="btn-submit"
+                    onclick="document.getElementById('status').value='published'">
+                投稿する
+            </button>
+
+        </div>
 
     </div>
 </div>

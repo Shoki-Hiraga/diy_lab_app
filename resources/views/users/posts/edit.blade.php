@@ -270,27 +270,33 @@
     フローティングボタン
 ========================== --}}
 <div class="floating-actions">
-    <div class="post-button-group">
+    <div class="floating-actions__inner">
 
-        <button type="button"
-                class="btn-cancel"
-                onclick="history.back()">
-            キャンセル
-        </button>
+        <div class="post-button-group">
 
-        <button type="submit"
-                form="post-edit-form"
-                class="btn-draft"
-                onclick="document.getElementById('status').value='{{ \App\Models\Post::STATUS_DRAFT }}'">
-            下書き
-        </button>
+            <button type="button"
+                    class="btn-cancel"
+                    onclick="history.back()">
+                キャンセル
+            </button>
 
-        <button type="submit"
-                form="post-edit-form"
-                class="btn-submit"
-                onclick="document.getElementById('status').value='{{ \App\Models\Post::STATUS_PUBLISHED }}'">
-            公開する
-        </button>
+            {{-- 下書き --}}
+            <button type="submit"
+                    form="post-edit-form"
+                    class="btn-draft"
+                    onclick="document.getElementById('status').value='draft'">
+                下書き
+            </button>
+
+            {{-- 投稿 --}}
+            <button type="submit"
+                    form="post-edit-form"
+                    class="btn-submit"
+                    onclick="document.getElementById('status').value='published'">
+                投稿する
+            </button>
+
+        </div>
 
     </div>
 </div>

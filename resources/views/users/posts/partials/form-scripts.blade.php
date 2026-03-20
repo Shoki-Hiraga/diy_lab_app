@@ -94,6 +94,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    /* =====================================================
+     * Enter送信防止
+     * - textarea は改行OK
+     * - tag-input は tags-js 側に任せる
+    ===================================================== */
+    const form = document.getElementById('post-edit-form');
+    if (!form) return;
+
+    form.addEventListener('keydown', function(e) {
+
+        if (e.key !== 'Enter') return;
+
+        // textareaはOK
+        if (e.target.tagName === 'TEXTAREA') return;
+
+        // 🔥これを強化（重要）
+        if (e.target.id === 'tag-input') return;
+
+        e.preventDefault();
+    });
+
 });
 
 </script>
