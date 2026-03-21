@@ -169,17 +169,19 @@
 
             {{-- 下書き --}}
             <button type="submit"
-                    form="post-edit-form"
-                    class="btn-draft"
-                    onclick="document.getElementById('status').value='draft'">
+                    form="post-form"
+                    name="status"
+                    value="draft"
+                    class="btn-draft">
                 下書き
             </button>
 
             {{-- 投稿 --}}
             <button type="submit"
-                    form="post-edit-form"
-                    class="btn-submit"
-                    onclick="document.getElementById('status').value='published'">
+                    form="post-form"
+                    name="status"
+                    value="published"
+                    class="btn-submit">
                 投稿する
             </button>
 
