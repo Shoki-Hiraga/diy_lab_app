@@ -17,8 +17,15 @@
                 <span class="post-status-badge published">公開中</span>
             @endif
             @endauth
+
+                @php
+                    $url = $post->status === \App\Models\Post::STATUS_DRAFT
+                        ? route('users.posts.edit', $post)
+                        : route('users.posts.show', $post);
+                @endphp
+
                 <a
-                    href="{{ route('users.posts.show', $post) }}"
+                    href="{{ $url }}"
                     class="post-card-link"
                 >
 
