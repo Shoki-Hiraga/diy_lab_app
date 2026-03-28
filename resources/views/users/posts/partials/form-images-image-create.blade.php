@@ -1,13 +1,13 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    /* =====================================================
-       画像エリア（ドラッグ対応版）
-    ===================================================== */
 
     function isPC() {
         return window.innerWidth >= 900;
     }
 
+    /* =============================
+       画像プレビュー
+    ============================= */
     function previewImage(file, preview) {
         const reader = new FileReader();
         reader.onload = e => {
@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.readAsDataURL(file);
     }
 
+    /* =============================
+       新規ブロック追加
+    ============================= */
     function addNewBlock(file = null) {
 
         const area = document.getElementById('photo-comment-area');
@@ -30,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
         block.className = 'photo-comment-block';
 
         block.innerHTML = `
+            <button type="button" class="btn-remove-block">×</button>
+
             <div class="image-upload">
                 <div class="drop-area">
                     <p class="drop-text">ドラッグ＆ドロップ</p>
@@ -38,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         name="images[]"
                         id="image_${index}"
                         accept="image/*"
-                        multiple
                         hidden>
                     <label for="image_${index}" class="btn-upload">
                         ファイルを選択
@@ -46,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="preview post-preview"></div>
             </div>
+
             <textarea name="comments[]" placeholder="この写真の説明を入力..."></textarea>
         `;
 
@@ -65,6 +70,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    /* =============================
+       空ブロック制御
+    ============================= */
+    function ensureEmptyBlock() {
+        const area = document.getElementById('photo-comment-area');
+        const blocks = area.querySelectorAll('.photo-comment-block');
+
+        if (blocks.length === 0) {
+            addNewBlock();
+            return;
+        }
+
+        const lastBlock = blocks[blocks.length - 1];
+        const input = lastBlock.querySelector('input[type=file]');
+        const textarea = lastBlock.querySelector('textarea');
+
+        if (input.files.length > 0 || textarea.value.trim() !== '') {
+            addNewBlock();
+        }
+    }
+
+    /* =============================
+       input / drag 共通処理
+    ============================= */
     function bindInput(input, preview, dropArea) {
 
         input.addEventListener('change', () => {
@@ -73,17 +102,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (files.length === 0) return;
 
             files.forEach((file, index) => {
-
                 if (index === 0) {
                     previewImage(file, preview);
                 } else {
                     addNewBlock(file);
                 }
-
             });
 
-            // 最後に空ブロック追加
-            addNewBlock();
+            ensureEmptyBlock();
         });
 
         if (!isPC()) return;
@@ -97,6 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         dropArea.addEventListener('drop', e => {
+            e.preventDefault();
 
             dropArea.classList.remove('dragover');
 
@@ -105,7 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (files.length === 0) return;
 
-            // 1枚目は今のブロックへ
             const firstFile = files.shift();
 
             const dt = new DataTransfer();
@@ -114,15 +140,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             previewImage(firstFile, preview);
 
-            // 2枚目以降は新規
             files.forEach(file => addNewBlock(file));
 
-            // 最後に空ブロック1つ
-            addNewBlock();
+            ensureEmptyBlock();
         });
     }
 
-    /* ===== 最初のブロック初期化 ===== */
+    /* =============================
+       初期ブロック設定
+    ============================= */
     const firstBlock = document.querySelector('.photo-comment-block');
     if (firstBlock) {
         const input = firstBlock.querySelector('input[type=file]');
@@ -131,12 +157,44 @@ document.addEventListener('DOMContentLoaded', () => {
         bindInput(input, preview, dropArea);
     }
 
-    /* =====================================================
-     * × 削除
-    ===================================================== */
+    ensureEmptyBlock();
+
+    /* =============================
+       画像削除（条件付き）
+    ============================= */
     document.addEventListener('click', e => {
         if (!e.target.classList.contains('btn-remove')) return;
-        e.target.closest('.photo-comment-block').remove();
+
+        const block = e.target.closest('.photo-comment-block');
+        const textarea = block.querySelector('textarea');
+        const preview = block.querySelector('.preview');
+        const input = block.querySelector('input[type=file]');
+
+        preview.innerHTML = '';
+        input.value = '';
+
+        if (!textarea.value.trim()) {
+            block.remove();
+        }
+
+        ensureEmptyBlock();
     });
+
+    /* =============================
+       ブロック削除ボタン
+    ============================= */
+    document.addEventListener('click', e => {
+        if (!e.target.classList.contains('btn-remove-block')) return;
+
+        const block = e.target.closest('.photo-comment-block');
+        const area = document.getElementById('photo-comment-area');
+
+        if (area.children.length > 1) {
+            block.remove();
+        }
+
+        ensureEmptyBlock();
+    });
+
 });
 </script>

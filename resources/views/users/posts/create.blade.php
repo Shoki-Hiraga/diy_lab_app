@@ -132,20 +132,27 @@
 
             <div id="photo-comment-area">
                 <div class="photo-comment-block">
+
+                    <!-- 🔽 ブロック削除ボタン -->
+                    <button type="button" class="btn-remove-block">×</button>
+
                     <div class="image-upload">
                         <div class="drop-area">
                             <input type="file"
-                                   name="images[]"
-                                   id="image_0"
-                                   accept="image/*"
-                                   multiple
-                                   hidden>
+                                name="images[]"
+                                id="image_0"
+                                accept="image/*"
+                                hidden>
                             <label for="image_0" class="btn-upload">
                                 ファイルを選択
                             </label>
                         </div>
                         <div class="preview post-preview"></div>
                     </div>
+
+                    <!-- 🔽 外に出す（重要） -->
+                    <textarea name="comments[]" placeholder="この写真の説明を入力..."></textarea>
+
                 </div>
             </div>
         </div>
