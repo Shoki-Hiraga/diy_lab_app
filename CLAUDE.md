@@ -92,9 +92,8 @@ diylab/
 
 ## よく使う機能・画面（わかる範囲で記入）
 
-- ※例: 記事投稿機能（/admin/posts）
-- ※例: ユーザー管理（/admin/users）
-- ※例: お問い合わせフォーム（/contact）
+- 記事投稿機能（/users/new）
+- ユーザー管理（/users/posts/{id}/edit）
 
 ---
 
