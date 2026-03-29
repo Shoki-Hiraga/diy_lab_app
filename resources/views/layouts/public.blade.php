@@ -6,9 +6,6 @@
     <meta name="robots" content="noindex">
     @endif
 
-    <!-- 開発中のnoindex -->
-    <meta name="robots" content="noindex">
-
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
