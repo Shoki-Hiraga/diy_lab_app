@@ -200,13 +200,6 @@
                 </ol>
             </section>
 
-            <hr class="legal__divider">
-
-            <aside class="legal__note" aria-label="注意事項">
-                <p>
-                    ※本規約は一般的なSNS投稿サービスを想定したひな形です。運用実態（解析ツール、広告、課金、外部API、未成年利用、モデレーション方針等）に合わせて調整してください。
-                </p>
-            </aside>
         </article>
     </div>
 </div>

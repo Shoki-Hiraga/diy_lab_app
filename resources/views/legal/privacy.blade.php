@@ -154,14 +154,6 @@
                 </p>
             </section>
 
-            <hr class="legal__divider">
-
-            <aside class="legal__note" aria-label="注意事項">
-                <p>
-                    ※本ポリシーは一般的なSNSサービスを想定したひな形です。
-                    実際のデータ取得内容や外部サービス利用状況に応じて調整してください。
-                </p>
-            </aside>
         </article>
     </div>
 </div>
