@@ -3,7 +3,7 @@
 @section('content')
 <div class="post-wrapper">
 
-    <h2>投稿一覧</h2>
+    <h2>投稿済み一覧</h2>
 
     <form method="GET" action="{{ route('users.posts.index') }}" class="post-search">
 
