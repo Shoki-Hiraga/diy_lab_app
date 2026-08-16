@@ -95,6 +95,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* =====================================================
+     * 送信前チェック（難易度・カテゴリ未選択の防止）
+     * - サーバー側バリデーションで弾かれると画面が再読み込みされ、
+     *   アップロード済みの写真やコメントが消えてしまうため、
+     *   送信前にブラウザ側でチェックしてページ遷移自体を止める
+    ===================================================== */
+    const postForm = document.getElementById('post-form') || document.getElementById('post-edit-form');
+
+    if (postForm) {
+        postForm.addEventListener('submit', (e) => {
+
+            const missing = [];
+
+            const difficultyInput = document.getElementById('difficulty');
+            if (!difficultyInput || !parseInt(difficultyInput.value, 10)) {
+                missing.push('難易度');
+            }
+
+            const categoryGroup = document.getElementById('category-group');
+            const hasCategory = categoryGroup
+                && categoryGroup.querySelectorAll('input[type=checkbox]:checked').length > 0;
+            if (!hasCategory) {
+                missing.push('カテゴリ');
+            }
+
+            if (missing.length === 0) return;
+
+            e.preventDefault();
+
+            let box = document.getElementById('client-validation-error');
+            if (!box) {
+                box = document.createElement('div');
+                box.id = 'client-validation-error';
+                box.className = 'alert-error';
+                postForm.parentElement.insertBefore(box, postForm);
+            }
+
+            box.innerHTML = '<ul>' +
+                missing.map(name => `<li>・${name}を選択してください</li>`).join('') +
+                '</ul>';
+
+            box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
+
+    /* =====================================================
      * Enter送信防止
      * - textarea は改行OK
      * - tag-input は tags-js 側に任せる

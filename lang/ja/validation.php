@@ -156,4 +156,31 @@ return [
     'uppercase'              => ':attributeは、大文字で入力してください。',
     'url'                    => ':attributeは、有効なURL形式で指定してください。',
     'uuid'                   => ':attributeは、有効なUUIDである必要があります。',
+
+    /*
+    |--------------------------------------------------------------------------
+    | カスタム項目名（:attribute に差し込まれる日本語ラベル）
+    |--------------------------------------------------------------------------
+    | ここに定義していない項目は、DBのカラム名がそのまま表示されてしまう
+    | （例：difficulty_id → 「difficulty id」）ため、フォームで使う項目は
+    | 随時ここに追加してください。
+    */
+    'attributes' => [
+        'title'                        => 'タイトル',
+        'difficulty_id'                => '難易度',
+        'category_id'                  => 'カテゴリ',
+        'category_id.*'                => 'カテゴリ',
+        'tools'                        => 'ツール',
+        'tools.*'                      => 'ツール',
+        'images'                       => '画像',
+        'images.*'                     => '画像',
+        'comments'                     => '写真の説明',
+        'comments.*'                   => '写真の説明',
+        'status'                       => '公開状態',
+        'tags'                         => 'タグ',
+        'existing_contents'            => '既存の写真',
+        'existing_contents.*.comment'  => '写真の説明',
+        'existing_contents.*.image'    => '写真',
+        'existing_contents.*.delete'   => '写真の削除',
+    ],
 ];
