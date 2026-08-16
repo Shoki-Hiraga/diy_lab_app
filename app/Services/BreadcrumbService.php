@@ -68,9 +68,29 @@ class BreadcrumbService
 
         foreach ($reflection->getParameters() as $param) {
             $name = $param->getName();
+            $type = $param->getType();
 
             if (array_key_exists($name, $routeParams)) {
-                $args[] = $routeParams[$name];
+                $value = $routeParams[$name];
+
+                // 🔧 ルートモデルバインディングがまだ済んでいない場合の保険。
+                //     型ヒントがEloquentモデルなのに、渡された値がそのモデルの
+                //     インスタンスになっていない（IDや文字列のまま等）ときは、
+                //     ここで改めてモデルを解決する。
+                if (
+                    $value !== null &&
+                    $type instanceof \ReflectionNamedType &&
+                    !$type->isBuiltin() &&
+                    is_subclass_of($type->getName(), \Illuminate\Database\Eloquent\Model::class)
+                ) {
+                    $modelClass = $type->getName();
+
+                    if (!($value instanceof $modelClass)) {
+                        $value = (new $modelClass)->resolveRouteBinding($value) ?? $value;
+                    }
+                }
+
+                $args[] = $value;
             } elseif ($param->isDefaultValueAvailable()) {
                 $args[] = $param->getDefaultValue();
             } else {
@@ -79,6 +99,12 @@ class BreadcrumbService
             }
         }
 
-        return $callback(...$args);
+        try {
+            return $callback(...$args);
+        } catch (\Throwable $e) {
+            // パンくずリストの生成に失敗しても、ページ全体は落とさない
+            report($e);
+            return null;
+        }
     }
 }
